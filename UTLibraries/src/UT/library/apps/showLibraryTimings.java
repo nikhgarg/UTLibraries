@@ -13,6 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class showLibraryTimings extends Activity {
+	
+	WebView webview;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -24,7 +26,7 @@ public class showLibraryTimings extends Activity {
 //			getWindow().requestFeature(Window.FEATURE_PROGRESS); // display the
 			// progress in the activity title bar
 
-			WebView webview = (WebView) findViewById(R.id.libraryHours);
+			webview = (WebView) findViewById(R.id.libraryHours);
 
 			// --------------------------------copied code 			// copied WebView code from http://developer.android.com/reference/android/webkit/WebView.html
 
@@ -51,15 +53,15 @@ public class showLibraryTimings extends Activity {
 			});
 			// --------------------------------------end Copied
 
-//			SharedPreferences hourspref = this.getSharedPreferences(
-//					"libraryhours", this.MODE_PRIVATE);
-//			SharedPreferences.Editor prefEditor = hourspref.edit();
-//			String hoursHTML = hourspref.getString("hoursHTML", "");
-//			if (hoursHTML.length() == 0) {
-//				hoursHTML = repeatMethods.getHTMLfromURL("http://www.lib.utexas.edu/about/hours/");
-//				prefEditor.putString("hoursHTML", hoursHTML);
-//			}
-//			webview.loadData(hoursHTML, "text/html", null);
+			SharedPreferences hourspref = this.getSharedPreferences(
+					"libraryhours", this.MODE_PRIVATE);
+			SharedPreferences.Editor prefEditor = hourspref.edit();
+			String hoursHTML = hourspref.getString("hoursHTML", "");
+			if (hoursHTML.length() == 0) {
+				hoursHTML = shared.getHTMLfromURL("http://www.lib.utexas.edu/about/hours/");
+				prefEditor.putString("hoursHTML", hoursHTML);
+			}
+			webview.loadData(hoursHTML, "text/css", null);
 			String url = "http://www.lib.utexas.edu/about/hours/";
 			webview.loadUrl(url);
 			
@@ -77,11 +79,15 @@ public class showLibraryTimings extends Activity {
 	public void refreshPage(View view)
 	{
 		try{
-			WebView webview = (WebView) findViewById(R.id.libraryHours);
+			SharedPreferences hourspref = this.getSharedPreferences(
+					"libraryhours", this.MODE_PRIVATE);
+			SharedPreferences.Editor prefEditor = hourspref.edit();
+//			WebView webview = (WebView) findViewById(R.id.libraryHours);
 			String url = "http://www.lib.utexas.edu/about/hours/";
-			webview.loadUrl(url);
-//			String html = repeatMethods.getHTMLfromURL(url);
-//			webview.loadData(html, "text/html", null);
+//			webview.loadUrl(url);
+			String html = shared.getHTMLfromURL(url);
+			webview.loadData(html, "text/html", null);
+			prefEditor.putString("hoursHTML", html);
 
 		}
 		catch(Exception e)
