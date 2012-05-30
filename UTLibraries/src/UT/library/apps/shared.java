@@ -1,0 +1,135 @@
+package UT.library.apps;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URI;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
+
+import android.content.SharedPreferences;
+
+//class for shared data and content, including Log in method, and client for connection
+public class shared {
+
+	public static String getHTMLfromURL(String urlstring) throws Exception { //should probably catch exception instead of throwing it
+		URL url = new URL(urlstring);
+		BufferedReader in = new BufferedReader(new InputStreamReader(
+				url.openStream()));
+
+		String HTML = "";
+		String add = in.readLine();
+		while (add != null) {
+			HTML += add;
+			add = in.readLine();
+		}
+
+		return HTML;
+	}
+
+
+	public static boolean loggedIntoCatalog = false;
+	public static boolean loggedIntoUTDirect = false;
+	
+	public static String retrieveProtectedWebPage (DefaultHttpClient client, String uri)
+	{
+		String html = "";
+		
+		try{
+//			SharedPreferences loginPreferences = settings.loginPreferences;
+//			String username = loginPreferences.getString("uteid", "");
+//			String password = loginPreferences.getString("password","");
+//
+//
+//			HttpPost httppost = new HttpPost ();
+//			httppost.setURI(new URI(uri));
+//			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+//			nameValuePairs.add(new BasicNameValuePair("LOGON", username));  			//use my info for testing
+//			nameValuePairs.add(new BasicNameValuePair("PASSWORDS", password)); 
+//			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs, HTTP.ASCII));
+//			HttpResponse response = client.execute(httppost);
+
+			logIntoUTDirect(client);
+			HttpGet httpget = new HttpGet();
+			httpget.setURI(new URI(uri));
+			HttpResponse response = client.execute(httpget);
+			BufferedReader in = new BufferedReader(new InputStreamReader(
+					response.getEntity().getContent()));
+			
+			String next = in.readLine();
+			while(next!=null){
+			//	System.out.println(next);
+				html+=next;
+				next = in.readLine();
+			}
+			return html;
+			
+		}
+		catch(Exception e)
+		{
+			return e.toString();
+		}
+	}
+	
+	public static boolean logIntoUTDirect(DefaultHttpClient client)
+	{
+		try{
+			SharedPreferences loginPreferences = settings.loginPreferences;
+			String username = loginPreferences.getString("uteid", "");
+			String password = loginPreferences.getString("password","");
+
+
+			HttpPost httppost = new HttpPost ("http://www.lib.utexas.edu/studyrooms/index.php?mode=search");
+			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+			nameValuePairs.add(new BasicNameValuePair("LOGON", username));  			//use my info for testing
+			nameValuePairs.add(new BasicNameValuePair("PASSWORDS", password)); 
+			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs, HTTP.ASCII));
+			HttpResponse response = client.execute(httppost);
+			response.getEntity().getContent().close();
+		}
+		catch(Exception e)
+		{
+			loggedIntoUTDirect = false;
+			return false;
+		}
+		loggedIntoUTDirect =  true;
+		return true;
+
+	}
+
+	public static boolean logIntoCatalog (DefaultHttpClient client)
+	{
+		try{
+			SharedPreferences loginPreferences = settings.loginPreferences;
+			String username = loginPreferences.getString("uteid", "");
+			String password = loginPreferences.getString("password","");
+
+
+			HttpPost httppost = new HttpPost ("https://catalog.lib.utexas.edu/patroninfo/");
+			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+			nameValuePairs.add(new BasicNameValuePair("extpatid", username));  			//use my info for testing
+			nameValuePairs.add(new BasicNameValuePair("extpatpw", password)); 
+			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs, HTTP.ASCII));
+			HttpResponse response = client.execute(httppost);
+			response.getEntity().getContent().close();
+
+		}
+		catch(Exception e)
+		{
+			loggedIntoCatalog = false;
+			return false;
+		}
+		loggedIntoCatalog =  true;
+		return true;
+	}
+}
