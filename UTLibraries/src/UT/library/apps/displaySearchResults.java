@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import org.apache.http.client.methods.HttpGet;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -88,30 +90,6 @@ public class displaySearchResults extends Activity {
 			tv.setText(e.toString());
 			setContentView(tv);
 			return null;
-		}
-
-	}
-
-	private void getResultsPage(Uri uri) {
-
-		try {
-			HttpGet httpget = new HttpGet(uri.toString());
-			URL libraryURL = new URL(httpget.getURI().toString());
-
-			// if (!pageLoading)
-			// new Thread(new getURIdata(libraryURL)).start();
-
-			getURIdata getdata = new getURIdata(libraryURL);
-			getdata.run();
-
-		}
-
-		catch (Exception e) {
-			Log.i("displaySearchResults",
-					"Exception in getResultsPage:" + e.toString());
-			TextView tv = new TextView(this);
-			tv.setText(e.toString());
-			setContentView(tv);
 		}
 
 	}
@@ -297,34 +275,34 @@ public class displaySearchResults extends Activity {
 			if (start < 0)
 				start = 0;
 			Log.i("displaySearchResults", "inside display Results");
-			//			while ((!allResultsQed || entriesBeg != entriesEnd)
-			//					&& allBooks.size() < start + resultsPerPage) {
-			//			} // wait till new books are loaded, or all books are loaded
-
 			if (start < allBooks.size()) {
 				int end = (int) Math.min(start + resultsPerPage,
 						allBooks.size());
 				currentViewNumStart = start;
 				currentViewNumEnd = end;
+				Log.i("displaySearchResults", "inside display Results if statement");
 
-				header.setText(String.format("%d-%d/%d",
-						currentViewNumStart + 1, currentViewNumEnd,
-						parseResults4.numResults));
 
-				ArrayList<Book> toDisplay = new ArrayList<Book>();
+				listViewData.clear();
 				for (int i = start; i < end; i++)
-					toDisplay.add(allBooks.get(i));
+					listViewData.add(allBooks.get(i));	
+				handler.post(new Runnable() {
+					@Override
+					public void run() {
+						header.setText(String.format("%d-%d/%d",
+								currentViewNumStart + 1, currentViewNumEnd,
+								parseResults4.numResults));
+						ListView listview = (ListView) findViewById(R.id.searchResultsListView5);
+						listview.setAdapter(new BookBaseAdapter(context, listViewData));					}
+				});				
+		//		bookAdapter.notifyDataSetChanged();
+				Log.i("displaySearchResults", "set adaptor for display layout with arraylist size" + listViewData.size());
 
-				final ListView lv1 = (ListView) findViewById(R.id.searchResultsListView5);
-				lv1.setAdapter(new BookBaseAdapter(this, toDisplay));
 
 			}
 
 		} catch (Exception e) {
-			Log.i("displaySearchResults", "Exception in displayResults");
-			TextView tv = new TextView(this);
-			tv.setText(e.toString());
-			setContentView(tv);
+			Log.i("displaySearchResults", "Exception in displayResults: " + e.toString());
 		}
 	}
 
@@ -353,10 +331,10 @@ public class displaySearchResults extends Activity {
 			//				Log.i("displaySearchResults", "book out of range");
 
 		} catch (Exception e) {
-			Log.i("displaySearchResults", "Exception in nextPage");
-			TextView ttest = new TextView(this);
-			ttest.setText(e.toString());
-			setContentView(ttest);
+			Log.i("displaySearchResults", "Exception in nextPage:" + e.toString());
+//			TextView ttest = new TextView(this);
+//			ttest.setText(e.toString());
+//			setContentView(ttest);
 		}
 
 		displayResults(currentViewNumEnd);
@@ -452,6 +430,11 @@ public class displaySearchResults extends Activity {
 			setContentView(tv);
 		}
 	}
+	
+	ArrayList<Book> listViewData = new ArrayList<Book>();
+	BookBaseAdapter bookAdapter;
+	Handler handler;
+	Context context;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -460,7 +443,7 @@ public class displaySearchResults extends Activity {
 
 		setContentView(R.layout.search_results5);
 		header = (TextView) findViewById(R.id.searchResultsHeader);
-
+		context = this;
 		ListView listview = (ListView) findViewById(R.id.searchResultsListView5);
 		listview.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view,
@@ -470,12 +453,30 @@ public class displaySearchResults extends Activity {
 
 			}
 		});
+		bookAdapter=new BookBaseAdapter(this, listViewData);
+		listview.setAdapter(bookAdapter);
 
 		Bundle bundle = getIntent().getExtras();
 		SearchData data = bundle.getParcelable("fieldsData");
 
 		Uri uri = buildURIfromData(data);
-		getResultsPage(uri);
+		handler = new Handler();
+		
+		try {
+			HttpGet httpget = new HttpGet(uri.toString());
+			URL libraryURL = new URL(httpget.getURI().toString());
+			// if (!pageLoading)
+			 new Thread(new getURIdata(libraryURL)).start();
+//			getURIdata getdata = new getURIdata(libraryURL);
+//			getdata.run();
+
+		}
+
+		catch (Exception e) {
+			Log.i("displaySearchResults",
+					"Exception in getResultsPage:" + e.toString());
+		}
+		
 
 		// new Thread(new sendDatatoParse()).start(); //decided to call later
 		// (within download thread) to see if it would go faster
