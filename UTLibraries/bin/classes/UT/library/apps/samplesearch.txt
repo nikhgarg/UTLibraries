@@ -1,0 +1,461 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><html lang="en">
+<head>
+<title>University of Texas Libraries                                    /All Locations</title>
+<base target="_self"/>
+<link rel="stylesheet" type="text/css" href="/scripts/ProStyles.css" />
+<link rel="stylesheet" type="text/css" href="/screens/styles.css" />
+<link rel="shortcut icon" type="ximage/icon" href="/screens/favicon.ico" />
+<script language="JavaScript" type="text/javascript" src="/scripts/common.js"></script>
+<script language="JavaScript" type="text/javascript" src="/scripts/elcontent.js"></script>
+<script language="JavaScript">
+<!-- Hide the JS
+startTimeout(6000000, "/");
+// -->
+</script>
+<noscript>
+<meta http-equiv="Refresh" content="6000;URL=/" />
+</noscript>
+
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8" ><meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE" /><link rel="stylesheet" type="text/css" href="/screens/styles_print.css" media="print"><script type="text/javascript" src="/screens/bibdisplay.js"></script>
+</head>
+<body bgcolor="#FFFFFF" >
+<!-- begin toplogo.html file -->
+<!-- Rel 2009B Example Set -->
+<!-- Updated: 12 Apr 2010 -->
+
+<div class="minHeight">
+<div class="fullPage">
+
+<div id="skipNav"><a href="#content" tabindex="1">Skip to content</a></div>
+
+<div class="topLogo">
+
+<div id="lib-head">
+<table width="100%" border="0" cellpadding="0" cellspacing="0" id="UTLibraries">
+<tr>
+<td id="wordmarkblock"><a href="http://www.utexas.edu/"><img src="/screens/UTwordmark_01.jpg" alt="University of Texas at Austin" width="320" height="36" border="0" /></a></td>
+<td valign="bottom" align="right" id="supernav"><div id="topLogohead">
+<div id="topID" style="font-size:.9em; margin-right:1em"><a href="http://www.lib.utexas.edu/about/librarymap/">Map &amp; Floorplans</a> | <a href="http://www.lib.utexas.edu/about/hours/">Hours</a> | <a href="http://www.lib.utexas.edu/services/ils/">InterLibrary Services</a><br /><a href="http://www.lib.utexas.edu/indexes/">Article Databases</a> | <a href="http://www.lib.utexas.edu/libcats/">Other Catalogs</a></div></div></td>
+</tr>
+<tr>
+<td colspan="2" bgcolor="#CC5500" id="logotd"><a href="http://www.lib.utexas.edu"><img src="/screens/lib_wordmark_tertiary.gif" alt="University of Texas Libraries" width="199" height="27" border="0" /></a></td>
+</tr>
+<tr>
+  <td colspan="2" bgcolor="#CCCCCC" class="black11" id="logotd"><a href="/" style="text-decoration:none; color:#000000;"><strong style="font-size:1.3em">Library Catalog</strong></a>: Search for Books, Journals, Music and More</td>
+</tr>
+</table>
+</div>
+
+<br />
+
+<div class="clear"></div>
+
+<div style="padding-right:10px;">
+
+<a name="catact" />
+<div id="top_nav" class="top_nav" >
+<a href="#lefttypes" id="searchtypes" style="position: absolute; left: -1000em; width: 20em;">Skip to Search Types</a>
+<ul>
+  <li class="left_border"><a href="/screens/help_index.html">Help</a></li><li><a target="_new" href="http://www.lib.utexas.edu/services/reference/">Ask a Librarian</a></li><li><a href="/patroninfo/">Renew &amp; My Account</a></li>
+</ul>
+</div>
+
+<!-- really wish this weren't in tables... -->
+
+<div id="ac-content" style="clear:right;">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr valign="top"><td width="11em">
+<a name="lefttypes" />
+<div id="lefttypes">
+<a href="#contentWrapper" id="content" style="position: absolute; left: -1000em; width: 20em;">Skip to Content</a>
+<div id="lefttypes-default">
+<a href="/search/" title="Basic Keyword Search">Keyword</a>
+<a href="/search/X" title="Advanced Keyword Search">Advanced Search</a>
+<a href="/search/t" title="Title Search">Title</a>
+<a href="/screens/journaltitle.html" title="Journal, Magazine & Newspaper Title Search">Journal Title</a>
+<a href="/search/a" title="Author Search">Author</a>
+<a href="/search/q" title="Combined Author & Title Search">Author + Title</a>
+<a href="/search/d" title="Library of Congress Subject Heading Search">Subject Heading</a>
+<a href="/search/c" title="Call Number Search">Call Number</a>
+<a href="/search/i" title="ISBN/ISSN Search">ISBN or Other Nos.</a>
+<a href="/search/r" title="Course Reserves Search">Course Reserves</a>
+<a href="/screens/music_search.html">Music Search</a>
+</div>
+</div>		
+<div class="clear"></div>
+</td>
+<td width="100%">
+<a name="contentWrapper" />
+<div id="ContentWrapper">
+
+<div class="pageContent"><!-- content container -->
+<a name="content" id="content"></a>
+<!--end toplogo.html-->
+<div align="center" class="navigationRow">
+<form>
+<a href="/search"><span class="button"><img src="/screens/ico_startover.gif" alt=""><span class="buttonText">Start Over</span></span></a>
+<a href="/search~S29/X?NOSRCH=italo+calvino&searchscope=29&SORT=D&SUBKEY=italo%20calvino"><span class="button"><img src="/screens/ico_magnifyingglass_modify.gif" alt=""><span class="buttonText">Modify Search</span></span></a>
+<a href="/search~S29/X"><span class="button"><img src="/screens/ico_magnifyingglass.gif" alt=""><span class="buttonText">Another Search</span></span></a>
+<select name=HISTORY onChange="onSelectChange(this, '~S29')"><option value="">(Search History)</option>
+<OPTION VALUE="Xitalo+calvino&searchscope=29&SORT=D">KEYWORD: italo calvino in ALL Locations
+<option value="+/search~S29/X?italo+calvino&searchscope=29&SORT=D&clear_history">(Clear Search History)</option>
+<option value="+/">(End Search Session)</option>
+</select>
+<noscript>
+<h2>Search history function requires JavaScript</h2>
+</noscript>
+</form>
+</div>
+
+<!-- BEGIN BROWSE SCREEN TABLE -->
+<table  cellpadding="2" cellspacing="0" border="0" class="browseScreen">
+<!-- BEGIN SEARCH WIDGET -->
+<div align="center">
+<tr align="center" valign="middle">
+<td valign="middle" colspan="2">
+<div  class="browseSearchtool">
+<script language="JavaScript" type="text/JavaScript">
+<!-- Hide the JS
+var savedTag;
+var savedSearch;
+var savedExactSearch = null; 
+
+var savedScope;
+var sortButtonText = null;
+
+var sortTypes = new Array();
+var sortLabels = new Array();
+sortTypes[0] = "t";
+sortLabels[0] = "Title";
+sortTypes[1] = "a";
+sortLabels[1] = "Author";
+sortTypes[2] = "c";
+sortLabels[2] = "Year";
+sortTypes[3] = "r";
+sortLabels[3] = "Reverse Year";
+sortTypes[4] = "n";
+sortLabels[4] = "Call Number";
+sortTypes[5] = "m";
+sortLabels[5] = "Material Type";
+sortLabels[6] = "System Sorted";
+sortTypes[6] = "-";
+var sortSelectedValue = "6";
+var sortExactBrowseURL = "/search~S29?/Xitalo+calvino&searchscope=29&SORT=D/Xitalo+calvino&searchscope=29&SORT=D&SUBKEY=italo%20calvino/1%2C283%2C283%2CB/browse"
+var nonSortTags = "XYZprWw"
+// Unhide the JS -->
+</script>
+<form name="searchtool" target="_self" action="/search~S29/">
+      <label for="searchtype" style="display:none;">SearchType</label> <select name="searchtype" id="searchtype" onChange="initSort()">
+        <option value="a"> AUTHOR</option>
+        <option value="t"> TITLE</option>
+        <option value="d"> SUBJECT</option>
+        <option value="c"> LC CALL NO</option>
+        <option value="o"> OCLC NO</option>
+        <option value="x"> SPECIAL COLLECTION</option>
+        <option value="h"> OTHER CALL NO</option>
+        <option value="e"> DEWEY CALL NO</option>
+        <option value="g"> USDOC NO</option>
+        <option value="i"> ISSN, ISBN</option>
+        <option value="X" selected="selected"> KEYWORD</option>
+      </select>
+      &nbsp;
+      <label for="searcharg" style="display:none;">Search</label><input type="text" name="searcharg" id="searcharg" size="30" maxlength="75" value="italo calvino" />
+      &nbsp;
+      <label for="searchscope" style="display:none;">Search Scope</label><select name="searchscope" id="searchscope">
+        <option value="1"> -- Compact Discs</option>
+        <option value="2"> -- Dissertations/Theses</option>
+        <option value="3"> -- DVDs</option>
+        <option value="4"> -- Electronic resources</option>
+        <option value="5"> -- Journals</option>
+        <option value="6"> -- Microforms</option>
+        <option value="7"> Architecture Library</option>
+        <option value="9"> Benson Latin American Collection</option>
+        <option value="10"> Benson Rare Books</option>
+        <option value="11"> Briscoe Center for American History</option>
+        <option value="30"> Casa Herrera</option>
+        <option value="12"> Chemistry Library</option>
+        <option value="13"> Classics Library</option>
+        <option value="14"> Collections Deposit Library</option>
+        <option value="15"> Engineering Library</option>
+        <option value="16"> Fine Arts Library</option>
+        <option value="17"> Geology Library</option>
+        <option value="18"> Harry Ransom Center</option>
+        <option value="19"> K-12 Textbooks & Curriculum</option>
+        <option value="21"> Life Science Library</option>
+        <option value="22"> Marine Science Library</option>
+        <option value="23"> PCL (Perry Castaneda Library)</option>
+        <option value="24"> PCL Reference</option>
+        <option value="31"> Petroleum Engineering Reading Room</option>
+        <option value="8"> Peridier and McDonald Libraries</option>
+        <option value="25"> Physics-Math-Astronomy Library</option>
+        <option value="26"> Stark Center</option>
+        <option value="27"> Tarlton Law Library</option>
+        <option value="20"> Wildflower Center</option>
+        <option value="28"> Youth Collections</option>
+        <option value="29" selected="selected"> ALL Locations</option>
+      </select>
+      &nbsp;
+
+<span id="sort_cell">
+</span>
+
+<script language="JavaScript" type="text/JavaScript">
+<!-- Hide the JS
+initSort();
+// Unhide the JS -->
+</script>
+      <input type="hidden" name="SORT" value="DZ" /><input type="hidden" name="extended" value="0" /><input type="submit" name="SUBMIT" value="Search" />
+<div>
+      <input type="checkbox" name="availlim" value="1"  /> <span class="availLimMessage">Limit to available items</span><br/>
+</div>
+<div>
+      <input type="hidden" name="searchlimits" value="" />
+      <input type="hidden" name="searchorigarg" value="Xitalo calvino&SORT=D" />
+</div>
+</form>
+<div>
+<form action="/search~S29/X?" method="get" name="spellcheck" id="spellcheck">
+<input type="hidden" name="searchtype" value="X">
+<input type="hidden" name="searcharg" id="searchterms" value="">
+<input type="hidden" name="searchscope" value="29">
+<script language="javascript">
+function spell_submit(tool_type) {
+var i;
+var cnt = 0;
+var searchargs = getObj("searchterms");
+var obj = getObj("spellcheck");
+for (i = 0; i < obj.elements.length; i++ )
+    {
+    if( obj.elements[i].type == "select-one")
+        {
+        if (cnt == 0)
+        {
+        newterms = obj.elements[i].options[obj.elements[i].selectedIndex].value;
+        }
+        else
+        {
+        newterms = newterms + " " + obj.elements[i].options[obj.elements[i].selectedIndex].value;
+        }
+    	cnt++
+    	}
+    }
+searchargs.setAttribute('value',newterms);
+obj.submit();
+}
+function getObj(name) { 
+  if (document.getElementById) {
+      object = document.getElementById(name);
+  } else if (document.all) { 
+      object = document.all[name]; 
+  } else if (document.layers) { 
+      var object = document.layers[name]; 
+ }
+return object; 
+}
+function spell_change() { 
+var brief = getObj("spellcheck_brief");
+var more = getObj("spellcheck_more");
+more.style.display='block';
+brief.style.display='none';
+}
+</script>
+<div id="spellcheck_more" style="display : none;">
+<span class="spellcheckTool">Did you mean <select name="words">
+<option value="talon">talon</option>
+<option value="vital">vital</option>
+<option value="tallow">tallow</option>
+<option value="intaglio">intaglio</option>
+<option value="italic">italic</option>
+<option value="Italia">Italia</option>
+<option value="Italy">Italy</option>
+<option value="Tao">Tao</option>
+</select>
+<select name="words">
+<option value="calvin">calvin</option>
+<option value="Alvin">Alvin</option>
+<option value="calving">calving</option>
+<option value="Calvinism">Calvinism</option>
+<option value="Calvinist">Calvinist</option>
+<option value="albino">albino</option>
+<option value="Calvinists">Calvinists</option>
+<option value="calico">calico</option>
+</select>
+? <a href="#" onclick="spell_submit(this);"><img src="/screens/go_but.gif" class="button" border="0" alt="Search"></a> </span></div>
+<div id="spellcheck_brief" style="display : block;">
+<span class="spellcheckTool">Did you mean <a href="#" onclick="spell_submit(this);">talon calvin</a>? <a href="#" onclick="spell_change();"><spanclass="spellcheckToolMore">more&nbsp;&raquo;</span></a> </span></div></form></div>
+<div  class="browseSearchtoolMessage">       <i>283 results found. </i>Sorted by  <strong>relevance</strong>  | <a href="/search~S29/X?italo+calvino&searchscope=29&SORT=DX">date</a>  | <a href="/search~S29/X?italo+calvino&searchscope=29&SORT=AX">title</a> .
+</div>
+<div></div></div>
+
+</td>
+</tr>
+</div>
+<!-- END SEARCH WIDGET -->
+
+<!-- BEGIN BROWSE PAGER -->
+<!-- begin page widgit -->
+<tr  class="browsePager"><td align="center"  class="browsePager" colspan="5">
+
+Results Page&nbsp;&nbsp;&nbsp;<strong>1</strong>
+<a href="/search~S29?/Xitalo+calvino&searchscope=29&SORT=D/Xitalo+calvino&searchscope=29&SORT=D&SUBKEY=italo%20calvino/51%2C283%2C283%2CB/browse">2</a>
+<a href="/search~S29?/Xitalo+calvino&searchscope=29&SORT=D/Xitalo+calvino&searchscope=29&SORT=D&SUBKEY=italo%20calvino/101%2C283%2C283%2CB/browse">3</a>
+<a href="/search~S29?/Xitalo+calvino&searchscope=29&SORT=D/Xitalo+calvino&searchscope=29&SORT=D&SUBKEY=italo%20calvino/151%2C283%2C283%2CB/browse">4</a>
+<a href="/search~S29?/Xitalo+calvino&searchscope=29&SORT=D/Xitalo+calvino&searchscope=29&SORT=D&SUBKEY=italo%20calvino/201%2C283%2C283%2CB/browse">5</a>
+<a href="/search~S29?/Xitalo+calvino&searchscope=29&SORT=D/Xitalo+calvino&searchscope=29&SORT=D&SUBKEY=italo%20calvino/251%2C283%2C283%2CB/browse">6</a>
+<a href="/search~S29?/Xitalo+calvino&searchscope=29&SORT=D/Xitalo+calvino&searchscope=29&SORT=D&SUBKEY=italo%20calvino/51%2C283%2C283%2CB/browse">Next</a>
+<!-- end page widgit -->
+</td>
+<td>&nbsp;</td>
+</tr>
+<!-- END BROWSE PAGER -->
+
+<!-- BEGIN BROWSE SCREEN LEFT CELL: BROWSELIST/BRIEFCIT AREA -->
+<tr><td>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr align="CENTER" valign="MIDDLE">
+<td colspan="5" class="browseSaveJump">
+<form method="POST" action="/search~S29?/Xitalo+calvino&searchscope=29&SORT=D/Xitalo+calvino&searchscope=29&SORT=D&SUBKEY=italo%20calvino/1%2C283%2C283%2CB/browse" name="export_form" id="export_form" >
+<input type="hidden" name="jumpref" value="Xitalo+calvino">
+<input type="hidden" id="save_func" name="save_func" value=""/>
+<span name='save_page_btn1' id='save_page_btn1' style='visibility: visible' ><a href="#" onclick="process_save(1);" style="text-decoration:none">
+<span class="button"><img src="/screens/ico_bag_add.gif" alt=""><span class="buttonText">Save All to Clipboard</span></span></a>
+</span>
+<span name='mylist_btn1' id='mylist_btn1' style='visibility: visible' ><a href="#" onclick="save_to_mylist();">
+<span class="button"><img src="/screens/ico_list_add.gif" alt=""><span class="buttonText">Add Marked to My Lists</span></span></a>
+</span>
+</td></tr>
+
+
+</td>
+</tr>
+<tr  class="browseHeader">
+<td align="center" class="browseHeaderData">
+Keyword (Advanced) (1-50 of 283)
+</td>
+</tr>
+<!-- Right Result rank 1 -->
+<tr  class="browseSuperEntry browseEntryRelGroup1"><td colspan="1"><img src="/screens/relevance5.gif" alt="Most relevant">&nbsp;<h1 class="browseSuperEntryTitle">Most relevant titles</h1>&nbsp;entries 1-45</td></tr>
+<!-- Rel 2009B Example Set -->
+<!-- This File Last Changed: 15 Oct 2009 -->
+<tr>
+<td class="briefcitCell">
+
+<div class="briefcitRow">
+
+<div class="briefcitLeft">
+<div class="briefcitEntryNum">
+<a name='anchor_1'></a> 1</div>
+
+<div class="briefcitMedia">
+ <img src="/screens/media_book.gif" alt="PRINTED MATL"></div>
+
+</div>
+
+
+<div class="briefcitJacket">
+
+<a href="http://www.lib.utexas.edu/amazon_check/prod-linker.php?isbn=9788860874306" target="new""><img SRC="http://www.lib.utexas.edu/amazon_check/image-test.php?isbn=9788860874306" width="60"  border="0" alt="item image"></a>
+<br />
+<a href=" http://findit.lib.utexas.edu/utaustin?sid=III:innopac&pid=id=9788860874306" target="_parent"><img src="/screens/sfx.gif" border="0" alt="Find it at U T"></a></div>
+
+
+<div class="briefcitDetail">
+
+<div class="briefcitDetailMain">
+
+<!--{nohitmsg}-->
+<h2 class="briefcitTitle">
+<a href="/search~S29?/Xitalo+calvino&searchscope=29&SORT=D/Xitalo+calvino&searchscope=29&SORT=D&SUBKEY=italo%20calvino/1%2C283%2C283%2CB/frameset&FF=Xitalo+calvino&searchscope=29&SORT=D&1%2C1%2C">Italo Calvino : la realtà dell'immaginazione e le ambivalenze del moderno</a></h2>
+<br />
+<div>
+</div>
+<div>
+</div>
+<div>
+2011</div>
+<div>
+<a href="/search~S29?/Xitalo+calvino&searchscope=29&SORT=D/Xitalo+calvino&searchscope=29&SORT=D&SUBKEY=italo%20calvino/1%2C283%2C283%2CB/frameset&FF=Xitalo+calvino&searchscope=29&SORT=D&1%2C1%2C">Gremigni, Elena.</a></div>
+<div>
+Firenze : Le lettere, c2011.</div>
+<div>
+</div>
+
+<div class="briefcitMark">
+<br />
+<a href="#anchor_1" onClick="return replace_or_redraw('/search~S29?/Xitalo+calvino&searchscope=29&SORT=D/Xitalo+calvino&searchscope=29&SORT=D&SUBKEY=italo%20calvino/1%2C283%2C283%2CB/browse?save=b7741884#anchor_1')"><span class="button"><img src="/screens/ico_bag_add.gif" alt=""><span class="buttonText">Add to Clipboard</span></span></a></div>
+
+<span class="briefcitStatus">
+</span>
+
+<div class="briefcitActions">
+
+&nbsp;</div>
+</div>
+<div class="briefcitItems">
+<!--<div class="briefcitItemsHeader"><h2>Copies</h2></div>-->
+<div class="briefcitItemsMain">
+<table id="bib_items" width="100%" border="0" cellspacing="1" cellpadding="2" class="bibItems">
+<tr  class="bibItemsHeader">
+<th width="33%"  class="bibItemsHeader">
+Location
+</th>
+<th width="33%"  class="bibItemsHeader">
+Call No.
+</th>
+<th width="34%"  class="bibItemsHeader">
+Current Status
+</th>
+</tr>
+<tr  class="bibItemsEntry">
+
+<td width="33%" ><!-- field 1 -->&nbsp;<a href="http://www.lib.utexas.edu/about/librarymap/pcl.html">PCL Stacks</a> 
+</td>
+<td width="33%" ><!-- field C -->&nbsp;<a href="/search~S29?/cPQ+4809+A45+Z72327+2011/cpq+4809+a45+z72327+2011/-3,-1,,B/browse">PQ 4809 A45 Z72327 2011</a> <!-- field v --><!-- field # -->&nbsp;</td>
+<td width="34%" ><!-- field % -->&nbsp;AVAILABLE </td></tr>
+</table>
+</div>
+</div>
+
+</div>
+
+
+
+
+
+<div class="briefcitClear"></div>
+
+</div>
+</td>
+</tr>
+<!--this is customized <screens/briefcit.html>-->
+<!-- Rel 2009B Example Set -->
+<!-- This File Last Changed: 15 Oct 2009 -->
+<tr>
+<td class="briefcitCell">
+
+<div class="briefcitRow">
+
+<div class="briefcitLeft">
+<div class="briefcitEntryNum">
+<a name='anchor_2'></a> 2</div>
+
+<div class="briefcitMedia">
+ <img src="/screens/media_book.gif" alt="PRINTED MATL"></div>
+
+</div>
+
+
+<div class="briefcitJacket">
+
+<a href="http://www.lib.utexas.edu/amazon_check/prod-linker.php?isbn=9780786447664" target="new""><img SRC="http://www.lib.utexas.edu/amazon_check/image-test.php?isbn=9780786447664" width="60"  border="0" alt="item image"></a>
+<br />
+<a href=" http://findit.lib.utexas.edu/utaustin?sid=III:innopac&pid=id=9780786447664" target="_parent"><img src="/screens/sfx.gif" border="0" alt="Find it at U T"></a></div>
+
+
+<div class="briefcitDetail">
+
+<div class="briefcitDetailMain">
+
+</body>
+</html>
