@@ -15,9 +15,9 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
-import org.apache.http.util.EntityUtils;
 
 import android.content.SharedPreferences;
+import android.util.Log;
 
 //class for shared data and content, including Log in method, and client for connection
 public class shared {
@@ -46,20 +46,7 @@ public class shared {
 		String html = "";
 		
 		try{
-//			SharedPreferences loginPreferences = settings.loginPreferences;
-//			String username = loginPreferences.getString("uteid", "");
-//			String password = loginPreferences.getString("password","");
-//
-//
-//			HttpPost httppost = new HttpPost ();
-//			httppost.setURI(new URI(uri));
-//			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-//			nameValuePairs.add(new BasicNameValuePair("LOGON", username));  			//use my info for testing
-//			nameValuePairs.add(new BasicNameValuePair("PASSWORDS", password)); 
-//			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs, HTTP.ASCII));
-//			HttpResponse response = client.execute(httppost);
-
-			logIntoUTDirect(client);
+//			logIntoUTDirect(client);
 			HttpGet httpget = new HttpGet();
 			httpget.setURI(new URI(uri));
 			HttpResponse response = client.execute(httpget);
@@ -72,12 +59,15 @@ public class shared {
 				html+=next;
 				next = in.readLine();
 			}
+//			response.getEntity().getContent().close();
 			return html;
 			
 		}
 		catch(Exception e)
 		{
-			return e.toString();
+			Log.i("shared",
+					"exception in retrieveProtectedWebPage: " + e.toString());
+			return null;
 		}
 	}
 	
@@ -99,6 +89,8 @@ public class shared {
 		}
 		catch(Exception e)
 		{
+			Log.i("shared",
+					"exception in logIntoUTDirect: " + e.toString());
 			loggedIntoUTDirect = false;
 			return false;
 		}
@@ -126,6 +118,8 @@ public class shared {
 		}
 		catch(Exception e)
 		{
+			Log.i("shared",
+					"exception in logIntoCatalog: " + e.toString());
 			loggedIntoCatalog = false;
 			return false;
 		}

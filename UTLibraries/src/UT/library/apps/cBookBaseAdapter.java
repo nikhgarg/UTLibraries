@@ -1,0 +1,78 @@
+package UT.library.apps;
+
+import java.util.ArrayList;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.TextView;
+
+public class cBookBaseAdapter extends BaseAdapter {
+
+	private static ArrayList<cBook> bookArrayList;
+	private LayoutInflater mInflater;
+
+	public cBookBaseAdapter(Context context, ArrayList<cBook> results) {
+		bookArrayList = results;
+		mInflater = LayoutInflater.from(context);
+	}
+
+	@Override
+	public int getCount() {
+		// TODO Auto-generated method stub
+		return bookArrayList.size();
+	}
+
+	@Override
+	public Object getItem(int position) {
+		// TODO Auto-generated method stub
+		return bookArrayList.get(position);
+	}
+
+	@Override
+	public long getItemId(int position) {
+		// TODO Auto-generated method stub
+		return position;
+	}
+
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		ViewHolder holder;
+		if (convertView == null) {
+			convertView = mInflater.inflate(R.layout.c_book_layout, null);
+			holder = new ViewHolder();
+			holder.title = (TextView) convertView
+			.findViewById(R.id.title);
+			holder.barcode = (TextView) convertView
+			.findViewById(R.id.barcode);
+			holder.callNo = (TextView) convertView
+			.findViewById(R.id.callNo);
+			holder.status = (TextView) convertView
+			.findViewById(R.id.status);
+
+			convertView.setTag(holder);
+		} else {
+			holder = (ViewHolder) convertView.getTag();
+		}
+
+		cBook b = bookArrayList.get(position);
+
+		holder.title.setText(b.title);
+		holder.barcode.setText(b.barcode);
+		holder.status.setText(b.status);
+		holder.callNo.setText(b.callNumber);
+
+		return convertView;
+	}
+
+	static class ViewHolder {
+		TextView title;
+		TextView callNo;
+		TextView status;
+		TextView barcode;
+
+	}
+
+}

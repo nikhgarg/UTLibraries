@@ -373,5 +373,10 @@
     <string name="pclgroup">PCL Group Study Rooms</string>
     <string name="pclpresentation">PCL Presentation Practice Rooms</string>
     <string name="peoplepromp">Pleae Enter Number of People</string>
+    <string name="checkedoutbooksheader">Checked Out Books</string>
+    <string name="renewall">Renew All</string>
+    <string name="renewmarked">Renew Marked</string>
+    <string name="renew">Renew</string>
+    <string name="title">Title</string>
 
 </resources>
