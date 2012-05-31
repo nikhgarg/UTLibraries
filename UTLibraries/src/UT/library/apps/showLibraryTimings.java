@@ -61,9 +61,10 @@ public class showLibraryTimings extends Activity {
 				hoursHTML = shared.getHTMLfromURL("http://www.lib.utexas.edu/about/hours/");
 				prefEditor.putString("hoursHTML", hoursHTML);
 			}
-			webview.loadData(hoursHTML, "text/css", null);
-			String url = "http://www.lib.utexas.edu/about/hours/";
-			webview.loadUrl(url);
+			webview.loadDataWithBaseURL(null, hoursHTML, "text/html", null, null);
+//			webview.loadData(hoursHTML, "", "");
+//			String url = "http://www.lib.utexas.edu/about/hours/";
+//			webview.loadUrl(url);
 			
 		} catch (Exception e) {
 			TextView tv = new TextView(this);
@@ -86,7 +87,8 @@ public class showLibraryTimings extends Activity {
 			String url = "http://www.lib.utexas.edu/about/hours/";
 //			webview.loadUrl(url);
 			String html = shared.getHTMLfromURL(url);
-			webview.loadData(html, "text/html", null);
+			webview.loadDataWithBaseURL(null, html, "text/html", null, null);
+//			webview.loadData(html, "text/css", null);
 			prefEditor.putString("hoursHTML", html);
 
 		}

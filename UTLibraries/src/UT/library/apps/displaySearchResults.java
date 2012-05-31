@@ -30,8 +30,8 @@ public class displaySearchResults extends Activity {
 	boolean allResultsQed = false;
 	boolean allResultsParsed = false;
 	boolean pageLoading = false;
-	int resultsPerPage = 5;
-	TextView header; 
+	int resultsPerPage = 10;
+	TextView header;
 
 	private Uri buildURIfromData(SearchData data) {
 		try {
@@ -82,7 +82,8 @@ public class displaySearchResults extends Activity {
 			return uri;
 
 		} catch (Exception e) {
-			Log.i("displaySearchResults", "Exception in buildURIfromData:" + e.toString());
+			Log.i("displaySearchResults",
+					"Exception in buildURIfromData:" + e.toString());
 			TextView tv = new TextView(this);
 			tv.setText(e.toString());
 			setContentView(tv);
@@ -97,21 +98,17 @@ public class displaySearchResults extends Activity {
 			HttpGet httpget = new HttpGet(uri.toString());
 			URL libraryURL = new URL(httpget.getURI().toString());
 
-			// to do: implement using threads so download in background as
-			// extraction/displaying is going on
+			// if (!pageLoading)
+			// new Thread(new getURIdata(libraryURL)).start();
 
-			// TextView ttest = new TextView(this);
-			// ttest.setText(libraryURL.toString());
-			// setContentView(ttest);
-			if (!pageLoading)
-				new Thread(new getURIdata(libraryURL)).start();
-			// TextView ttest = new TextView(this);
-			// ttest.setText(entries.toString());
-			// setContentView(ttest);
+			getURIdata getdata = new getURIdata(libraryURL);
+			getdata.run();
+
 		}
 
 		catch (Exception e) {
-			Log.i("displaySearchResults", "Exception in getResultsPage:" + e.toString());
+			Log.i("displaySearchResults",
+					"Exception in getResultsPage:" + e.toString());
 			TextView tv = new TextView(this);
 			tv.setText(e.toString());
 			setContentView(tv);
@@ -120,6 +117,7 @@ public class displaySearchResults extends Activity {
 	}
 
 	boolean startedParseThread = false;
+	boolean shownFirst = false;
 
 	// to do: implement locks in both runnable classes (or not needed)
 	private class getURIdata implements Runnable {
@@ -132,59 +130,111 @@ public class displaySearchResults extends Activity {
 
 		public void run() {
 			pageLoading = true;
-			String temp = "";
 			String catalogHTML = "";
 			int numfound = 0;
-			try {
-				BufferedReader in = new BufferedReader(new InputStreamReader(
-						libraryURL.openStream()));
-				boolean first = true;
-				while (temp != null) {
-					if (temp.contains("briefcitEntryNum")) {
-						if (!first) {
-							if ((entriesEnd + 1) % qSize != entriesBeg % qSize) {
-								entries[entriesEnd] = catalogHTML;
-								entriesEnd++;
-								entriesEnd %= qSize;
-								numfound++;
-								if (numfound == resultsPerPage && !startedParseThread){
-									new Thread(new sendDatatoParse()).start();
-									startedParseThread = true;
-								}
-							}
-						}
-						// if first time that seeing "briefcitEntryNum",
-						// then it is at the top of the page - need to extract
-						// num results and next url from top
-						else {
-							first = false;
-							parseResults4.parsePage(catalogHTML); //parse top of page for number of results, link to next page
-						}
-						catalogHTML = "";
+			while(true){
+				try {
+					if(libraryURL==null){ 
+						pageLoading = false;
+						allResultsQed = true;
+						return;
 					}
 
-					catalogHTML += temp + "\n";
-					temp = in.readLine();
+					BufferedReader in = new BufferedReader(new InputStreamReader(
+							libraryURL.openStream()));
+					boolean first = true;
+					String temp = "";
+					while (temp != null) {
+						if (temp.contains("briefcitEntryNum")) {
+							if (!first) {
+								// if ((entriesEnd + 1) % qSize != entriesBeg %
+								// qSize) {
+								// entries[entriesEnd] = catalogHTML;
+								// entriesEnd++;
+								// entriesEnd %= qSize;
+
+								int oldSize = allBooks.size();
+								ArrayList<Book> tempBooks = parseResults4
+								.extractBooks(catalogHTML);
+								numfound+=tempBooks.size();
+								for (int i = 0; i < tempBooks.size(); i++)
+									tempBooks.get(i).title = i + oldSize + 1 + ". "
+									+ tempBooks.get(i).title;
+								allBooks.addAll(tempBooks);
+								Log.i("displaySearchResults", ""+allBooks.size());
+								if (allBooks.size()>=resultsPerPage && !shownFirst)
+								{
+									displayResults(0);
+									shownFirst = true;
+								}
+
+								// if (numfound == resultsPerPage &&
+								// !startedParseThread){
+								// new Thread(new sendDatatoParse()).start();
+								// startedParseThread = true;
+								// }
+								// }
+							}
+							// if first time that seeing "briefcitEntryNum",
+							// then it is at the top of the page - need to extract
+							// num results and next url from top
+							else {
+								first = false;
+								parseResults4.parsePage(catalogHTML); // parse top
+								
+								Log.i("displaySearchResults", "parsed page again, book size currently:" + allBooks.size() + "\n next page url:" + parseResults4.nextPageUrl);
+								// of page
+								// for
+								// number of
+								// results,
+								// link to
+								// next page
+							}
+							catalogHTML = "";
+						}
+
+						catalogHTML += temp + "\n";
+						temp = in.readLine();
+					}
+					//
+					//				if ((entriesEnd + 1) % qSize != entriesBeg % qSize) {
+					//					entries[entriesEnd] = catalogHTML;
+					//					entriesEnd++;
+					//					entriesEnd %= qSize;
+					//				}
+					//for last entry (there is not briefEntryNum after it so is not extracted in the loop)
+					int oldSize = allBooks.size();
+					ArrayList<Book> tempBooks = parseResults4
+					.extractBooks(catalogHTML);
+					numfound+=tempBooks.size();
+					for (int i = 0; i < tempBooks.size(); i++)
+						tempBooks.get(i).title = i + oldSize + 1 + ". "
+						+ tempBooks.get(i).title;
+					allBooks.addAll(tempBooks);
+					catalogHTML = "";
+
+					in.close();
+					if(parseResults4.nextPageUrl!=null){
+						libraryURL = new URL(parseResults4.nextPageUrl);
+						parseResults4.nextPageUrl = null;}
+					else libraryURL = null;
+					Log.i("displaySearchResults", "next page URL:" + libraryURL);
+
+
+				} catch (Exception e) {
+					Log.i("displaySearchResults",
+							"Exception in getURIdata:" + e.toString());
 				}
-
-				if ((entriesEnd + 1) % qSize != entriesBeg % qSize) {
-					entries[entriesEnd] = catalogHTML;
-					entriesEnd++;
-					entriesEnd %= qSize;
-				}
-				in.close();
-			} catch (Exception e) {
-				Log.i("displaySearchResults", "Exception in getURIdata:" + e.toString());
-			}
-			if (!startedParseThread)
-			{
-				new Thread(new sendDatatoParse()).start();
-				startedParseThread = true;
+				// if (!startedParseThread)
+				// {
+				// new Thread(new sendDatatoParse()).start();
+				// startedParseThread = true;
+				//
+				// }
 
 			}
-			pageLoading = false;
-			allResultsQed = true;
-
+			//			pageLoading = false;
+			//			allResultsQed = true;
 		}
 	}
 
@@ -226,8 +276,8 @@ public class displaySearchResults extends Activity {
 				}
 			} catch (Exception e) {
 
-				Log.i("displaySearchResults", "Send data to parse:" + e.toString());
-
+				Log.i("displaySearchResults",
+						"Send data to parse:" + e.toString());
 
 			}
 
@@ -246,9 +296,10 @@ public class displaySearchResults extends Activity {
 		try {
 			if (start < 0)
 				start = 0;
-			while ((!allResultsQed || entriesBeg != entriesEnd)
-					&& allBooks.size() < start + resultsPerPage) {
-			} // wait till new books are loaded, or all books are loaded
+			Log.i("displaySearchResults", "inside display Results");
+			//			while ((!allResultsQed || entriesBeg != entriesEnd)
+			//					&& allBooks.size() < start + resultsPerPage) {
+			//			} // wait till new books are loaded, or all books are loaded
 
 			if (start < allBooks.size()) {
 				int end = (int) Math.min(start + resultsPerPage,
@@ -256,16 +307,16 @@ public class displaySearchResults extends Activity {
 				currentViewNumStart = start;
 				currentViewNumEnd = end;
 
-				header.setText(String.format("%d-%d/%d", currentViewNumStart+1, currentViewNumEnd, parseResults4.numResults));
+				header.setText(String.format("%d-%d/%d",
+						currentViewNumStart + 1, currentViewNumEnd,
+						parseResults4.numResults));
 
 				ArrayList<Book> toDisplay = new ArrayList<Book>();
 				for (int i = start; i < end; i++)
 					toDisplay.add(allBooks.get(i));
 
-				final ListView lv1 = (ListView) findViewById(R.id.listView1);
+				final ListView lv1 = (ListView) findViewById(R.id.searchResultsListView5);
 				lv1.setAdapter(new BookBaseAdapter(this, toDisplay));
-
-
 
 			}
 
@@ -279,23 +330,27 @@ public class displaySearchResults extends Activity {
 
 	public void nextPage(View view) {
 		try {
-			if (!pageLoading
-					&& allBooks.size() - currentViewNumEnd < resultsPerPage * 10){
-				if (parseResults4.nextPageUrl != null) {
-					//				String localcopy = parseResults4.nextPageUrl;
-
-					URL nextPage = new URL(parseResults4.nextPageUrl);
-					parseResults4.nextPageUrl = null;
-					new Thread(new getURIdata(nextPage)).start();
-				}
-			}
-			if (currentViewNumEnd<allBooks.size()&&allBooks.get(currentViewNumEnd).bookDetails.size()!=0){
-				Book b = allBooks.get(currentViewNumEnd);
-				Log.i("displaySearchResults", "Book already has detail:" + b.title + " " + b.bookDetails.toString());
-			}
-			else if (currentViewNumEnd<allBooks.size()&&allBooks.get(currentViewNumEnd).bookDetails.size()==0)
-				new Thread(new fetchBookDetail(currentViewNumEnd, currentViewNumEnd + resultsPerPage)).start();
-			else Log.i("displaySearchResults", "book out of range");
+			//			if (!pageLoading
+			//					&& allBooks.size() - currentViewNumEnd < resultsPerPage * 10) {
+			//				if (parseResults4.nextPageUrl != null) {
+			//					// String localcopy = parseResults4.nextPageUrl;
+			//
+			//					URL nextPage = new URL(parseResults4.nextPageUrl);
+			//					parseResults4.nextPageUrl = null;
+			////					new Thread(new getURIdata(nextPage)).start();               ///FIX THIS
+			//				}
+			//			}
+			//			if (currentViewNumEnd < allBooks.size()
+			//					&& allBooks.get(currentViewNumEnd).bookDetails.size() != 0) {
+			//				Book b = allBooks.get(currentViewNumEnd);
+			//				Log.i("displaySearchResults", "Book already has detail:"
+			//						+ b.title + " " + b.bookDetails.toString());
+			//			} else if (currentViewNumEnd < allBooks.size()
+			//					&& allBooks.get(currentViewNumEnd).bookDetails.size() == 0)
+			//				new Thread(new fetchBookDetail(currentViewNumEnd,
+			//						currentViewNumEnd + resultsPerPage)).start();
+			//			else
+			//				Log.i("displaySearchResults", "book out of range");
 
 		} catch (Exception e) {
 			Log.i("displaySearchResults", "Exception in nextPage");
@@ -303,8 +358,6 @@ public class displaySearchResults extends Activity {
 			ttest.setText(e.toString());
 			setContentView(ttest);
 		}
-
-
 
 		displayResults(currentViewNumEnd);
 
@@ -324,69 +377,75 @@ public class displaySearchResults extends Activity {
 		int start;
 		int end;
 
-		public fetchBookDetail(int start1, int end1)
-		{
+		public fetchBookDetail(int start1, int end1) {
 			this.start = start1;
 			this.end = end1;
 		}
 
 		public void run() {
-	//		Log.i("displaySearchResults","inside run method for fetching book details");
+			// Log.i("displaySearchResults","inside run method for fetching book details");
 			try {
-				for (int i=start;i<end;i++)
-				{
-		//			Log.i("displaySearchResults","inside for loop for fetching book details");
+				for (int i = start; i < end; i++) {
+					// Log.i("displaySearchResults","inside for loop for fetching book details");
 
-					if (i<allBooks.size()){
+					if (i < allBooks.size()) {
 						Book b = allBooks.get(i);
 
-						if (b.bookDetails.size()==0){
+						if (b.bookDetails.size() == 0) {
 
-							//URL detailURL = new URL (b.detailURL);
+							// URL detailURL = new URL (b.detailURL);
 							String HTML = shared.getHTMLfromURL(b.detailURL);
 							parseResults4.parseBookDetails(HTML, b);
-							Log.i("displaySearchResults","fetched book details for book:" + b.title);
+							Log.i("displaySearchResults",
+									"fetched book details for book:" + b.title);
 
 						}
 					}
 				}
 			} catch (Exception e) {
-				Log.i("displaySearchResults", "Exception in fetchBookDetail" + e.toString());
+				Log.i("displaySearchResults", "Exception in fetchBookDetail"
+						+ e.toString());
 
 			}
 		}
 	}
 
-	public void displayBookDetail (int position)
-	{
-		try{
+	public void displayBookDetail(int position) {
+		try {
 			Book b = allBooks.get(position + currentViewNumStart);
-			if(b.bookDetails.size()>0){
+			if (b.bookDetails.size() > 0) {
 				setContentView(R.layout.book_detail_layout2);
 				LayoutInflater mInflater = LayoutInflater.from(this);
 
-				View view = mInflater.inflate(R.layout.book_detail_layout2, null);
-				//TableLayout detailsTable = (TableLayout) view.findViewById(R.id.detailsTable);
-				LinearLayout detailsTable = (LinearLayout) view.findViewById(R.id.detailsTable2);
+				View view = mInflater.inflate(R.layout.book_detail_layout2,
+						null);
+				// TableLayout detailsTable = (TableLayout)
+				// view.findViewById(R.id.detailsTable);
+				LinearLayout detailsTable = (LinearLayout) view
+				.findViewById(R.id.detailsTable2);
 				detailsTable.removeAllViews();
-				//    setContentView(detailsTable);
-				for (String key: b.bookDetails.keySet()){	
-					// TableRow row = (TableRow)mInflater.inflate(R.layout.book_detail_row, null);
-					RelativeLayout row = (RelativeLayout)mInflater.inflate(R.layout.book_detail_row2, null);
+				// setContentView(detailsTable);
+				for (String key : b.bookDetails.keySet()) {
+					// TableRow row =
+					// (TableRow)mInflater.inflate(R.layout.book_detail_row,
+					// null);
+					RelativeLayout row = (RelativeLayout) mInflater.inflate(
+							R.layout.book_detail_row2, null);
 
-					((TextView)row.findViewById(R.id.detailLabel2)).setText(key+": ");
-					((TextView)row.findViewById(R.id.detailValue2)).setText(b.bookDetails.get(key));
+					((TextView) row.findViewById(R.id.detailLabel2))
+					.setText(key + ": ");
+					((TextView) row.findViewById(R.id.detailValue2))
+					.setText(b.bookDetails.get(key));
 					detailsTable.addView(row);
 				}
 				setContentView(detailsTable);
-				//	setContentView(R.layout.book_detail_layout2);
-			}
-			else Log.i("displaySearchResults", "book detail not fetched yet:" + b.title);
+				// setContentView(R.layout.book_detail_layout2);
+			} else
+				Log.i("displaySearchResults", "book detail not fetched yet:"
+						+ b.title);
 		}
 
-
-		catch(Exception e)
-		{
+		catch (Exception e) {
 			Log.i("displaySearchResults", "Exception in displayBookDetail");
 			TextView tv = new TextView(this);
 			tv.setText(e.toString());
@@ -402,7 +461,7 @@ public class displaySearchResults extends Activity {
 		setContentView(R.layout.search_results5);
 		header = (TextView) findViewById(R.id.searchResultsHeader);
 
-		ListView listview = (ListView) findViewById(R.id.listView1);
+		ListView listview = (ListView) findViewById(R.id.searchResultsListView5);
 		listview.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
@@ -412,23 +471,17 @@ public class displaySearchResults extends Activity {
 			}
 		});
 
-
 		Bundle bundle = getIntent().getExtras();
 		SearchData data = bundle.getParcelable("fieldsData");
 
 		Uri uri = buildURIfromData(data);
-
-		// TextView ttest = new TextView(this);
-		// ttest.setText(uri.toString());
-		// setContentView(ttest);
-
 		getResultsPage(uri);
 
-		//		new Thread(new sendDatatoParse()).start(); //decided to call later (within download thread) to see if it would go faster
-		new Thread(new fetchBookDetail(0,resultsPerPage));
+		// new Thread(new sendDatatoParse()).start(); //decided to call later
+		// (within download thread) to see if it would go faster
+//		new Thread(new fetchBookDetail(0, resultsPerPage));                     ///FIX THIS
 
-
-		displayResults(0);
+//		displayResults(0);
 
 	}
 
