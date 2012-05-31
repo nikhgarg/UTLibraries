@@ -49,14 +49,14 @@ public class BookBaseAdapter extends BaseAdapter {
 			.findViewById(R.id.titleList);
 			//			holder.image = (ImageView) convertView
 			//					.findViewById(R.id.bookImageList);
-			holder.location = (TextView) convertView
-			.findViewById(R.id.locationList);
+//			holder.location = (TextView) convertView
+//			.findViewById(R.id.locationList);
 			holder.publication = (TextView) convertView
 			.findViewById(R.id.publicationList);
-			holder.callNo = (TextView) convertView
-			.findViewById(R.id.callNoList);
-			holder.status = (TextView) convertView
-			.findViewById(R.id.statusList);
+//			holder.callNo = (TextView) convertView
+//			.findViewById(R.id.callNoList);
+//			holder.status = (TextView) convertView
+//			.findViewById(R.id.statusList);
 			holder.other = (TextView) convertView
 			.findViewById(R.id.otherInfoList);
 

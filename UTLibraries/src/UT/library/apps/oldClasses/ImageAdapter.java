@@ -1,5 +1,7 @@
-package UT.library.apps;
+package UT.library.apps.oldClasses;
 
+import UT.library.apps.R;
+import UT.library.apps.R.drawable;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
