@@ -1,6 +1,5 @@
 package UT.library.apps;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -87,7 +86,7 @@ public class BookBaseAdapter extends BaseAdapter {
 		// ImageDownloader imgD = new ImageDownloader();
 		// imgD.download(b.imageURL, holder.image);
 
-		holder.title.setText(b.title);
+		holder.title.setText(position + 1 + ". " + b.title);
 		// holder.location.setText(b.location);
 		holder.publication.setText(b.publication);
 		// holder.callNo.setText(b.callNo);
@@ -120,41 +119,63 @@ public class BookBaseAdapter extends BaseAdapter {
 				try{
 					String FILENAME = "Saved_Books";
 					boolean first = true;
-					savedBooks.add(b);
+
+					try{
+						FileInputStream fileIn = context.openFileInput(FILENAME);
+						ObjectInputStream in = new ObjectInputStream(fileIn);
+						Object nextObject = null;
+						//					if (in.available()>0)
+						nextObject = in.readObject();
+						savedBooks.clear();
+						//instead of using savedBooks,  just read from file everytime
+						if (nextObject!=null&&nextObject instanceof ArrayList<?>){
+							Log.i("BookBaseAdapter", "class of nextObject: " + nextObject.getClass().toString());
+							savedBooks = (ArrayList<Book>)nextObject;
+							Log.i("BookBaseAdapter", savedBooks.toString());
+						}
+						in.close();
+						fileIn.close();
+					}
+					catch(java.io.FileNotFoundException e)
+					{
+						//do nothing. just write new file - do now have to read from old
+					}
+					savedBooks.add(b); 
 					FileOutputStream fos = null;
 					ObjectOutputStream oos = null;
 					fos = context.openFileOutput(FILENAME, Context.MODE_PRIVATE); 	//change this back to append
 					oos = new ObjectOutputStream(fos);
-					
+
 					oos.writeObject(savedBooks);
-//					for (Book bb: savedBooks)
-//					{
-//						Log.i("BookBaseAdapter", "saved Book title: " + bb.title);
-//						oos.writeObject(bb);
-//					}
+					//					for (Book bb: savedBooks)
+					//					{
+					//						Log.i("BookBaseAdapter", "saved Book title: " + bb.title);
+					//						oos.writeObject(bb);
+					//					}
 					oos.close();
-					
-//					FileInputStream fileIn = context.openFileInput("Saved_Books"); //also opening input to read (see if any objects already there)
-//					
-//					boolean first = fileIn.read()==-1;
-//					if(!first)
-//					{
-//						Log.i("BookBaseAdapter", "here in onClick, hopefully before exception");
-//						Log.i("BookBaseAdapter", "already in file:" + (new ObjectInputStream(fileIn)).readObject());
-//					}
-//					fileIn.close();
-//					
-//					FileOutputStream fos = null;
-//					ObjectOutputStream oos = null;
-//					fos = context.openFileOutput(FILENAME, Context.MODE_PRIVATE); 	//change this back to append
-//					if(first) //file is empty, write to file with header
-//						oos = new ObjectOutputStream(fos);
-//					else 
-//						oos = new AppendableObjectOutputStream(fos); //file not empty, use custom ObjectOutputStream
-//					oos.writeObject(b);
-//					Log.i("BookBaseAdapter", "saved Book title: " + b.title);
-//					oos.close();
-//					fos.close();
+					fos.close();
+
+					//					FileInputStream fileIn = context.openFileInput("Saved_Books"); //also opening input to read (see if any objects already there)
+					//					
+					//					boolean first = fileIn.read()==-1;
+					//					if(!first)
+					//					{
+					//						Log.i("BookBaseAdapter", "here in onClick, hopefully before exception");
+					//						Log.i("BookBaseAdapter", "already in file:" + (new ObjectInputStream(fileIn)).readObject());
+					//					}
+					//					fileIn.close();
+					//					
+					//					FileOutputStream fos = null;
+					//					ObjectOutputStream oos = null;
+					//					fos = context.openFileOutput(FILENAME, Context.MODE_PRIVATE); 	//change this back to append
+					//					if(first) //file is empty, write to file with header
+					//						oos = new ObjectOutputStream(fos);
+					//					else 
+					//						oos = new AppendableObjectOutputStream(fos); //file not empty, use custom ObjectOutputStream
+					//					oos.writeObject(b);
+					//					Log.i("BookBaseAdapter", "saved Book title: " + b.title);
+					//					oos.close();
+					//					fos.close();
 				}
 				catch(Exception e)
 				{
