@@ -39,7 +39,7 @@ public class Book implements Serializable {
 
 	public void cleanUp()
 	{
-		publication = publication.substring(0,publication.length()-1);
+//		publication = publication.substring(0,publication.length()-1);
 
 		String [] toPrint = {title, publication, 
 				//location, callNo, 
@@ -86,8 +86,6 @@ public class Book implements Serializable {
 			ind++;
 		}
 		return ret;
-		//return String.format("Title: %s\nAuthor: %s\nYear: %s\nPublication Info: %s\nLocation: %s\nCall #: %s\nCurrentStatus: %s\nOther Fields: %s\n", title, author, year, publication, location,callNo, currentStatus, otherFields);
-
 
 	}
 }

@@ -260,9 +260,10 @@ public class displaySearchResults extends Activity {
 				Log.i("displaySearchResults", "Book already has detail:"
 						+ b.title + " " + b.bookDetails.toString());
 			} else if (currentViewNumEnd < allBooks.size()
-					&& allBooks.get(currentViewNumEnd).bookDetails.size() == 0)
-				new Thread(new fetchBookDetail(currentViewNumEnd,
-						currentViewNumEnd + resultsPerPage)).start();
+					&& allBooks.get(currentViewNumEnd).bookDetails.size() == 0){
+//				new Thread(new fetchBookDetail(currentViewNumEnd,		//not fetching details right now - slows down code too much
+//						currentViewNumEnd + resultsPerPage)).start();
+			}
 			else
 				Log.i("displaySearchResults", "book out of range");
 
@@ -382,6 +383,8 @@ public class displaySearchResults extends Activity {
 	{
 		super.onResume();
 		activityRunning = true;
+		parseResults4.numResults = -1; //static field, need to reset. - should probably rewrite this field to be nonstatic
+									 //and localized to each searchResults activity instance.
 	}
 
 	/** Called when the activity is first created. */

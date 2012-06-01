@@ -138,44 +138,17 @@ public class BookBaseAdapter extends BaseAdapter {
 					}
 					catch(java.io.FileNotFoundException e)
 					{
-						//do nothing. just write new file - do now have to read from old
+						//do nothing. just make new file - do not have  read from old
 					}
 					savedBooks.add(b); 
 					FileOutputStream fos = null;
 					ObjectOutputStream oos = null;
 					fos = context.openFileOutput(FILENAME, Context.MODE_PRIVATE); 	//change this back to append
 					oos = new ObjectOutputStream(fos);
-
 					oos.writeObject(savedBooks);
-					//					for (Book bb: savedBooks)
-					//					{
-					//						Log.i("BookBaseAdapter", "saved Book title: " + bb.title);
-					//						oos.writeObject(bb);
-					//					}
 					oos.close();
 					fos.close();
 
-					//					FileInputStream fileIn = context.openFileInput("Saved_Books"); //also opening input to read (see if any objects already there)
-					//					
-					//					boolean first = fileIn.read()==-1;
-					//					if(!first)
-					//					{
-					//						Log.i("BookBaseAdapter", "here in onClick, hopefully before exception");
-					//						Log.i("BookBaseAdapter", "already in file:" + (new ObjectInputStream(fileIn)).readObject());
-					//					}
-					//					fileIn.close();
-					//					
-					//					FileOutputStream fos = null;
-					//					ObjectOutputStream oos = null;
-					//					fos = context.openFileOutput(FILENAME, Context.MODE_PRIVATE); 	//change this back to append
-					//					if(first) //file is empty, write to file with header
-					//						oos = new ObjectOutputStream(fos);
-					//					else 
-					//						oos = new AppendableObjectOutputStream(fos); //file not empty, use custom ObjectOutputStream
-					//					oos.writeObject(b);
-					//					Log.i("BookBaseAdapter", "saved Book title: " + b.title);
-					//					oos.close();
-					//					fos.close();
 				}
 				catch(Exception e)
 				{
