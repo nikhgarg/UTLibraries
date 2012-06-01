@@ -75,7 +75,7 @@ public class shared {
 	public static boolean logIntoUTDirect(Context context, DefaultHttpClient client)
 	{
 		try{
-			SharedPreferences loginPreferences = context.getSharedPreferences("login", context.MODE_PRIVATE); 
+			SharedPreferences loginPreferences = context.getSharedPreferences("login", Context.MODE_PRIVATE); 
 			String username = loginPreferences.getString("uteid", "");
 			String password = loginPreferences.getString("password","");
 
@@ -103,7 +103,7 @@ public class shared {
 	public static boolean logIntoCatalog (Context context,DefaultHttpClient client)
 	{
 		try{
-			SharedPreferences loginPreferences = context.getSharedPreferences("login", context.MODE_PRIVATE); 
+			SharedPreferences loginPreferences = context.getSharedPreferences("login", Context.MODE_PRIVATE); 
 			String username = loginPreferences.getString("uteid", "");
 			String password = loginPreferences.getString("password","");
 

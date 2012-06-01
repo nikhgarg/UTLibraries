@@ -1,6 +1,5 @@
 package UT.library.apps;
 import java.util.ArrayList;
-import java.util.List;
 
 import net.htmlparser.jericho.Element;
 import net.htmlparser.jericho.Source;
@@ -42,18 +41,6 @@ public class parseResults4 {
 
 		reccount++;
 
-		//	Element parent = e.getParentElement();
-		//	String val = e.getContent().getTextExtractor().toString();
-
-		//	boolean hasClass = e.getAttributeValue("class")!=null;
-		//	String classValue = e.getAttributeValue("class");
-
-		//		if (hasClass && (classValue.equals("bibItemsHeader") || classValue.equals("briefcitCell") || classValue.equals("briefcitClear") || classValue.equals("briefcitJacket")))return;
-		//	boolean classEqualsTitle = hasClass && classValue.equals("briefcitTitle");
-
-
-
-
 		Source pageRec = new Source(e.getContent().toString());
 
 		Element pubElem = pageRec.getFirstElementByClass("briefcitDetailMain");
@@ -61,8 +48,6 @@ public class parseResults4 {
 
 		Element titleElem = pageRec.getFirstElementByClass("briefcitTitle");
 		b.title = titleElem.getContent().getTextExtractor().toString();
-
-	//	System.out.println(b.title);
 
 		String pubtemp = b.publication;
 		pubtemp = pubtemp.replace(b.title, "");
@@ -82,15 +67,12 @@ public class parseResults4 {
 				.toString();
 				switch (ind) {
 				case 0:
-					//	b.location = ebibtemp;
 					b.location.add(ebibtemp);
 					break;
 				case 1:
-					//		b.callNo = ebibtemp;
 					b.callNo.add(ebibtemp);
 					break;
 				case 2:
-					//	b.currentStatus = ebibtemp;
 					b.currentStatus.add(ebibtemp);
 					break;
 				default:
@@ -105,12 +87,6 @@ public class parseResults4 {
 
 	public static ArrayList<Book> extractBooks(String HTML) {
 		Source page = new Source(HTML);
-		int position = 0;
-		int oldposition = -1;
-
-		String nextImageURL = "";
-
-		List<Element> allElements = page.getAllElements();
 		ArrayList<Book> allBooks = new ArrayList<Book>();
 		int briefIndex = HTML.indexOf("\"briefcitDetail\"");
 		String HTMLtemp = HTML;
@@ -118,24 +94,12 @@ public class parseResults4 {
 			HTMLtemp = HTMLtemp.substring(briefIndex-11);
 			Source pagetemp = new Source(HTMLtemp);
 			Element a = pagetemp.getFirstElementByClass("briefcitDetail");
-			//		System.out.println(a);
-//			String elemout = "";
-//			ArrayList<String> bookdetails = new ArrayList<String>();
 			allBooks.add(new Book());
 			recElementBookParse(a, allBooks.get(allBooks.size() - 1),null);
-			// allBooks.get(allBooks.size() - 1).imageURL = nextImageURL;
 			HTMLtemp = HTMLtemp.substring(briefIndex+1); //so find next briefcitDetail
 			briefIndex = HTMLtemp.indexOf("\"briefcitDetail\"");
 			allBooks.get(allBooks.size()-1).cleanUp();
 		}
-		//		}
-
-//		for (Book b : allBooks)
-//			b.cleanUp();
-
-		// for (Book book: allBooks)
-		// out.println(book);
-	//	System.out.println(reccount);
 		return allBooks;
 	}
 
@@ -146,8 +110,8 @@ public class parseResults4 {
 	public static void parsePage(String HTML) {
 
 		Source page = new Source(HTML);
-		int position = 0;
-		int oldposition = -1;
+//		int position = 0;
+//		int oldposition = -1;
 
 	//	List<Element> allElements = page.getAllElements();
 		

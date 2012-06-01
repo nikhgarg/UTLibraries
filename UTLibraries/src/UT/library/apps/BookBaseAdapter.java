@@ -113,6 +113,7 @@ public class BookBaseAdapter extends BaseAdapter {
 		}
 
 		holder.saveBook.setOnClickListener(new OnClickListener() {
+			@SuppressWarnings("unchecked")
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub

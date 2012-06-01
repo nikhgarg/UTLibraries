@@ -7,13 +7,11 @@ import java.util.LinkedHashMap;
 
 public class Book implements Serializable {
 
-//	/**
-//	 * 
-//	 */
-//	private static final long serialVersionUID = 4994743741186231795L;
-//	/**
-//	 * 
-//	 */
+
+	/**
+	 * generated serialVersionUID
+	 */
+	private static final long serialVersionUID = 4994743741186231795L;
 	public String title="";
 	public String author="";
 	public String year="";
@@ -39,8 +37,6 @@ public class Book implements Serializable {
 
 	public void cleanUp()
 	{
-//		publication = publication.substring(0,publication.length()-1);
-
 		String [] toPrint = {title, publication, 
 				//location, callNo, 
 				otherFields, 
@@ -64,11 +60,9 @@ public class Book implements Serializable {
 	//	currentStatus = toPrint[5];
 
 		publication = (publication.substring(publication.length()-1, publication.length()).equals("\n"))? publication.substring(0,publication.length()-1): publication;
-
-
-
 	}
 
+	@SuppressWarnings("unchecked")
 	public String toString(){
 
 		cleanUp();

@@ -129,10 +129,10 @@ public class displaySearchResults extends Activity {
 					boolean first = true;
 					String temp = "";
 					while (temp != null) {
-						if(!activityRunning)return;
+						if(!activityRunning)finish();
 						if (temp.contains("briefcitEntryNum")) {
 							if (!first) {
-								int oldSize = allBooks.size();
+//								int oldSize = allBooks.size();
 								ArrayList<Book> tempBooks = parseResults4
 								.extractBooks(catalogHTML);
 								numfound += tempBooks.size();
@@ -297,7 +297,7 @@ public class displaySearchResults extends Activity {
 			// Log.i("displaySearchResults","inside run method for fetching book details");
 			try {
 				for (int i = start; i < end; i++) {
-					if(!activityRunning) return;
+					if(!activityRunning) finish();
 					// Log.i("displaySearchResults","inside for loop for fetching book details");
 
 					if (i < allBooks.size()) {
