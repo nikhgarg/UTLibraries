@@ -17,8 +17,8 @@ public class WelcomeScreen extends Activity {
 
 		// setContentView(R.layout.main);
 
-		String[] features = { "Search Catalog", "Library Hours", "Settings", "Reserve Study Room", "Checked Out Books" };
-		
+		String[] features = { "Search Catalog", "Library Hours", "Settings", "Reserve Study Room", "Checked Out Books", "Saved Books" };
+
 		setContentView(R.layout.main2);
 
 		ListView listview = (ListView) findViewById(R.id.mainPageListView);
@@ -27,7 +27,7 @@ public class WelcomeScreen extends Activity {
 		listview.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				
+
 				launchActivity(position);
 
 			}
@@ -50,20 +50,16 @@ public class WelcomeScreen extends Activity {
 
 		Intent intent=null;
 		switch (position) {
-		case 0:
-			intent = new Intent(this, searchInputScreen.class);
-			break;
-		case 1:
-			intent = new Intent(this, showLibraryTimings.class);
-			break;
-		case 2:
-			intent = new Intent(this, settings.class); break;
+		case 0:	intent = new Intent(this, searchInputScreen.class);	break;
+		case 1: intent = new Intent(this, showLibraryTimings.class);break;
+		case 2:	intent = new Intent(this, settings.class); break;
 		case 3: intent = new Intent(this,reserveStudyRoom.class); break;
 		case 4: intent = new Intent(this, renewBooks.class);break;
+		case 5: intent = new Intent(this, saveBooks.class);break;
 
 		}
 		if(intent!=null)
-		startActivity(intent);
+			startActivity(intent);
 
 	}
 }

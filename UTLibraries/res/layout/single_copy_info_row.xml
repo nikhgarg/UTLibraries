@@ -8,7 +8,6 @@
         android:id="@+id/location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_column="0"
         android:text="Location"
         android:textAppearance="?android:attr/textAppearanceSmall" />
@@ -17,7 +16,7 @@
         android:id="@+id/callNo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        
         android:layout_column="1"
         android:text="call No"
         android:textAppearance="?android:attr/textAppearanceSmall" />
@@ -26,7 +25,7 @@
         android:id="@+id/status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        
         android:layout_column="2"
         android:layout_gravity="right"
         android:text="status"

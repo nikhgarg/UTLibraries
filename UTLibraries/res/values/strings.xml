@@ -378,5 +378,7 @@
     <string name="renewmarked">Renew Marked</string>
     <string name="renew">Renew</string>
     <string name="title">Title</string>
+    <string name="savebook">Save Book</string>
+    <string name="savedbooks">Saved Books</string>
 
 </resources>

@@ -32,6 +32,7 @@
         <activity android:name=".reserveStudyRoom" />
         <activity android:name=".displayRoomResults" />
         <activity android:name=".renewBooks" />
+        <activity android:name=".saveBooks"/>
     </application>
 
 </manifest>

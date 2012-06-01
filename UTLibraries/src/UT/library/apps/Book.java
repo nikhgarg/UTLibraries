@@ -1,11 +1,19 @@
 package UT.library.apps;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
-public class Book {
+public class Book implements Serializable {
 
+//	/**
+//	 * 
+//	 */
+//	private static final long serialVersionUID = 4994743741186231795L;
+//	/**
+//	 * 
+//	 */
 	public String title="";
 	public String author="";
 	public String year="";
@@ -24,6 +32,10 @@ public class Book {
 	
 	public HashMap<String, String> bookDetails = new LinkedHashMap<String, String>();
 
+	public Book()
+	{
+		//default constructor, supposedly needed for serializable (according to a tutorial online)
+	}
 
 	public void cleanUp()
 	{

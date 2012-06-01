@@ -33,9 +33,9 @@ public class displaySearchResults extends Activity {
 	boolean allResultsQed = false;
 	boolean allResultsParsed = false;
 	boolean pageLoading = false;
-	int resultsPerPage = 10;
+	int resultsPerPage = 5;
 	TextView header;
-
+	
 	private Uri buildURIfromData(SearchData data) {
 		try {
 
