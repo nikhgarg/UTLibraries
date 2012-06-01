@@ -20,14 +20,14 @@
         android:layout_centerHorizontal="true"
         android:text="@string/checkedoutbooksheader"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-
+
     <Button
         android:id="@+id/backButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:onClick="toSearchInput"
-        android:text="@string/back" />
+        android:onClick="goHome"
+        android:text="@string/home" />
 
     <Button
         android:id="@+id/renewallButton"
@@ -37,7 +37,7 @@
         android:layout_below="@+id/backButton"
         android:onClick="renewAllBooks"
         android:text="@string/renewall" />
-
+
     <Button
         android:id="@+id/renewMarkedButton"
         android:layout_width="wrap_content"

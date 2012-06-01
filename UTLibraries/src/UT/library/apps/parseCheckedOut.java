@@ -17,6 +17,10 @@ public class parseCheckedOut {
 		{
 			Source epage = new Source(elem.getContent());
 			cBook b = new cBook();
+			String temp = (epage.getFirstElementByClass("patFuncMark").getContent().toString());
+			temp = temp.substring(temp.indexOf("value") + 7);
+			temp = temp.substring(0, temp.indexOf("\""));
+			b.renewValue = temp;
 			b.title = epage.getFirstElementByClass("patFuncTitle").getTextExtractor().toString();
 			b.barcode = epage.getFirstElementByClass("patFuncBarcode").getTextExtractor().toString();
 			b.status = epage.getFirstElementByClass("patFuncStatus").getTextExtractor().toString();

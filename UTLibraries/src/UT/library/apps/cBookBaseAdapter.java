@@ -3,10 +3,14 @@ package UT.library.apps;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 
 public class cBookBaseAdapter extends BaseAdapter {
@@ -51,18 +55,28 @@ public class cBookBaseAdapter extends BaseAdapter {
 			.findViewById(R.id.callNo);
 			holder.status = (TextView) convertView
 			.findViewById(R.id.status);
+			holder.renew = (CheckBox) convertView.findViewById(R.id.renewBox);
 
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
 
-		cBook b = bookArrayList.get(position);
+		final cBook b = bookArrayList.get(position);
 
 		holder.title.setText(b.title);
 		holder.barcode.setText(b.barcode);
 		holder.status.setText(b.status);
 		holder.callNo.setText(b.callNumber);
+//		holder.renew.setChecked(b.renew);
+		
+        holder.renew.setOnCheckedChangeListener(new OnCheckedChangeListener(){
+
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            	b.renew = isChecked;
+            }               
+        });
+		
 
 		return convertView;
 	}
@@ -72,6 +86,7 @@ public class cBookBaseAdapter extends BaseAdapter {
 		TextView callNo;
 		TextView status;
 		TextView barcode;
+		CheckBox renew;
 
 	}
 

@@ -22,7 +22,7 @@ public class displayRoomResults extends Activity {
 
 		//log into UT direct with new client
 		DefaultHttpClient client = new DefaultHttpClient();
-		shared.logIntoUTDirect(client);
+		shared.logIntoUTDirect(this,client);
 		//		shared.logIntoCatalog(client);
 		// use HttpGet with all the parameters to find rooms page
 		String uri = createURIfromData(bundle);

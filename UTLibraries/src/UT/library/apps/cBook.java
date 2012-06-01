@@ -9,6 +9,7 @@ public class cBook {
 	String status = "";
 	String callNumber = "";
 	boolean renew = false;
+	String renewValue = ""; //value in page for checkbox to renew book
 	
 	public String toString()
 	{

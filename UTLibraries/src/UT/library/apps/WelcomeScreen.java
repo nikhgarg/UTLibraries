@@ -17,7 +17,7 @@ public class WelcomeScreen extends Activity {
 
 		// setContentView(R.layout.main);
 
-		String[] features = { "Search Catalog", "Library Timings", "Settings", "Reserve Study Room", "Renew Books" };
+		String[] features = { "Search Catalog", "Library Hours", "Settings", "Reserve Study Room", "Checked Out Books" };
 		
 		setContentView(R.layout.main2);
 

@@ -16,6 +16,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
@@ -71,10 +72,10 @@ public class shared {
 		}
 	}
 	
-	public static boolean logIntoUTDirect(DefaultHttpClient client)
+	public static boolean logIntoUTDirect(Context context, DefaultHttpClient client)
 	{
 		try{
-			SharedPreferences loginPreferences = settings.loginPreferences;
+			SharedPreferences loginPreferences = context.getSharedPreferences("login", context.MODE_PRIVATE); 
 			String username = loginPreferences.getString("uteid", "");
 			String password = loginPreferences.getString("password","");
 
@@ -99,10 +100,10 @@ public class shared {
 
 	}
 
-	public static boolean logIntoCatalog (DefaultHttpClient client)
+	public static boolean logIntoCatalog (Context context,DefaultHttpClient client)
 	{
 		try{
-			SharedPreferences loginPreferences = settings.loginPreferences;
+			SharedPreferences loginPreferences = context.getSharedPreferences("login", context.MODE_PRIVATE); 
 			String username = loginPreferences.getString("uteid", "");
 			String password = loginPreferences.getString("password","");
 
