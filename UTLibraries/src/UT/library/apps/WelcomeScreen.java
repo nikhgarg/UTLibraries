@@ -17,7 +17,7 @@ public class WelcomeScreen extends Activity {
 
 		// setContentView(R.layout.main);
 
-		String[] features = { "Search Catalog", "Library Hours", "Settings", "Reserve Study Room", "Checked Out Books", "Saved Books" };
+		String[] features = { "Search Catalog", "Library Hours", "Settings", "Reserve Study Room", "Checked Out Books", "Saved Books", "Library Maps" };
 
 		setContentView(R.layout.main2);
 
@@ -56,6 +56,7 @@ public class WelcomeScreen extends Activity {
 		case 3: intent = new Intent(this,reserveStudyRoom.class); break;
 		case 4: intent = new Intent(this, renewBooks.class);break;
 		case 5: intent = new Intent(this, saveBooks.class);break;
+		case 6: intent = new Intent(this, libraryMaps.class); break;
 
 		}
 		if(intent!=null)

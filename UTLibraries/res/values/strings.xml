@@ -380,5 +380,8 @@
     <string name="title">Title</string>
     <string name="savebook">Save Book</string>
     <string name="savedbooks">Saved Books</string>
+    <string name="Floorup">Floor Up</string>
+    <string name="floordown">Floor Down</string>
+    <string name="floor">Floor</string>
 
 </resources>
