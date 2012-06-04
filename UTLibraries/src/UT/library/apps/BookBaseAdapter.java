@@ -86,7 +86,7 @@ public class BookBaseAdapter extends BaseAdapter {
 		// ImageDownloader imgD = new ImageDownloader();
 		// imgD.download(b.imageURL, holder.image);
 
-		holder.title.setText(position + 1 + ". " + b.title);
+		holder.title.setText(b.numberinorder + ". " + b.title);
 		// holder.location.setText(b.location);
 		holder.publication.setText(b.publication);
 		// holder.callNo.setText(b.callNo);

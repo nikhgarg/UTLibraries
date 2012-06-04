@@ -1,8 +1,10 @@
 package UT.library.apps;
+
 import java.util.ArrayList;
 
 import net.htmlparser.jericho.Element;
 import net.htmlparser.jericho.Source;
+import android.util.Log;
 
 public class parseResults4 {
 
@@ -58,46 +60,57 @@ public class parseResults4 {
 			b.detailURL = "http://catalog.lib.utexas.edu"+ b.detailURL.substring(0,b.detailURL.indexOf("\""));
 		}
 
-		Element bibElem = pageRec.getFirstElementByClass("bibItemsEntry");
+		String htmltemp = e.getContent().toString();
+		int bibInd = htmltemp.indexOf("bibItemsEntry");
 
-		int ind = 0;
-		if (bibElem!=null)
-			for (Element ebib : bibElem.getChildElements()) {
-				String ebibtemp = ebib.getContent().getTextExtractor()
-				.toString();
-				switch (ind) {
-				case 0:
-					b.location.add(ebibtemp);
-					break;
-				case 1:
-					b.callNo.add(ebibtemp);
-					break;
-				case 2:
-					b.currentStatus.add(ebibtemp);
-					break;
-				default:
-					b.otherFields += ebibtemp + "\t";
-					break;
+		while(bibInd>=0){
+			Source bibpage = new Source(htmltemp);
+			Element bibElem = bibpage.getFirstElementByClass("bibItemsEntry");
+			int ind = 0;
+			if (bibElem!=null)
+				for (Element ebib : bibElem.getChildElements()) {
+					String ebibtemp = ebib.getContent().getTextExtractor()
+					.toString();
+					switch (ind) {
+					case 0:
+						b.location.add(ebibtemp);
+						break;
+					case 1:
+						b.callNo.add(ebibtemp);
+						break;
+					case 2:
+						b.currentStatus.add(ebibtemp);
+						break;
+					default:
+						b.otherFields += ebibtemp + "\t";
+						break;
+					}
+					ind++;
 				}
-				ind++;
-			}
+			htmltemp = htmltemp.substring(bibInd + 1);
+			bibInd = htmltemp.indexOf("bibItemsEntry");
+		}
 
 		return;
 	}
 
 	public static ArrayList<Book> extractBooks(String HTML) {
-		Source page = new Source(HTML);
+//		Source page = new Source(HTML);
 		ArrayList<Book> allBooks = new ArrayList<Book>();
 		int briefIndex = HTML.indexOf("\"briefcitDetail\"");
 		String HTMLtemp = HTML;
 		while(briefIndex>=0){
-			HTMLtemp = HTMLtemp.substring(briefIndex-11);
 			Source pagetemp = new Source(HTMLtemp);
 			Element a = pagetemp.getFirstElementByClass("briefcitDetail");
+
+			//	System.out.println(a.getContent());
+
 			allBooks.add(new Book());
 			recElementBookParse(a, allBooks.get(allBooks.size() - 1),null);
 			HTMLtemp = HTMLtemp.substring(briefIndex+1); //so find next briefcitDetail
 			briefIndex = HTMLtemp.indexOf("\"briefcitDetail\"");
+			if (briefIndex<0) break;
+			HTMLtemp = HTMLtemp.substring(briefIndex-11);
 			allBooks.get(allBooks.size()-1).cleanUp();
 		}
 		return allBooks;
@@ -109,37 +122,43 @@ public class parseResults4 {
 	//parses top of page to get total number of Results and the URL for the next Page (to prefetch before displaying results)
 	public static void parsePage(String HTML) {
 
-		Source page = new Source(HTML);
-//		int position = 0;
-//		int oldposition = -1;
+		try{
+			Source page = new Source(HTML);
+			//		int position = 0;
+			//		int oldposition = -1;
 
-	//	List<Element> allElements = page.getAllElements();
-		
-		Element a = page.getFirstElementByClass("browseSearchtool");
-	if (numResults<0)	
-		for (Element aa : a.getChildElements()) {
-			if (aa.getName().equals("div")
-					&& aa.getAttributeValue("class") != null
-					&& aa.getAttributeValue("class").equals(
-					"browseSearchtoolMessage")) {
-				String temp = aa.getContent().getTextExtractor()
-				.toString();
-				temp = temp.substring(0, temp.indexOf("results found"));
-				String[] tempar = temp.trim().split(" ");
-				numResults = Integer
-				.parseInt(tempar[tempar.length - 1]);
-			}
-		}
-		
-		a = page.getFirstElementByClass("browsePager");
-		
-		for (Element aa : a.getChildElements()) {
-			for (Element aaa : aa.getChildElements()) {
-				if (aaa.getContent().getTextExtractor().toString()
-						.equals("Next") && aaa.getAttributeValue("href")!=null) {
-					nextPageUrl = "http://catalog.lib.utexas.edu" +  aaa.getAttributeValue("href");
+			//	List<Element> allElements = page.getAllElements();
+
+			Element a = page.getFirstElementByClass("browseSearchtool");
+			if (numResults<0)	
+				for (Element aa : a.getChildElements()) {
+					if (aa.getName().equals("div")
+							&& aa.getAttributeValue("class") != null
+							&& aa.getAttributeValue("class").equals(
+							"browseSearchtoolMessage")) {
+						String temp = aa.getContent().getTextExtractor()
+						.toString();
+						temp = temp.substring(0, temp.indexOf("results found"));
+						String[] tempar = temp.trim().split(" ");
+						numResults = Integer
+						.parseInt(tempar[tempar.length - 1]);
+					}
+				}
+
+			a = page.getFirstElementByClass("browsePager");
+
+			for (Element aa : a.getChildElements()) {
+				for (Element aaa : aa.getChildElements()) {
+					if (aaa.getContent().getTextExtractor().toString()
+							.equals("Next") && aaa.getAttributeValue("href")!=null) {
+						nextPageUrl = "http://catalog.lib.utexas.edu" +  aaa.getAttributeValue("href");
+					}
 				}
 			}
+		}
+		catch(Exception e)
+		{
+			Log.e("parseResults", "exception caught in parse page", e);
 		}
 	}
 }

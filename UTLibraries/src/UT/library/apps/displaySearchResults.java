@@ -21,7 +21,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.TableLayout;
 import android.widget.TextView;
 
 public class displaySearchResults extends Activity {
@@ -132,14 +131,13 @@ public class displaySearchResults extends Activity {
 						if(!activityRunning)finish();
 						if (temp.contains("briefcitEntryNum")) {
 							if (!first) {
-//								int oldSize = allBooks.size();
+								int oldSize = allBooks.size();
 								ArrayList<Book> tempBooks = parseResults4
 								.extractBooks(catalogHTML);
 								numfound += tempBooks.size();
 								// now do this in BookBaseAdapter
-								// for (int i = 0; i < tempBooks.size(); i++)
-								// tempBooks.get(i).title = i + oldSize + 1
-								// + ". " + tempBooks.get(i).title;
+								 for (int i = 0; i < tempBooks.size(); i++)
+								 tempBooks.get(i).numberinorder = i + oldSize +1;
 								allBooks.addAll(tempBooks);
 								Log.i("displaySearchResults",
 										"" + allBooks.size());
@@ -183,9 +181,8 @@ public class displaySearchResults extends Activity {
 					.extractBooks(catalogHTML);
 					numfound += tempBooks.size();
 					// now do this in BookBaseAdapter
-					// for (int i = 0; i < tempBooks.size(); i++)
-					// tempBooks.get(i).title = i + oldSize + 1 + ". "
-					// + tempBooks.get(i).title;
+					 for (int i = 0; i < tempBooks.size(); i++)
+						 tempBooks.get(i).numberinorder = i + oldSize +1;
 					allBooks.addAll(tempBooks);
 					catalogHTML = "";
 

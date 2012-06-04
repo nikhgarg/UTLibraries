@@ -15,6 +15,7 @@ public class Book implements Serializable {
 	public String title="";
 	public String author="";
 	public String year="";
+	public int numberinorder = -1;
 	//	public String location="";
 	//	public String callNo="";
 	//	public String currentStatus="";
@@ -42,7 +43,7 @@ public class Book implements Serializable {
 				otherFields, 
 				//currentStatus
 		};
-		String [] ignoreWords = {"Location", "Call No.", "Current Status", "Add to Clipboard"}; 
+		String [] ignoreWords = {"Location", "Call No.", "Current Status", "Add to Clipboard", "Request"}; 
 
 
 		for (int i=0;i<toPrint.length;i++)

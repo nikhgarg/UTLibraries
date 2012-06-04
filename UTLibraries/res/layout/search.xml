@@ -29,6 +29,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/searchTopHeader"
         android:layout_toRightOf="@+id/fieldtypeInput"
+        android:inputType="textWebEditText"
         android:text="@string/SearchString" >
 
         <requestFocus />
