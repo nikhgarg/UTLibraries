@@ -1,6 +1,7 @@
 package UT.library.apps;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,11 +13,13 @@ import android.widget.Toast;
 public class showLibraryTimings extends Activity {
 
 	WebView webview;
-
+	ProgressDialog dialog;
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		dialog = ProgressDialog.show(this, "", 
+				"Loading. Please wait...", true);
 		setContentView(R.layout.library_hours);
 		try {
 			webview = (WebView) findViewById(R.id.libraryHours);
@@ -27,6 +30,7 @@ public class showLibraryTimings extends Activity {
 			webview.setWebViewClient(new WebViewClient() {
 				public void onReceivedError(WebView view, int errorCode,
 						String description, String failingUrl) {
+					dialog.cancel();
 					Toast.makeText(
 							activity,
 							"Page Could Not Load. Please Try Again Later. "
@@ -43,6 +47,7 @@ public class showLibraryTimings extends Activity {
 			}
 			else
 				webview.loadUrl(url);
+			dialog.cancel();
 
 		} catch (Exception e) {
 			Log.i("showLibraryTimings", "exception in onCreate: " + e.toString());
@@ -69,8 +74,11 @@ public class showLibraryTimings extends Activity {
 	public void refreshPage(View view)
 	{
 		try{
+			dialog = ProgressDialog.show(this, "", 
+					"Loading. Please wait...", true);
 			String url = "http://www.lib.utexas.edu/about/hours/";
 			webview.loadUrl(url);
+			dialog.cancel();
 		}
 		catch(Exception e)
 		{

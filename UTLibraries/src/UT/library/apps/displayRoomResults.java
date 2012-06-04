@@ -27,7 +27,7 @@ public class displayRoomResults extends Activity {
 		// use HttpGet with all the parameters to find rooms page
 		String uri = createURIfromData(bundle);
 		//		String uri = "https://catalog.lib.utexas.edu/patroninfo~S29/1160546/top";
-		String html = shared.retrieveProtectedWebPage(client, uri);
+		String html = shared.retrieveProtectedWebPage(this,client, uri);
 		TextView tv = new TextView(this);
 		tv.setText(html);
 		setContentView(tv);

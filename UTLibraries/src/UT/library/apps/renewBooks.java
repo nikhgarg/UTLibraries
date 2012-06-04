@@ -30,7 +30,7 @@ public class renewBooks extends Activity {
 		shared.logIntoCatalog(this, client);
 
 		// get HTML for page
-		String html = shared.retrieveProtectedWebPage(client,
+		String html = shared.retrieveProtectedWebPage(this,client,
 		"https://catalog.lib.utexas.edu/patroninfo~S29/1160546/items");
 		Log.i("renewBooks", "html: " + html);
 

@@ -19,6 +19,7 @@ import org.apache.http.protocol.HTTP;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
+import android.widget.Toast;
 
 //class for shared data and content, including Log in method, and client for connection
 public class shared {
@@ -42,7 +43,7 @@ public class shared {
 	public static boolean loggedIntoCatalog = false;
 	public static boolean loggedIntoUTDirect = false;
 	
-	public static String retrieveProtectedWebPage (DefaultHttpClient client, String uri)
+	public static String retrieveProtectedWebPage (Context context,DefaultHttpClient client, String uri)
 	{
 		String html = "";
 		
@@ -66,6 +67,8 @@ public class shared {
 		}
 		catch(Exception e)
 		{
+			Toast toast = Toast.makeText(context, "Could not retrive web page. Please check network connection and try again later.", Toast.LENGTH_SHORT);
+			toast.show();
 			Log.i("shared",
 					"exception in retrieveProtectedWebPage: " + e.toString());
 			return null;
@@ -93,6 +96,8 @@ public class shared {
 			Log.i("shared",
 					"exception in logIntoUTDirect: " + e.toString());
 			loggedIntoUTDirect = false;
+			Toast toast = Toast.makeText(context, "Could not Log in. Please check UTEID/Password and network connection.", Toast.LENGTH_SHORT);
+			toast.show();
 			return false;
 		}
 		loggedIntoUTDirect =  true;
@@ -122,6 +127,8 @@ public class shared {
 			Log.i("shared",
 					"exception in logIntoCatalog: " + e.toString());
 			loggedIntoCatalog = false;
+			Toast toast = Toast.makeText(context, "Could not Log in. Please check UTEID/Password and network connection.", Toast.LENGTH_SHORT);
+			toast.show();
 			return false;
 		}
 		loggedIntoCatalog =  true;

@@ -77,6 +77,8 @@ public class BookBaseAdapter extends BaseAdapter {
 			.findViewById(R.id.copiesTable);
 
 			convertView.setTag(holder);
+			//convertView.setClickable(true);
+			
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
@@ -111,7 +113,7 @@ public class BookBaseAdapter extends BaseAdapter {
 
 			holder.copiesTable.addView(row);
 		}
-
+		holder.saveBook.setFocusable(false);  //needed to make listview clickable
 		holder.saveBook.setOnClickListener(new OnClickListener() {
 			@SuppressWarnings("unchecked")
 			@Override

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import org.apache.http.client.methods.HttpGet;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -16,12 +17,14 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class displaySearchResults extends Activity {
 
@@ -111,7 +114,7 @@ public class displaySearchResults extends Activity {
 			String catalogHTML = "";
 			int numfound = 0;
 			while (activityRunning) {
-				
+
 				try {
 					if (libraryURL == null) {
 						pageLoading = false;
@@ -135,9 +138,8 @@ public class displaySearchResults extends Activity {
 								ArrayList<Book> tempBooks = parseResults4
 								.extractBooks(catalogHTML);
 								numfound += tempBooks.size();
-								// now do this in BookBaseAdapter
-								 for (int i = 0; i < tempBooks.size(); i++)
-								 tempBooks.get(i).numberinorder = i + oldSize +1;
+								for (int i = 0; i < tempBooks.size(); i++)
+									tempBooks.get(i).numberinorder = i + oldSize +1;
 								allBooks.addAll(tempBooks);
 								Log.i("displaySearchResults",
 										"" + allBooks.size());
@@ -181,8 +183,8 @@ public class displaySearchResults extends Activity {
 					.extractBooks(catalogHTML);
 					numfound += tempBooks.size();
 					// now do this in BookBaseAdapter
-					 for (int i = 0; i < tempBooks.size(); i++)
-						 tempBooks.get(i).numberinorder = i + oldSize +1;
+					for (int i = 0; i < tempBooks.size(); i++)
+						tempBooks.get(i).numberinorder = i + oldSize +1;
 					allBooks.addAll(tempBooks);
 					catalogHTML = "";
 
@@ -195,6 +197,8 @@ public class displaySearchResults extends Activity {
 					Log.i("displaySearchResults", "next page URL:" + libraryURL);
 
 				} catch (Exception e) {
+					Toast toast = Toast.makeText(context, "Could not load web data. Please check network connection and try again later.", Toast.LENGTH_SHORT);
+					toast.show();
 					Log.i("displaySearchResults", "Exception in getURIdata:"
 							+ e.toString());
 				}
@@ -213,8 +217,22 @@ public class displaySearchResults extends Activity {
 		try {
 			if (start < 0)
 				start = 0;
+			//			handler.post(new Runnable(){
+			//				@Override
+			//				public void run() {
+			//					// TODO Auto-generated method stub
+			//					dialog = ProgressDialog.show(context, "", 
+			//							"Loading. Please wait...", true); 
+			//				}			
+			//			});
+
 			Log.i("displaySearchResults", "inside display Results");
 			if (start < allBooks.size()) {
+				while(start+resultsPerPage < allBooks.size() && !allResultsQed && shownFirst){
+					Log.i("displaySearchResult","waiting for all to load. allBooks.size: " + allBooks.size() + " allResultsQed: " + allResultsQed + " shown First: " +  shownFirst);
+					//wait till next page all loaded, or all results have loaded. not for first results
+					//because that check occurs elsewhere
+				}
 				int end = (int) Math.min(start + resultsPerPage,
 						allBooks.size());
 				currentViewNumStart = start;
@@ -228,6 +246,7 @@ public class displaySearchResults extends Activity {
 				handler.post(new Runnable() {
 					@Override
 					public void run() {
+						dialog.cancel();
 						header.setText(String.format("%d-%d/%d",
 								currentViewNumStart + 1, currentViewNumEnd,
 								parseResults4.numResults));
@@ -244,8 +263,8 @@ public class displaySearchResults extends Activity {
 			}
 
 		} catch (Exception e) {
-			Log.i("displaySearchResults",
-					"Exception in displayResults: " + e.toString());
+			Log.e("displaySearchResults",
+					"Exception in displayResults: ", e);
 		}
 	}
 
@@ -258,8 +277,8 @@ public class displaySearchResults extends Activity {
 						+ b.title + " " + b.bookDetails.toString());
 			} else if (currentViewNumEnd < allBooks.size()
 					&& allBooks.get(currentViewNumEnd).bookDetails.size() == 0){
-//				new Thread(new fetchBookDetail(currentViewNumEnd,		//not fetching details right now - slows down code too much
-//						currentViewNumEnd + resultsPerPage)).start();
+				//				new Thread(new fetchBookDetail(currentViewNumEnd,		//not fetching details right now - slows down code too much
+				//						currentViewNumEnd + resultsPerPage)).start();
 			}
 			else
 				Log.i("displaySearchResults", "book out of range");
@@ -349,6 +368,7 @@ public class displaySearchResults extends Activity {
 					.setText(b.bookDetails.get(key));
 					detailsTable.addView(row);
 				}
+				dialog.cancel();
 				setContentView(detailsTable);
 				// setContentView(R.layout.book_detail_layout2);
 			} else
@@ -369,20 +389,22 @@ public class displaySearchResults extends Activity {
 	Handler handler;
 	Context context;
 	boolean activityRunning;
-	
+
 	public void onPause()
 	{
 		super.onPause();
 		activityRunning = false;
 	}
-	
+
 	public void onResume()
 	{
 		super.onResume();
 		activityRunning = true;
 		parseResults4.numResults = -1; //static field, need to reset. - should probably rewrite this field to be nonstatic
-									 //and localized to each searchResults activity instance.
+		//and localized to each searchResults activity instance.
 	}
+
+	ProgressDialog dialog;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -390,19 +412,28 @@ public class displaySearchResults extends Activity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.search_results5);
+		dialog = ProgressDialog.show(this, "", 
+				"Loading. Please wait...", true);
 		activityRunning = true;
 		header = (TextView) findViewById(R.id.searchResultsHeader);
 		context = this;
 		ListView listview = (ListView) findViewById(R.id.searchResultsListView5);
+
+		bookAdapter = new BookBaseAdapter(this, listViewData);
 		listview.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-
+				Log.i("displaySearchResult", "listview item clicked: " + position);
+				dialog = ProgressDialog.show(context, "", 
+						"Loading. Please wait...", true);
+				(new fetchBookDetail(position,position)).run(); //in UI thread.
+//				new Thread(new fetchBookDetail(currentViewNumEnd,		//not fetching details right now - slows down code too much
+//						currentViewNumEnd + resultsPerPage)).start();
 				displayBookDetail(position);
 
 			}
 		});
-		bookAdapter = new BookBaseAdapter(this, listViewData);
+		
 		listview.setAdapter(bookAdapter);
 
 		Bundle bundle = getIntent().getExtras();
@@ -421,7 +452,7 @@ public class displaySearchResults extends Activity {
 				displayResults(0);
 				shownFirst = true;
 			}
-			new Thread(new fetchBookDetail(0, resultsPerPage)).start(); // fetch
+//			new Thread(new fetchBookDetail(0, resultsPerPage)).start(); // fetch
 			// book
 			// details
 			// for
@@ -431,5 +462,6 @@ public class displaySearchResults extends Activity {
 			Log.i("displaySearchResults",
 					"Exception in getResultsPage:" + e.toString());
 		}
+
 	}
 }

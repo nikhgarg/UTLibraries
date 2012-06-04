@@ -7,6 +7,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -70,7 +71,7 @@ public class saveBooks extends Activity {
 			adapter=new sBookBaseAdapter(this, saved);
 			ListView listview = (ListView) findViewById(R.id.savedBooksListView);
 			listview.setAdapter(adapter);
-
+			dialog.cancel();
 		} catch (Exception e) {
 			Log.e("saveBooks", "Exception in displaySavedBooks", e);
 		}
@@ -139,11 +140,13 @@ public class saveBooks extends Activity {
 		super.onResume();
 		activityRunning = true;
 	}
-
+	ProgressDialog dialog;
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		dialog = ProgressDialog.show(this, "", 
+				"Loading. Please wait...", true);
 		setContentView(R.layout.saved_books);
 		context = this;
 		activityRunning = true;

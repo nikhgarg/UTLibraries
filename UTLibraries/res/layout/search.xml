@@ -29,8 +29,8 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/searchTopHeader"
         android:layout_toRightOf="@+id/fieldtypeInput"
-        android:inputType="textWebEditText"
-        android:text="@string/SearchString" >
+        android:hint="@string/SearchString"
+        android:inputType="textWebEditText" >
 
         <requestFocus />
     </EditText>
@@ -71,8 +71,8 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/goButton"
-        android:inputType="number"
-        android:text="@string/yearstart" />
+        android:hint="@string/yearstart"
+        android:inputType="number" />
 
     <EditText
         android:id="@+id/yearendInput"
@@ -81,8 +81,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignRight="@+id/yearstartInput"
         android:layout_below="@+id/yearstartInput"
-        android:inputType="number"
-        android:text="@string/yearend" />
+        android:hint="@string/yearend"
+        android:inputType="number" />
 
     <EditText
         android:id="@+id/publisherInput"
@@ -91,7 +91,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignRight="@+id/yearendInput"
         android:layout_below="@+id/yearendInput"
-        android:text="@string/publisher" />
+        android:hint="@string/publisher" />
 
     <Spinner
         android:id="@+id/searchandsortInput"
