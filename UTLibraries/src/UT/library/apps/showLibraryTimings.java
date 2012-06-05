@@ -2,6 +2,7 @@ package UT.library.apps;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,17 +11,58 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
+import com.markupartist.android.widget.ActionBar;
+import com.markupartist.android.widget.ActionBar.Action;
+import com.markupartist.android.widget.ActionBar.IntentAction;
+
 public class showLibraryTimings extends Activity {
 
 	WebView webview;
 	ProgressDialog dialog;
+	Context context;
+
+	private class RefreshAction implements Action {
+		@Override
+		public int getDrawable() {
+			return R.drawable.book_image_placeholder; // need to replace with
+			// Refresh icon
+		}
+		@Override
+		public void performAction(View view) {
+
+			try {
+				dialog = ProgressDialog.show(context, "",
+						"Loading. Please wait...", true);
+				String url = "http://www.lib.utexas.edu/about/hours/";
+				webview.loadUrl(url);
+				dialog.cancel();
+			} catch (Exception e) {
+				Log.i("showLibraryTimings",
+						"exception in refreshPage: " + e.toString());
+			}
+		}
+	}
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		dialog = ProgressDialog.show(this, "", 
+		dialog = ProgressDialog.show(this, "",
 				"Loading. Please wait...", true);
+
 		setContentView(R.layout.library_hours);
+		context = this;
+		//code downloaded from https://github.com/johannilsson/android-actionbar/blob/master/README.md
+		ActionBar actionBar = (ActionBar) findViewById(R.id.actionbar);
+		// You can also assign the title programmatically by passing a
+		// CharSequence or resource id.
+		actionBar.setTitle("Library Hours");
+		//	actionBar.setHomeLogo(R.drawable.book_image_placeholder);
+		actionBar.setHomeAction(new IntentAction(this,new Intent(this, WelcomeScreen.class) , R.drawable.book_image_placeholder)); //go home (already there)
+		actionBar.addAction(new IntentAction(this, new Intent(this, settings.class), R.drawable.book_image_placeholder)); //go to settings
+		actionBar.addAction(new RefreshAction());
+		//----------------------
+
 		try {
 			webview = (WebView) findViewById(R.id.libraryHours);
 
@@ -59,30 +101,9 @@ public class showLibraryTimings extends Activity {
 		super.onSaveInstanceState(outState);
 		webview.saveState(outState);
 	}
-	protected void onRestoreInstanceState(Bundle savedInstanceState)
-	{
+
+	protected void onRestoreInstanceState(Bundle savedInstanceState) {
 		super.onRestoreInstanceState(savedInstanceState);
 		webview.restoreState(savedInstanceState);
-	}
-
-
-	public void goHome(View view)
-	{
-		Intent intent = new Intent(this, WelcomeScreen.class);
-		startActivity(intent);
-	}
-	public void refreshPage(View view)
-	{
-		try{
-			dialog = ProgressDialog.show(this, "", 
-					"Loading. Please wait...", true);
-			String url = "http://www.lib.utexas.edu/about/hours/";
-			webview.loadUrl(url);
-			dialog.cancel();
-		}
-		catch(Exception e)
-		{
-			Log.i("showLibraryTimings", "exception in refreshPage: " + e.toString());
-		}
 	}
 }

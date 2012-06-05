@@ -9,6 +9,9 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.markupartist.android.widget.ActionBar;
+import com.markupartist.android.widget.ActionBar.IntentAction;
+
 public class WelcomeScreen extends Activity {
 	/** Called when the activity is first created. */
 	@Override
@@ -20,6 +23,16 @@ public class WelcomeScreen extends Activity {
 		String[] features = { "Search Catalog", "Library Hours", "Settings", "Reserve Study Room", "Checked Out Books", "Saved Books", "Library Maps" };
 
 		setContentView(R.layout.main2);
+
+		//code downloaded from https://github.com/johannilsson/android-actionbar/blob/master/README.md
+		ActionBar actionBar = (ActionBar) findViewById(R.id.actionbar);
+		// You can also assign the title programmatically by passing a
+		// CharSequence or resource id.
+		actionBar.setTitle("UTLibraries");
+		actionBar.setHomeLogo(R.drawable.book_image_placeholder);
+	//	actionBar.setHomeAction(new IntentAction(this,new Intent(this, WelcomeScreen.class) , )); //go home (already there)
+		actionBar.addAction(new IntentAction(this, new Intent(this, settings.class), R.drawable.book_image_placeholder)); //go to settings
+		//----------------------
 
 		ListView listview = (ListView) findViewById(R.id.mainPageListView);
 		listview.setAdapter(new ArrayAdapter<String>(this,R.layout.main_list_item, features));
