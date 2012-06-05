@@ -12,29 +12,17 @@
 
     </ListView>
 
-    <TextView
-        android:id="@+id/checkedOutHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="@string/checkedoutbooksheader"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <Button
-        android:id="@+id/backButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:onClick="goHome"
-        android:text="@string/home" />
+    <com.markupartist.android.widget.ActionBar
+        android:id="@+id/actionbar"
+        style="@style/ActionBar"
+         />
 
     <Button
         android:id="@+id/renewallButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/backButton"
+        android:layout_below="@+id/actionbar"
         android:onClick="renewAllBooks"
         android:text="@string/renewall" />
 
@@ -43,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/backButton"
+        android:layout_below="@+id/actionbar"
         android:onClick="renewMarkedBooks"
         android:text="@string/renewmarked" />
 

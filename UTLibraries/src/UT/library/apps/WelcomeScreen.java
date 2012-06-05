@@ -1,5 +1,8 @@
 package UT.library.apps;
 
+import android.graphics.Color;
+
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,6 +32,7 @@ public class WelcomeScreen extends Activity {
 		// You can also assign the title programmatically by passing a
 		// CharSequence or resource id.
 		actionBar.setTitle("UTLibraries");
+		actionBar.setBackgroundColor(Color.parseColor("#ff4500"));
 		actionBar.setHomeLogo(R.drawable.book_image_placeholder);
 	//	actionBar.setHomeAction(new IntentAction(this,new Intent(this, WelcomeScreen.class) , )); //go home (already there)
 		actionBar.addAction(new IntentAction(this, new Intent(this, settings.class), R.drawable.book_image_placeholder)); //go to settings

@@ -13,10 +13,14 @@ import org.apache.http.protocol.HTTP;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
+
+import com.markupartist.android.widget.ActionBar;
+import com.markupartist.android.widget.ActionBar.IntentAction;
 
 public class renewBooks extends Activity {
 
@@ -52,11 +56,11 @@ public class renewBooks extends Activity {
 				Log.i("renewBooks", "book: " + cbooks.get(i).title
 						+ " renew?: " + cbooks.get(i).renew);
 
-			
+
 			HttpPost httppost = new HttpPost(
 			"https://catalog.lib.utexas.edu/patroninfo~S29/1160546/items");
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-			
+
 			//renew books whose values are marked
 			for (int i = 0; i < cbooks.size(); i++) {
 				cBook b = cbooks.get(i);
@@ -70,7 +74,7 @@ public class renewBooks extends Activity {
 			HttpResponse response = client.execute(httppost);
 			// update listview after renewing books
 			displayCheckedOutBooks();
-			
+
 		} catch (Exception e) {
 			Log.i("renewBooks",
 					"exception in renewMarkedBooks: " + e.toString());
@@ -85,13 +89,6 @@ public class renewBooks extends Activity {
 		}
 		renewMarkedBooks(view);
 	}
-	
-	public void goHome(View view)
-	{
-    	Intent intent = new Intent(this, WelcomeScreen.class);
-    	startActivity(intent);
-
-	}
 
 	/** Called when the activity is first created. */
 	@Override
@@ -99,6 +96,24 @@ public class renewBooks extends Activity {
 		super.onCreate(savedInstanceState);
 		// set Content view
 		setContentView(R.layout.renew_books);
+
+		// code downloaded from
+		// https://github.com/johannilsson/android-actionbar/blob/master/README.md
+		ActionBar actionBar = (ActionBar) findViewById(R.id.actionbar);
+		// You can also assign the title programmatically by passing a
+		// CharSequence or resource id.
+		actionBar.setTitle("Checked Out Books");
+		actionBar.setBackgroundColor(Color.parseColor("#ff4500"));
+		actionBar.setHomeAction(new IntentAction(this, new Intent(this,
+				WelcomeScreen.class), R.drawable.book_image_placeholder)); // go
+		// home
+
+		actionBar.addAction(new IntentAction(this, new Intent(this,
+				settings.class), R.drawable.book_image_placeholder)); // go to
+		// settings
+//		actionBar.addAction(new prevPage());
+//		actionBar.addAction(new nextPage());
+		// ----------------------
 
 		displayCheckedOutBooks();
 

@@ -3,22 +3,17 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
-    <TextView
-        android:id="@+id/searchTopHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:text="@string/searchTopText"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+    <com.markupartist.android.widget.ActionBar
+        android:id="@+id/actionbar"
+        style="@style/ActionBar"
+         />
 
     <Spinner
         android:id="@+id/fieldtypeInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/searchTopHeader"
+        android:layout_below="@+id/actionbar"
         android:entries="@array/FieldTypeTable"
         android:prompt="@string/FieldPrompt" />
 
@@ -27,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/searchTopHeader"
+        android:layout_below="@+id/actionbar"
         android:layout_toRightOf="@+id/fieldtypeInput"
         android:hint="@string/SearchString"
         android:inputType="textWebEditText" >

@@ -1,9 +1,14 @@
 package UT.library.apps;
 
+import com.markupartist.android.widget.ActionBar;
+import com.markupartist.android.widget.ActionBar.IntentAction;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
@@ -11,20 +16,30 @@ import android.widget.EditText;
 
 public class settings extends Activity {
 
-	
-	public static SharedPreferences loginPreferences; 
-	public static SharedPreferences.Editor editor; 
-	
+
+	public static SharedPreferences loginPreferences;
+	public static SharedPreferences.Editor editor;
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.settings);
-		loginPreferences = this.getSharedPreferences("login", MODE_PRIVATE); 
+
+		//code downloaded from https://github.com/johannilsson/android-actionbar/blob/master/README.md
+		ActionBar actionBar = (ActionBar) findViewById(R.id.actionbar);
+		actionBar.setTitle("Settings");
+		actionBar.setBackgroundColor(Color.parseColor("#ff4500"));
+		actionBar.setHomeLogo(R.drawable.book_image_placeholder);
+		actionBar.setHomeAction(new IntentAction(this,new Intent(this, WelcomeScreen.class) , R.drawable.book_image_placeholder));
+		//----------------------
+
+
+		loginPreferences = this.getSharedPreferences("login", MODE_PRIVATE);
 		editor = loginPreferences.edit();
 	}
-	
-	
+
+
 	public void launchUteidDialog(View view)
 	{
 		String savedUsername = loginPreferences.getString("uteid", "");
@@ -49,14 +64,14 @@ public class settings extends Activity {
 						dialog.cancel();
 					}
 				});
-		
+
 		AlertDialog alert = alt_bld.create();
 		// Title for AlertDialog
 		//alert.setTitle("AlertDialogExample");
 		// Icon for AlertDialog
 		//alert.setIcon(R.drawable.ic_launcher);
 		alert.show();
-		
+
 	}
 	public void launchPasswordDialog(View view)
 	{
@@ -83,14 +98,14 @@ public class settings extends Activity {
 						dialog.cancel();
 					}
 				});
-		
+
 		AlertDialog alert = alt_bld.create();
 		// Title for AlertDialog
 		//alert.setTitle("AlertDialogExample");
 		// Icon for AlertDialog
 		//alert.setIcon(R.drawable.ic_launcher);
 		alert.show();
-		
+
 	}
 
 }

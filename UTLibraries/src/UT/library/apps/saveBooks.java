@@ -6,9 +6,14 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+import com.markupartist.android.widget.ActionBar;
+import com.markupartist.android.widget.ActionBar.IntentAction;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
@@ -55,7 +60,7 @@ public class saveBooks extends Activity {
 			TextView ttest = new TextView(this);
 			ttest.setText("Sorry. You have not saved any books yet");
 			setContentView(ttest);
-			return false;			
+			return false;
 		}
 		catch(Exception e)
 		{
@@ -145,11 +150,22 @@ public class saveBooks extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		dialog = ProgressDialog.show(this, "", 
+		dialog = ProgressDialog.show(this, "",
 				"Loading. Please wait...", true);
 		setContentView(R.layout.saved_books);
 		context = this;
 		activityRunning = true;
+
+		//code downloaded from https://github.com/johannilsson/android-actionbar/blob/master/README.md
+		ActionBar actionBar = (ActionBar) findViewById(R.id.actionbar);
+		// You can also assign the title programmatically by passing a CharSequence or resource id.
+		actionBar.setTitle("Saved Books");
+		actionBar.setBackgroundColor(Color.parseColor("#ff4500"));
+		actionBar.setHomeLogo(R.drawable.book_image_placeholder);
+		actionBar.addAction(new IntentAction(this, new Intent(this, settings.class), R.drawable.book_image_placeholder)); //go to settings
+		//----------------------
+
+
 		boolean booksSaved = retrieveSavedBooks();
 		if(booksSaved){
 			displaySavedBooks();

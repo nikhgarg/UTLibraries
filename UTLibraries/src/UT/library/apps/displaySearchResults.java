@@ -11,13 +11,13 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
@@ -25,6 +25,10 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.markupartist.android.widget.ActionBar;
+import com.markupartist.android.widget.ActionBar.Action;
+import com.markupartist.android.widget.ActionBar.IntentAction;
 
 public class displaySearchResults extends Activity {
 
@@ -131,7 +135,8 @@ public class displaySearchResults extends Activity {
 					boolean first = true;
 					String temp = "";
 					while (temp != null) {
-						if(!activityRunning)finish();
+						if (!activityRunning)
+							finish();
 						if (temp.contains("briefcitEntryNum")) {
 							if (!first) {
 								int oldSize = allBooks.size();
@@ -139,7 +144,8 @@ public class displaySearchResults extends Activity {
 								.extractBooks(catalogHTML);
 								numfound += tempBooks.size();
 								for (int i = 0; i < tempBooks.size(); i++)
-									tempBooks.get(i).numberinorder = i + oldSize +1;
+									tempBooks.get(i).numberinorder = i
+									+ oldSize + 1;
 								allBooks.addAll(tempBooks);
 								Log.i("displaySearchResults",
 										"" + allBooks.size());
@@ -184,7 +190,7 @@ public class displaySearchResults extends Activity {
 					numfound += tempBooks.size();
 					// now do this in BookBaseAdapter
 					for (int i = 0; i < tempBooks.size(); i++)
-						tempBooks.get(i).numberinorder = i + oldSize +1;
+						tempBooks.get(i).numberinorder = i + oldSize + 1;
 					allBooks.addAll(tempBooks);
 					catalogHTML = "";
 
@@ -197,7 +203,11 @@ public class displaySearchResults extends Activity {
 					Log.i("displaySearchResults", "next page URL:" + libraryURL);
 
 				} catch (Exception e) {
-					Toast toast = Toast.makeText(context, "Could not load web data. Please check network connection and try again later.", Toast.LENGTH_SHORT);
+					Toast toast = Toast
+					.makeText(
+							context,
+							"Could not load web data. Please check network connection and try again later.",
+							Toast.LENGTH_SHORT);
 					toast.show();
 					Log.i("displaySearchResults", "Exception in getURIdata:"
 							+ e.toString());
@@ -217,21 +227,27 @@ public class displaySearchResults extends Activity {
 		try {
 			if (start < 0)
 				start = 0;
-			//			handler.post(new Runnable(){
-			//				@Override
-			//				public void run() {
-			//					// TODO Auto-generated method stub
-			//					dialog = ProgressDialog.show(context, "", 
-			//							"Loading. Please wait...", true); 
-			//				}			
-			//			});
+			// handler.post(new Runnable(){
+			// @Override
+			// public void run() {
+			// // TODO Auto-generated method stub
+			// dialog = ProgressDialog.show(context, "",
+			// "Loading. Please wait...", true);
+			// }
+			// });
 
 			Log.i("displaySearchResults", "inside display Results");
 			if (start < allBooks.size()) {
-				while(start+resultsPerPage < allBooks.size() && !allResultsQed && shownFirst){
-					Log.i("displaySearchResult","waiting for all to load. allBooks.size: " + allBooks.size() + " allResultsQed: " + allResultsQed + " shown First: " +  shownFirst);
-					//wait till next page all loaded, or all results have loaded. not for first results
-					//because that check occurs elsewhere
+				while (start + resultsPerPage > allBooks.size()
+						&& (!allResultsQed) && shownFirst) {
+					Log.i("displaySearchResult",
+							"waiting for all to load. start: " + start + " resultsPerPage: " + resultsPerPage + "allBooks.size: "
+							+ allBooks.size() + " allResultsQed: "
+							+ allResultsQed + " shown First: "
+							+ shownFirst);
+					// wait till next page all loaded, or all results have
+					// loaded. not for first results
+					// because that check occurs elsewhere
 				}
 				int end = (int) Math.min(start + resultsPerPage,
 						allBooks.size());
@@ -247,9 +263,13 @@ public class displaySearchResults extends Activity {
 					@Override
 					public void run() {
 						dialog.cancel();
-						header.setText(String.format("%d-%d/%d",
+						actionBar.setTitle(String.format("%d-%d/%d",
 								currentViewNumStart + 1, currentViewNumEnd,
 								parseResults4.numResults));
+
+						// header.setText(String.format("%d-%d/%d",
+						// currentViewNumStart + 1, currentViewNumEnd,
+						// parseResults4.numResults));
 						ListView listview = (ListView) findViewById(R.id.searchResultsListView5);
 						listview.setAdapter(new BookBaseAdapter(context,
 								listViewData));
@@ -263,35 +283,50 @@ public class displaySearchResults extends Activity {
 			}
 
 		} catch (Exception e) {
-			Log.e("displaySearchResults",
-					"Exception in displayResults: ", e);
+			Log.e("displaySearchResults", "Exception in displayResults: ", e);
 		}
 	}
 
-	public void nextPage(View view) {
-		try {
-			if (currentViewNumEnd < allBooks.size()
-					&& allBooks.get(currentViewNumEnd).bookDetails.size() != 0) {
-				Book b = allBooks.get(currentViewNumEnd);
-				Log.i("displaySearchResults", "Book already has detail:"
-						+ b.title + " " + b.bookDetails.toString());
-			} else if (currentViewNumEnd < allBooks.size()
-					&& allBooks.get(currentViewNumEnd).bookDetails.size() == 0){
-				//				new Thread(new fetchBookDetail(currentViewNumEnd,		//not fetching details right now - slows down code too much
-				//						currentViewNumEnd + resultsPerPage)).start();
+	private class nextPage implements Action {
+		@Override
+		public int getDrawable() {
+			return R.drawable.book_image_placeholder; // need to replace with
+			// next icon
+		}
+
+		@Override
+		public void performAction(View view) {
+			try {
+				if (currentViewNumEnd < allBooks.size()
+						&& allBooks.get(currentViewNumEnd).bookDetails.size() != 0) {
+					Book b = allBooks.get(currentViewNumEnd);
+					Log.i("displaySearchResults", "Book already has detail:"
+							+ b.title + " " + b.bookDetails.toString());
+				} else if (currentViewNumEnd < allBooks.size()
+						&& allBooks.get(currentViewNumEnd).bookDetails.size() == 0) {
+					// new Thread(new fetchBookDetail(currentViewNumEnd, //not
+					// fetching details right now - slows down code too much
+					// currentViewNumEnd + resultsPerPage)).start();
+				} else
+					Log.i("displaySearchResults", "book out of range");
+
+			} catch (Exception e) {
+				Log.i("displaySearchResults",
+						"Exception in nextPage:" + e.toString());
 			}
-			else
-				Log.i("displaySearchResults", "book out of range");
-
-		} catch (Exception e) {
-			Log.i("displaySearchResults",
-					"Exception in nextPage:" + e.toString());
+			displayResults(currentViewNumEnd);
 		}
-		displayResults(currentViewNumEnd);
 	}
 
-	public void prevPage(View view) {
-		displayResults(currentViewNumStart - resultsPerPage);
+	private class prevPage implements Action {
+		public int getDrawable() {
+			return R.drawable.book_image_placeholder; // need to replace with
+			// prev icon
+		}
+
+		public void performAction(View view) {
+			displayResults(currentViewNumStart - resultsPerPage);
+		}
 	}
 
 	public void toSearchInput(View view) {
@@ -313,7 +348,8 @@ public class displaySearchResults extends Activity {
 			// Log.i("displaySearchResults","inside run method for fetching book details");
 			try {
 				for (int i = start; i < end; i++) {
-					if(!activityRunning) finish();
+					if (!activityRunning)
+						finish();
 					// Log.i("displaySearchResults","inside for loop for fetching book details");
 
 					if (i < allBooks.size()) {
@@ -390,21 +426,22 @@ public class displaySearchResults extends Activity {
 	Context context;
 	boolean activityRunning;
 
-	public void onPause()
-	{
+	public void onPause() {
 		super.onPause();
 		activityRunning = false;
 	}
 
-	public void onResume()
-	{
+	public void onResume() {
 		super.onResume();
 		activityRunning = true;
-		parseResults4.numResults = -1; //static field, need to reset. - should probably rewrite this field to be nonstatic
-		//and localized to each searchResults activity instance.
+		parseResults4.numResults = -1; // static field, need to reset. - should
+		// probably rewrite this field to be
+		// nonstatic
+		// and localized to each searchResults activity instance.
 	}
 
 	ProgressDialog dialog;
+	ActionBar actionBar;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -412,10 +449,9 @@ public class displaySearchResults extends Activity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.search_results5);
-		dialog = ProgressDialog.show(this, "", 
-				"Loading. Please wait...", true);
+		dialog = ProgressDialog.show(this, "", "Loading. Please wait...", true);
 		activityRunning = true;
-		header = (TextView) findViewById(R.id.searchResultsHeader);
+		// header = (TextView) findViewById(R.id.searchResultsHeader);
 		context = this;
 		ListView listview = (ListView) findViewById(R.id.searchResultsListView5);
 
@@ -423,18 +459,39 @@ public class displaySearchResults extends Activity {
 		listview.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				Log.i("displaySearchResult", "listview item clicked: " + position);
-				dialog = ProgressDialog.show(context, "", 
+				Log.i("displaySearchResult", "listview item clicked: "
+						+ position);
+				dialog = ProgressDialog.show(context, "",
 						"Loading. Please wait...", true);
-				(new fetchBookDetail(position,position)).run(); //in UI thread.
-//				new Thread(new fetchBookDetail(currentViewNumEnd,		//not fetching details right now - slows down code too much
-//						currentViewNumEnd + resultsPerPage)).start();
+				(new fetchBookDetail(position, position)).run(); // in UI
+				// thread.
+				// new Thread(new fetchBookDetail(currentViewNumEnd, //not
+				// fetching details right now - slows down code too much
+				// currentViewNumEnd + resultsPerPage)).start();
 				displayBookDetail(position);
 
 			}
 		});
-		
+
 		listview.setAdapter(bookAdapter);
+
+		// code downloaded from
+		// https://github.com/johannilsson/android-actionbar/blob/master/README.md
+		actionBar = (ActionBar) findViewById(R.id.actionbar);
+		// You can also assign the title programmatically by passing a
+		// CharSequence or resource id.
+		actionBar.setTitle("Search Results");
+		actionBar.setBackgroundColor(Color.parseColor("#ff4500"));
+		actionBar.setHomeAction(new IntentAction(this, new Intent(this,
+				WelcomeScreen.class), R.drawable.book_image_placeholder)); // go
+		// home
+
+		actionBar.addAction(new IntentAction(this, new Intent(this,
+				settings.class), R.drawable.book_image_placeholder)); // go to
+		// settings
+		actionBar.addAction(new prevPage());
+		actionBar.addAction(new nextPage());
+		// ----------------------
 
 		Bundle bundle = getIntent().getExtras();
 		SearchData data = bundle.getParcelable("fieldsData");
@@ -452,12 +509,9 @@ public class displaySearchResults extends Activity {
 				displayResults(0);
 				shownFirst = true;
 			}
-//			new Thread(new fetchBookDetail(0, resultsPerPage)).start(); // fetch
-			// book
-			// details
-			// for
-			// first
-			// page
+			// new Thread(new fetchBookDetail(0, resultsPerPage)).start(); //
+			// fetch
+			// book // details // for // first // page
 		} catch (Exception e) {
 			Log.i("displaySearchResults",
 					"Exception in getResultsPage:" + e.toString());

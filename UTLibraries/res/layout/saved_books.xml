@@ -3,21 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <TextView
-        android:id="@+id/savedBooksHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="@string/savedbooks"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+    <com.markupartist.android.widget.ActionBar
+        android:id="@+id/actionbar"
+        style="@style/ActionBar" />
 
     <ListView
         android:id="@+id/savedBooksListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/savedBooksHeader" >
+        android:layout_below="@+id/actionbar" >
     </ListView>
 
 </RelativeLayout>
