@@ -9,214 +9,290 @@ package UT.library.apps;
 
 public final class R {
     public static final class array {
-        public static final int FieldTypeTable=0x7f050003;
-        public static final int LanguageTable=0x7f050004;
-        public static final int LocationTable=0x7f050006;
-        public static final int MaterialTypeTable=0x7f050005;
-        public static final int fieldtypeValues=0x7f05000b;
-        public static final int langValues=0x7f050008;
-        public static final int materialtypeValues=0x7f050009;
-        public static final int reserveRoomBuildingNames=0x7f050000;
-        public static final int reserveRoomNumberOfPeople=0x7f050001;
-        public static final int reserveRoomRoomRequirements=0x7f050002;
-        public static final int searchandsorttable=0x7f050007;
-        public static final int searchscopeValues=0x7f05000a;
+        public static final int FieldTypeTable=0x7f080003;
+        public static final int LanguageTable=0x7f080004;
+        public static final int LocationTable=0x7f080006;
+        public static final int MaterialTypeTable=0x7f080005;
+        public static final int fieldtypeValues=0x7f08000b;
+        public static final int langValues=0x7f080008;
+        public static final int materialtypeValues=0x7f080009;
+        public static final int reserveRoomBuildingNames=0x7f080000;
+        public static final int reserveRoomNumberOfPeople=0x7f080001;
+        public static final int reserveRoomRoomRequirements=0x7f080002;
+        public static final int searchandsorttable=0x7f080007;
+        public static final int searchscopeValues=0x7f08000a;
     }
     public static final class attr {
+        /** <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int title=0x7f010000;
+    }
+    public static final class color {
+        public static final int actionbar_background_end=0x7f040003;
+        public static final int actionbar_background_item_pressed_end=0x7f040005;
+        public static final int actionbar_background_item_pressed_start=0x7f040004;
+        public static final int actionbar_background_start=0x7f040002;
+        public static final int actionbar_separator=0x7f040000;
+        public static final int actionbar_title=0x7f040001;
+    }
+    public static final class dimen {
+        public static final int actionbar_height=0x7f050000;
+        public static final int actionbar_item_height=0x7f050001;
+        public static final int actionbar_item_width=0x7f050002;
     }
     public static final class drawable {
-        public static final int apl_0=0x7f020000;
-        public static final int blac_01=0x7f020001;
-        public static final int blac_02=0x7f020002;
-        public static final int blac_03=0x7f020003;
-        public static final int blac_04=0x7f020004;
-        public static final int blac_loc1=0x7f020005;
-        public static final int blac_loc2=0x7f020006;
-        public static final int book_image_placeholder=0x7f020007;
-        public static final int chemistry_01=0x7f020008;
-        public static final int chemistry_loc1=0x7f020009;
-        public static final int classics_01=0x7f02000a;
-        public static final int classics_loc1=0x7f02000b;
-        public static final int classics_loc2=0x7f02000c;
-        public static final int engineering_01=0x7f02000d;
-        public static final int engineering_02=0x7f02000e;
-        public static final int engineering_loc1=0x7f02000f;
-        public static final int finearts_03=0x7f020010;
-        public static final int finearts_04=0x7f020011;
-        public static final int finearts_05=0x7f020012;
-        public static final int finearts_loc03=0x7f020013;
-        public static final int finearts_loc04=0x7f020014;
-        public static final int finearts_loc05=0x7f020015;
-        public static final int geology=0x7f020016;
-        public static final int ic_launcher=0x7f020017;
-        public static final int lsl_0=0x7f020018;
-        public static final int lsl_loc=0x7f020019;
-        public static final int pcl_01=0x7f02001a;
-        public static final int pcl_02=0x7f02001b;
-        public static final int pcl_03=0x7f02001c;
-        public static final int pcl_04=0x7f02001d;
-        public static final int pcl_05=0x7f02001e;
-        public static final int pcl_06=0x7f02001f;
-        public static final int pcl_book1=0x7f020020;
-        public static final int pcl_book2=0x7f020021;
-        public static final int pcl_book3=0x7f020022;
-        public static final int pcl_book4=0x7f020023;
-        public static final int pcl_book5=0x7f020024;
-        public static final int pcl_book6=0x7f020025;
-        public static final int pcl_book7=0x7f020026;
-        public static final int pma_01=0x7f020027;
-        public static final int pma_02=0x7f020028;
-        public static final int pma_loc=0x7f020029;
+        public static final int actionbar_back_indicator=0x7f020000;
+        public static final int actionbar_background=0x7f020001;
+        public static final int actionbar_btn=0x7f020002;
+        public static final int actionbar_btn_normal=0x7f020003;
+        public static final int actionbar_btn_pressed=0x7f020004;
+        public static final int apl_0=0x7f020005;
+        public static final int blac_01=0x7f020006;
+        public static final int blac_02=0x7f020007;
+        public static final int blac_03=0x7f020008;
+        public static final int blac_04=0x7f020009;
+        public static final int blac_loc1=0x7f02000a;
+        public static final int blac_loc2=0x7f02000b;
+        public static final int book_image_placeholder=0x7f02000c;
+        public static final int chemistry_01=0x7f02000d;
+        public static final int chemistry_loc1=0x7f02000e;
+        public static final int classics_01=0x7f02000f;
+        public static final int classics_loc1=0x7f020010;
+        public static final int classics_loc2=0x7f020011;
+        public static final int engineering_01=0x7f020012;
+        public static final int engineering_02=0x7f020013;
+        public static final int engineering_loc1=0x7f020014;
+        public static final int finearts_03=0x7f020015;
+        public static final int finearts_04=0x7f020016;
+        public static final int finearts_05=0x7f020017;
+        public static final int finearts_loc03=0x7f020018;
+        public static final int finearts_loc04=0x7f020019;
+        public static final int finearts_loc05=0x7f02001a;
+        public static final int geology=0x7f02001b;
+        public static final int ic_launcher=0x7f02001c;
+        public static final int icon=0x7f02001d;
+        public static final int lsl_0=0x7f02001e;
+        public static final int lsl_loc=0x7f02001f;
+        public static final int pcl_01=0x7f020020;
+        public static final int pcl_02=0x7f020021;
+        public static final int pcl_03=0x7f020022;
+        public static final int pcl_04=0x7f020023;
+        public static final int pcl_05=0x7f020024;
+        public static final int pcl_06=0x7f020025;
+        public static final int pcl_book1=0x7f020026;
+        public static final int pcl_book2=0x7f020027;
+        public static final int pcl_book3=0x7f020028;
+        public static final int pcl_book4=0x7f020029;
+        public static final int pcl_book5=0x7f02002a;
+        public static final int pcl_book6=0x7f02002b;
+        public static final int pcl_book7=0x7f02002c;
+        public static final int pma_01=0x7f02002d;
+        public static final int pma_02=0x7f02002e;
+        public static final int pma_loc=0x7f02002f;
     }
     public static final class id {
-        public static final int autologinButton=0x7f060043;
-        public static final int autologinText=0x7f060042;
-        public static final int backButton=0x7f06001b;
-        public static final int barcode=0x7f06000a;
-        public static final int bookdetailrow2=0x7f060001;
-        public static final int button1=0x7f060016;
-        public static final int button2=0x7f060025;
-        public static final int button3=0x7f060029;
-        public static final int button4=0x7f06002a;
-        public static final int callNo=0x7f06000b;
-        public static final int checkedOutHeader=0x7f06001a;
-        public static final int checkedOutListView=0x7f060018;
-        public static final int copiesTable=0x7f060008;
-        public static final int detailLabel2=0x7f060002;
-        public static final int detailValue2=0x7f060003;
-        public static final int detailsTable2=0x7f060000;
-        public static final int fieldtypeInput=0x7f06002f;
-        public static final int goButton=0x7f060035;
-        public static final int homeButton=0x7f06000f;
-        public static final int languageInput=0x7f060033;
-        public static final int libraryHours=0x7f060011;
-        public static final int libraryMapHeader=0x7f060015;
-        public static final int listView1=0x7f060040;
-        public static final int location=0x7f06004b;
-        public static final int locationInput=0x7f060031;
-        public static final int mainPageListView=0x7f060017;
-        public static final int mapimage=0x7f060013;
-        public static final int materialtypeInput=0x7f060032;
-        public static final int nextButton=0x7f06003d;
-        public static final int nextMapButton=0x7f060012;
-        public static final int numberPeopleSpinner=0x7f060026;
-        public static final int onlyavailablebox=0x7f060039;
-        public static final int otherInfoList=0x7f060006;
-        public static final int passwordButton=0x7f060049;
-        public static final int passwordText=0x7f060048;
-        public static final int prevButton=0x7f060041;
-        public static final int prevMapButton=0x7f060014;
-        public static final int publicationList=0x7f060004;
-        public static final int publisherInput=0x7f060037;
-        public static final int publisherbox=0x7f06003c;
-        public static final int refreshButton=0x7f060010;
-        public static final int relativeLayout1=0x7f06000e;
-        public static final int renewBox=0x7f06000d;
-        public static final int renewMarkedButton=0x7f060019;
-        public static final int renewallButton=0x7f06001c;
-        public static final int saveBookButton=0x7f060007;
-        public static final int savedBooksHeader=0x7f06002c;
-        public static final int savedBooksListView=0x7f06002d;
-        public static final int saveloginBox=0x7f060045;
-        public static final int saveloginText=0x7f060044;
-        public static final int searchResultsHeader=0x7f06003f;
-        public static final int searchResultsListView5=0x7f06003e;
-        public static final int searchTopHeader=0x7f06002e;
-        public static final int searchandsortInput=0x7f060038;
-        public static final int searchstringInput=0x7f060030;
-        public static final int singleCopyInfoRow=0x7f06004a;
-        public static final int status=0x7f06000c;
-        public static final int tableLayout1=0x7f06001d;
-        public static final int tableRow1=0x7f060021;
-        public static final int tableRow2=0x7f060023;
-        public static final int tableRow3=0x7f060020;
-        public static final int tableRow4=0x7f06001f;
-        public static final int tableRow5=0x7f060027;
-        public static final int tableRow6=0x7f06002b;
-        public static final int textView1=0x7f060022;
-        public static final int textView2=0x7f060024;
-        public static final int textView3=0x7f06001e;
-        public static final int textView4=0x7f060028;
-        public static final int title=0x7f060009;
-        public static final int titleList=0x7f060005;
-        public static final int uteidButton=0x7f060047;
-        public static final int uteidText=0x7f060046;
-        public static final int yearendInput=0x7f060036;
-        public static final int yearendbox=0x7f06003b;
-        public static final int yearstartInput=0x7f060034;
-        public static final int yearstartbox=0x7f06003a;
+        public static final int actionbar_actions=0x7f090006;
+        public static final int actionbar_home=0x7f090001;
+        public static final int actionbar_home_bg=0x7f090003;
+        public static final int actionbar_home_btn=0x7f090004;
+        public static final int actionbar_home_is_back=0x7f090005;
+        public static final int actionbar_home_logo=0x7f090002;
+        public static final int actionbar_item=0x7f090009;
+        public static final int actionbar_progress=0x7f090007;
+        public static final int actionbar_title=0x7f090008;
+        public static final int autologinButton=0x7f09004d;
+        public static final int autologinText=0x7f09004c;
+        public static final int backButton=0x7f090025;
+        public static final int barcode=0x7f090014;
+        public static final int bookdetailrow2=0x7f09000b;
+        public static final int button1=0x7f090020;
+        public static final int button2=0x7f09002f;
+        public static final int button3=0x7f090033;
+        public static final int button4=0x7f090034;
+        public static final int callNo=0x7f090015;
+        public static final int checkedOutHeader=0x7f090024;
+        public static final int checkedOutListView=0x7f090022;
+        public static final int copiesTable=0x7f090012;
+        public static final int detailLabel2=0x7f09000c;
+        public static final int detailValue2=0x7f09000d;
+        public static final int detailsTable2=0x7f09000a;
+        public static final int fieldtypeInput=0x7f090039;
+        public static final int goButton=0x7f09003f;
+        public static final int homeButton=0x7f090019;
+        public static final int languageInput=0x7f09003d;
+        public static final int libraryHours=0x7f09001b;
+        public static final int libraryMapHeader=0x7f09001f;
+        public static final int listView1=0x7f09004a;
+        public static final int location=0x7f090055;
+        public static final int locationInput=0x7f09003b;
+        public static final int mainPageListView=0x7f090021;
+        public static final int mapimage=0x7f09001d;
+        public static final int materialtypeInput=0x7f09003c;
+        public static final int nextButton=0x7f090047;
+        public static final int nextMapButton=0x7f09001c;
+        public static final int numberPeopleSpinner=0x7f090030;
+        public static final int onlyavailablebox=0x7f090043;
+        public static final int otherInfoList=0x7f090010;
+        public static final int passwordButton=0x7f090053;
+        public static final int passwordText=0x7f090052;
+        public static final int prevButton=0x7f09004b;
+        public static final int prevMapButton=0x7f09001e;
+        public static final int publicationList=0x7f09000e;
+        public static final int publisherInput=0x7f090041;
+        public static final int publisherbox=0x7f090046;
+        public static final int refreshButton=0x7f09001a;
+        public static final int relativeLayout1=0x7f090018;
+        public static final int renewBox=0x7f090017;
+        public static final int renewMarkedButton=0x7f090023;
+        public static final int renewallButton=0x7f090026;
+        public static final int saveBookButton=0x7f090011;
+        public static final int savedBooksHeader=0x7f090036;
+        public static final int savedBooksListView=0x7f090037;
+        public static final int saveloginBox=0x7f09004f;
+        public static final int saveloginText=0x7f09004e;
+        public static final int screen=0x7f090000;
+        public static final int searchResultsHeader=0x7f090049;
+        public static final int searchResultsListView5=0x7f090048;
+        public static final int searchTopHeader=0x7f090038;
+        public static final int searchandsortInput=0x7f090042;
+        public static final int searchstringInput=0x7f09003a;
+        public static final int singleCopyInfoRow=0x7f090054;
+        public static final int status=0x7f090016;
+        public static final int tableLayout1=0x7f090027;
+        public static final int tableRow1=0x7f09002b;
+        public static final int tableRow2=0x7f09002d;
+        public static final int tableRow3=0x7f09002a;
+        public static final int tableRow4=0x7f090029;
+        public static final int tableRow5=0x7f090031;
+        public static final int tableRow6=0x7f090035;
+        public static final int textView1=0x7f09002c;
+        public static final int textView2=0x7f09002e;
+        public static final int textView3=0x7f090028;
+        public static final int textView4=0x7f090032;
+        public static final int title=0x7f090013;
+        public static final int titleList=0x7f09000f;
+        public static final int uteidButton=0x7f090051;
+        public static final int uteidText=0x7f090050;
+        public static final int yearendInput=0x7f090040;
+        public static final int yearendbox=0x7f090045;
+        public static final int yearstartInput=0x7f09003e;
+        public static final int yearstartbox=0x7f090044;
     }
     public static final class layout {
-        public static final int book_detail_layout2=0x7f030000;
-        public static final int book_detail_row2=0x7f030001;
-        public static final int book_layout2=0x7f030002;
-        public static final int c_book_layout=0x7f030003;
-        public static final int library_hours=0x7f030004;
-        public static final int librarymap=0x7f030005;
-        public static final int main2=0x7f030006;
-        public static final int main_list_item=0x7f030007;
-        public static final int renew_books=0x7f030008;
-        public static final int reserve_room_input2=0x7f030009;
-        public static final int saved_books=0x7f03000a;
-        public static final int search=0x7f03000b;
-        public static final int search_results5=0x7f03000c;
-        public static final int settings=0x7f03000d;
-        public static final int single_copy_info_row=0x7f03000e;
+        public static final int actionbar=0x7f030000;
+        public static final int actionbar_item=0x7f030001;
+        public static final int book_detail_layout2=0x7f030002;
+        public static final int book_detail_row2=0x7f030003;
+        public static final int book_layout2=0x7f030004;
+        public static final int c_book_layout=0x7f030005;
+        public static final int library_hours=0x7f030006;
+        public static final int librarymap=0x7f030007;
+        public static final int main2=0x7f030008;
+        public static final int main_list_item=0x7f030009;
+        public static final int renew_books=0x7f03000a;
+        public static final int reserve_room_input2=0x7f03000b;
+        public static final int saved_books=0x7f03000c;
+        public static final int search=0x7f03000d;
+        public static final int search_results5=0x7f03000e;
+        public static final int settings=0x7f03000f;
+        public static final int single_copy_info_row=0x7f030010;
     }
     public static final class string {
-        public static final int FieldPrompt=0x7f040005;
-        public static final int Floorup=0x7f040033;
-        public static final int LocationPrompt=0x7f040002;
-        public static final int MaterialPrompt=0x7f040006;
-        public static final int SearchString=0x7f040007;
-        public static final int YearRange=0x7f040003;
-        public static final int anybuilding=0x7f040027;
-        public static final int app_name=0x7f040001;
-        public static final int autologin=0x7f040017;
-        public static final int back=0x7f040012;
-        public static final int building=0x7f040023;
-        public static final int checkedoutbooksheader=0x7f04002c;
-        public static final int date=0x7f040020;
-        public static final int empty=0x7f04001b;
-        public static final int endtime=0x7f040022;
-        public static final int enter=0x7f040026;
-        public static final int finearts=0x7f040028;
-        public static final int floor=0x7f040035;
-        public static final int floordown=0x7f040034;
-        public static final int go=0x7f04000d;
-        public static final int hello=0x7f040000;
-        public static final int home=0x7f040015;
-        public static final int input=0x7f04001c;
-        public static final int limitavailable=0x7f04000c;
-        public static final int loadmoreresultsbutton=0x7f040011;
-        public static final int next=0x7f040013;
-        public static final int numberofpeople=0x7f040024;
-        public static final int password=0x7f04001a;
-        public static final int pclgroup=0x7f040029;
-        public static final int pclpresentation=0x7f04002a;
-        public static final int peoplepromp=0x7f04002b;
-        public static final int previous=0x7f040014;
-        public static final int publisher=0x7f04000a;
-        public static final int refresh=0x7f040016;
-        public static final int renew=0x7f04002f;
-        public static final int renewall=0x7f04002d;
-        public static final int renewmarked=0x7f04002e;
-        public static final int reserve_room_header=0x7f04001f;
-        public static final int roomrequirements=0x7f040025;
-        public static final int savebook=0x7f040031;
-        public static final int savedbooks=0x7f040032;
-        public static final int savelogininfo=0x7f040018;
-        public static final int searchTopText=0x7f04000e;
-        public static final int searchandsort=0x7f04000b;
-        public static final int searchresults=0x7f040010;
-        public static final int set=0x7f04001d;
-        public static final int starttime=0x7f040021;
-        public static final int store=0x7f04001e;
-        public static final int title=0x7f040030;
-        public static final int to=0x7f040004;
-        public static final int usefield=0x7f04000f;
-        public static final int uteid=0x7f040019;
-        public static final int yearend=0x7f040009;
-        public static final int yearstart=0x7f040008;
+        public static final int FieldPrompt=0x7f060006;
+        public static final int Floorup=0x7f060034;
+        public static final int LocationPrompt=0x7f060003;
+        public static final int MaterialPrompt=0x7f060007;
+        public static final int SearchString=0x7f060008;
+        public static final int YearRange=0x7f060004;
+        public static final int actionbar_activity_not_found=0x7f060002;
+        public static final int anybuilding=0x7f060028;
+        public static final int app_name=0x7f060001;
+        public static final int autologin=0x7f060018;
+        public static final int back=0x7f060013;
+        public static final int building=0x7f060024;
+        public static final int checkedoutbooksheader=0x7f06002d;
+        public static final int date=0x7f060021;
+        public static final int empty=0x7f06001c;
+        public static final int endtime=0x7f060023;
+        public static final int enter=0x7f060027;
+        public static final int finearts=0x7f060029;
+        public static final int floor=0x7f060036;
+        public static final int floordown=0x7f060035;
+        public static final int go=0x7f06000e;
+        public static final int hello=0x7f060000;
+        public static final int home=0x7f060016;
+        public static final int input=0x7f06001d;
+        public static final int limitavailable=0x7f06000d;
+        public static final int loadmoreresultsbutton=0x7f060012;
+        public static final int next=0x7f060014;
+        public static final int numberofpeople=0x7f060025;
+        public static final int password=0x7f06001b;
+        public static final int pclgroup=0x7f06002a;
+        public static final int pclpresentation=0x7f06002b;
+        public static final int peoplepromp=0x7f06002c;
+        public static final int previous=0x7f060015;
+        public static final int publisher=0x7f06000b;
+        public static final int refresh=0x7f060017;
+        public static final int renew=0x7f060030;
+        public static final int renewall=0x7f06002e;
+        public static final int renewmarked=0x7f06002f;
+        public static final int reserve_room_header=0x7f060020;
+        public static final int roomrequirements=0x7f060026;
+        public static final int savebook=0x7f060032;
+        public static final int savedbooks=0x7f060033;
+        public static final int savelogininfo=0x7f060019;
+        public static final int searchTopText=0x7f06000f;
+        public static final int searchandsort=0x7f06000c;
+        public static final int searchresults=0x7f060011;
+        public static final int set=0x7f06001e;
+        public static final int starttime=0x7f060022;
+        public static final int store=0x7f06001f;
+        public static final int title=0x7f060031;
+        public static final int to=0x7f060005;
+        public static final int usefield=0x7f060010;
+        public static final int uteid=0x7f06001a;
+        public static final int yearend=0x7f06000a;
+        public static final int yearstart=0x7f060009;
     }
+    public static final class style {
+        public static final int ActionBar=0x7f070000;
+        public static final int ActionBarHomeItem=0x7f070002;
+        public static final int ActionBarHomeLogo=0x7f070003;
+        public static final int ActionBarItem=0x7f070001;
+        public static final int ActionBarProgressBar=0x7f070004;
+    }
+    public static final class styleable {
+        /** Attributes that can be used with a ActionBar.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #ActionBar_title UT.library.apps:title}</code></td><td></td></tr>
+           </table>
+           @see #ActionBar_title
+         */
+        public static final int[] ActionBar = {
+            0x7f010000
+        };
+        /**
+          <p>This symbol is the offset where the {@link UT.library.apps.R.attr#title}
+          attribute's value can be found in the {@link #ActionBar} array.
+
+
+          <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:title
+        */
+        public static final int ActionBar_title = 0;
+    };
 }
