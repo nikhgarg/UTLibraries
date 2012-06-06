@@ -26,7 +26,6 @@
         android:hint="@string/SearchString"
         android:inputType="textWebEditText" >
 
-        <requestFocus />
     </EditText>
 
     <Spinner

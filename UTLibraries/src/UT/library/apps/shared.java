@@ -42,11 +42,11 @@ public class shared {
 
 	public static boolean loggedIntoCatalog = false;
 	public static boolean loggedIntoUTDirect = false;
-	
+
 	public static String retrieveProtectedWebPage (Context context,DefaultHttpClient client, String uri)
 	{
 		String html = "";
-		
+
 		try{
 //			logIntoUTDirect(client);
 			HttpGet httpget = new HttpGet();
@@ -54,7 +54,7 @@ public class shared {
 			HttpResponse response = client.execute(httpget);
 			BufferedReader in = new BufferedReader(new InputStreamReader(
 					response.getEntity().getContent()));
-			
+
 			String next = in.readLine();
 			while(next!=null){
 			//	System.out.println(next);
@@ -63,7 +63,7 @@ public class shared {
 			}
 //			response.getEntity().getContent().close();
 			return html;
-			
+
 		}
 		catch(Exception e)
 		{
@@ -74,22 +74,22 @@ public class shared {
 			return null;
 		}
 	}
-	
+
 	public static boolean logIntoUTDirect(Context context, DefaultHttpClient client)
 	{
 		try{
-			SharedPreferences loginPreferences = context.getSharedPreferences("login", Context.MODE_PRIVATE); 
+			SharedPreferences loginPreferences = context.getSharedPreferences("login", Context.MODE_PRIVATE);
 			String username = loginPreferences.getString("uteid", "");
 			String password = loginPreferences.getString("password","");
 
 
-			HttpPost httppost = new HttpPost ("http://www.lib.utexas.edu/studyrooms/index.php?mode=search");
+			HttpPost httppost = new HttpPost ("https://utdirect.utexas.edu/security-443/logon_check.logonform");
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
 			nameValuePairs.add(new BasicNameValuePair("LOGON", username));  			//use my info for testing
-			nameValuePairs.add(new BasicNameValuePair("PASSWORDS", password)); 
+			nameValuePairs.add(new BasicNameValuePair("PASSWORDS", password));
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs, HTTP.ASCII));
 			HttpResponse response = client.execute(httppost);
-			response.getEntity().getContent().close();
+//			response.getEntity().getContent().close();
 		}
 		catch(Exception e)
 		{
@@ -108,7 +108,7 @@ public class shared {
 	public static boolean logIntoCatalog (Context context,DefaultHttpClient client)
 	{
 		try{
-			SharedPreferences loginPreferences = context.getSharedPreferences("login", Context.MODE_PRIVATE); 
+			SharedPreferences loginPreferences = context.getSharedPreferences("login", Context.MODE_PRIVATE);
 			String username = loginPreferences.getString("uteid", "");
 			String password = loginPreferences.getString("password","");
 
@@ -116,7 +116,7 @@ public class shared {
 			HttpPost httppost = new HttpPost ("https://catalog.lib.utexas.edu/patroninfo/");
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
 			nameValuePairs.add(new BasicNameValuePair("extpatid", username));  			//use my info for testing
-			nameValuePairs.add(new BasicNameValuePair("extpatpw", password)); 
+			nameValuePairs.add(new BasicNameValuePair("extpatpw", password));
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs, HTTP.ASCII));
 			HttpResponse response = client.execute(httppost);
 			response.getEntity().getContent().close();
