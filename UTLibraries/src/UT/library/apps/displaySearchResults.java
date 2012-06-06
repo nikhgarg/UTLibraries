@@ -63,17 +63,38 @@ public class displaySearchResults extends Activity {
 						"searchscope",
 						getResources()
 						.getStringArray(R.array.searchscopeValues)[data.location]);
-			// Language
-			if (data.language != 0)
-				build.appendQueryParameter(
-						"l",
-						getResources().getStringArray(R.array.langValues)[data.language]);
-			// Material Type
-			if (data.materialType != 0)
-				build.appendQueryParameter(
-						"m",
-						getResources().getStringArray(
-								R.array.materialtypeValues)[data.materialType]);
+			//TODO: rewrite with boolean arrays
+
+			if (!data.materialType[0]){
+
+				for (int i=1;i<data.materialType.length;i++)
+				{
+					if (data.materialType[i])
+						build.appendQueryParameter("m", getResources().getStringArray(R.array.materialtypeValues)[i]);
+				}
+
+			}
+			if (!data.language[0]){
+
+				for (int i=1;i<data.language.length;i++)
+				{
+					if (data.language[i])
+						build.appendQueryParameter("l", getResources().getStringArray(R.array.langValues)[i]);
+				}
+
+			}
+
+			//			// Language
+			//			if (data.language != 0)
+			//				build.appendQueryParameter(
+			//						"l",
+			//						getResources().getStringArray(R.array.langValues)[data.language]);
+			//			// Material Type
+			//			if (data.materialType != 0)
+			//				build.appendQueryParameter(
+			//						"m",
+			//						getResources().getStringArray(
+			//								R.array.materialtypeValues)[data.materialType]);
 
 			// Year Start, Year Start, 2 associated checkboxes
 			if (data.useYearStart)
@@ -88,6 +109,7 @@ public class displaySearchResults extends Activity {
 				build.appendQueryParameter("p", data.publisher);
 
 			Uri uri = build.build();
+			Log.i("displaySearchResults", "uri built from data: " + uri.toString());
 			return uri;
 
 		} catch (Exception e) {

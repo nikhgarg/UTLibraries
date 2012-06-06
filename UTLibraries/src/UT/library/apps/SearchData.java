@@ -1,15 +1,18 @@
 package UT.library.apps;
 
+import android.content.res.Resources;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 public class SearchData implements Parcelable {
-	
+
 	public int fieldType=0;
 	public String searchString = "";
 	public int location = 0;
-	public int materialType = 0;
-	public int language = 0;
+	public boolean[] materialType;
+	public int matLength;
+	public boolean[] language;
+	public int langLength;
 	public int yearStart = 0;
 	public int yearEnd = 0;
 	public boolean useYearStart = false;
@@ -18,7 +21,7 @@ public class SearchData implements Parcelable {
 	public boolean usePublisher = false;
 	public boolean limitAvailable = false;
 	public int searchAndSort = 0;
-	
+
 	@Override
 	public int describeContents() {
 		// TODO Auto-generated method stub
@@ -29,13 +32,15 @@ public class SearchData implements Parcelable {
 		dest.writeInt(fieldType);
 		dest.writeString(searchString);
 		dest.writeInt(location);
-		dest.writeInt(materialType);
-		dest.writeInt(language);
+		dest.writeInt(matLength);
+		dest.writeBooleanArray(materialType);
+		dest.writeInt(langLength);
+		dest.writeBooleanArray(language);
 		dest.writeInt(yearStart);
 		dest.writeInt(yearEnd);
 		dest.writeBooleanArray(new boolean [] {useYearStart, useYearEnd, usePublisher, limitAvailable} );
 		dest.writeString(publisher);
-		dest.writeInt(searchAndSort);		
+		dest.writeInt(searchAndSort);
 		// TODO Auto-generated method stub
 	}
 	public SearchData(Parcel in)
@@ -43,8 +48,12 @@ public class SearchData implements Parcelable {
 		fieldType = in.readInt();
 		searchString = in.readString();
 		location = in.readInt();
-		materialType = in.readInt();
-		language = in.readInt();
+		matLength = in.readInt();
+		materialType = new boolean[matLength];
+		in.readBooleanArray(materialType);
+		langLength = in.readInt();
+		language = new boolean[langLength];
+		in.readBooleanArray(language);
 		yearStart = in.readInt();
 		yearEnd = in.readInt();
 		boolean [] temp = new boolean[4];
@@ -65,14 +74,14 @@ public class SearchData implements Parcelable {
 			return new SearchData[size];
 		}
     };
-    
+
 	public SearchData()
 	{
-		
+
 	}
-	
-	
-	
-	
+
+
+
+
 
 }
