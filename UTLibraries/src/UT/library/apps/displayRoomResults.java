@@ -1,5 +1,7 @@
 package UT.library.apps;
 
+import java.util.ArrayList;
+
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.app.Activity;
@@ -14,27 +16,28 @@ public class displayRoomResults extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Bundle bundle = getIntent().getExtras();
-		
-		////NOTE: THIS FUNCTION IS NOT WORKING BECAUSE OF REDIRECT PROBLEMS (URLS FOR UTDIRECT AND ROOMS PAGE ARE IN 
-		///DIFFERENT DOMAINS, HENCE LOG IN PROBLEM HAPPENING.
 
-		//		setContentView(R.layout.search_results5);
 
 		//log into UT direct with new client
 		DefaultHttpClient client = new DefaultHttpClient();
 		shared.logIntoUTDirect(this,client);
-		//		shared.logIntoCatalog(client);
-		// use HttpGet with all the parameters to find rooms page
+
 		String uri = createURIfromData(bundle);
-		//		String uri = "https://catalog.lib.utexas.edu/patroninfo~S29/1160546/top";
 		String html = shared.retrieveProtectedWebPage(this,client, uri);
+
+		//parse rooms page
+		ArrayList<Room> allRooms = new ArrayList<Room>();
+
+		//TODO:	display prettily
+
+		//TODO: parse room reservation page - send data including start/end time and group name
+			//can be done use post method
+
 		TextView tv = new TextView(this);
 		tv.setText(html);
 		setContentView(tv);
 
-		//parse rooms page and display prettily
-		//need to save links to follow to add room reservation
-		//parse room reservation page - send data including start/end time and group name
+
 	}
 	public String createURIfromData(Bundle bundle)
 	{
@@ -52,17 +55,17 @@ public class displayRoomResults extends Activity {
 			build.appendQueryParameter("year", ""+date[0]);
 
 			date[1]++; //add 1 (month was 0 indexed, need 1 indexed)
-			String month =""+ ((date[1]>9)?date[1]:"0"+date[1]); //add 0 to month if less than 10 
+			String month =""+ ((date[1]>9)?date[1]:"0"+date[1]); //add 0 to month if less than 10
 			build.appendQueryParameter("month", month);
 
-			String day =""+ ((date[2]>9)?date[2]:"0"+date[2]); //add 0 to day if less than 10 
+			String day =""+ ((date[2]>9)?date[2]:"0"+date[2]); //add 0 to day if less than 10
 			build.appendQueryParameter("day", day);
 
 			int startHour = date[3];
 
 			//round startMinute to nearest 15 minutes
 			int startMinute = date[4];
-			startMinute = (int) (Math.round(startMinute/15.0))*15;	
+			startMinute = (int) (Math.round(startMinute/15.0))*15;
 			if (startMinute==60){
 				startMinute=0;
 				startHour = (startHour+1)%24;
@@ -87,7 +90,7 @@ public class displayRoomResults extends Activity {
 
 			//round endMinute to nearest 15 minutes
 			int endMinute = date[6];
-			endMinute = (int) (Math.round(endMinute/15.0))*15;	
+			endMinute = (int) (Math.round(endMinute/15.0))*15;
 			if(endMinute==60)
 			{
 				endMinute = 0;
