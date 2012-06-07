@@ -22,6 +22,30 @@
         <item>Perry-Castañeda Library (Group Study Rooms)</item>
         <item>Perry-Castañeda Library (Presentation Practice Rooms)</item>
     </string-array>
+    <string-array name="timeHour">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+    </string-array>
+    <string-array name="timeMinute">
+        <item>00</item>
+        <item>15</item>
+        <item>30</item>
+        <item>45</item>
+    </string-array>
+    <string-array name="PM">
+        <item>PM</item>
+        <item>AM</item>
+    </string-array>
     <string-array name="reserveRoomNumberOfPeople">
         <item>Any Number</item>
         <item>2</item>
@@ -385,5 +409,10 @@
     <string name="floor">Floor</string>
     <string name="choosematerialtype">Chooose Material Type</string>
     <string name="chooselanguage">Choose Language</string>
+    <string name="reserve">Reserve</string>
+    <string name="finalizeroomreservation">Finalize Room Reservation</string>
+    <string name="location">location</string>
+    <string name="room">Room</string>
+
 
 </resources>
