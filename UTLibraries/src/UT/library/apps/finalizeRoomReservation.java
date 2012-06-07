@@ -17,6 +17,7 @@ import org.apache.http.protocol.HTTP;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -24,28 +25,21 @@ import android.widget.Spinner;
 
 public class finalizeRoomReservation extends Activity {
 
+	String roomId="";
+	String date="";
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.finalize_room_reservation);
+		Bundle bundle = getIntent().getExtras();
 
 		//get times, date, room id from previous screen
 
-
-		//TODO: add on click functionality for reserve room - create new activity first
-
-		//TODO: parse room reservation page - send data including start/end time and group name
-		//can be done use post method
-
-//		Log.i("displayRoomResults", "here is the html:\n"+ html);
-//
-//		TextView tv = new TextView(this);
-//		tv.setText(html);
-//		setContentView(tv);
-
-
+		roomId = bundle.getString("roomID");
+		date = String.format("%s-%s-%s", bundle.getString("year"), bundle.getString("month"), bundle.getString("day"));
 	}
 
 	public void finalizeReservation(View view)
@@ -75,9 +69,8 @@ public class finalizeRoomReservation extends Activity {
 		nameValuePairs.add(new BasicNameValuePair("endMinute", endMinute));
 		nameValuePairs.add(new BasicNameValuePair("isEndPM", endPM));
 
-//
-//		nameValuePairs.add(new BasicNameValuePair("date", "2012-06-06"));
-//		nameValuePairs.add(new BasicNameValuePair("roomID", "24"));
+		nameValuePairs.add(new BasicNameValuePair("date", date));
+		nameValuePairs.add(new BasicNameValuePair("roomID", roomId));
 
 		String url = "http://www.lib.utexas.edu/studyrooms/reservations/submit.php";
 		HttpPost httppost = new HttpPost (url);
@@ -110,5 +103,6 @@ public class finalizeRoomReservation extends Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		Log.i("finalizeRoomReservation", html);
 	}
 }

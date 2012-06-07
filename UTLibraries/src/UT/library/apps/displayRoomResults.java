@@ -1,29 +1,24 @@
 package UT.library.apps;
 
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.List;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.HTTP;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ListView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.markupartist.android.widget.ActionBar;
@@ -31,16 +26,24 @@ import com.markupartist.android.widget.ActionBar.IntentAction;
 
 public class displayRoomResults extends Activity {
 
+
+	ArrayList<ArrayList<Room>> allRooms;
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Bundle bundle = getIntent().getExtras();
-		setContentView(R.layout.room_results);
+		setContentView(R.layout.room_results2);
+
+		LayoutInflater mInflater = LayoutInflater.from(this);
+
+		View view = mInflater.inflate(R.layout.room_results2,null);
+		LinearLayout linLayout = (LinearLayout) view.findViewById(R.id.roomsLinearLayout);
 
 		// code downloaded from
 		// https://github.com/johannilsson/android-actionbar/blob/master/README.md
-		ActionBar actionBar = (ActionBar) findViewById(R.id.actionbar);
+		ActionBar actionBar = (ActionBar) linLayout.findViewById(R.id.actionbar);
 		actionBar.setTitle("Room Results");
 		actionBar.setBackgroundColor(Color.parseColor("#ff4500"));
 		actionBar.setHomeAction(new IntentAction(this, new Intent(this,
@@ -61,17 +64,123 @@ public class displayRoomResults extends Activity {
 		String html = shared.retrieveProtectedWebPage(this,client, uri);
 
 		//parse rooms page
-		ArrayList<Room> allRooms = parseRoomResults.extractRooms(html);
+		allRooms = parseRoomResults.extractRooms(html);
 
 		//TODO:	display prettily. either improve listview or implement using tables
-		RoomBaseAdapter roomAdapter = new RoomBaseAdapter(this,allRooms);
-		ListView listview = (ListView) findViewById(R.id.roomResultsListView);
-		listview.setAdapter(roomAdapter);
+		displayAllRooms(allRooms, linLayout, mInflater);
+		//		RoomBaseAdapter roomAdapter = new RoomBaseAdapter(this,allRooms);
+		//		ListView listview = (ListView) findViewById(R.id.roomResultsListView);
+		//		listview.setAdapter(roomAdapter);
 
 
 
 
 	}
+
+	public void displayAllRooms (ArrayList<ArrayList<Room>> rooms, LinearLayout linLayout, LayoutInflater mInflater)
+	{
+		Context context = this;
+
+		try {
+
+			int outer = 0, inner = 0; //setting tags in table rows so that know which button was pressed
+
+
+//			setContentView(view);
+//			linLayout.removeAllViews();
+			for (ArrayList<Room> byLocation : rooms)
+			{
+				Log.i("displayRoomResults","in by Location");
+				TextView tv = new TextView(context);
+				tv.setText(byLocation.get(0).location);
+				linLayout.addView(tv);
+
+//				TextView tvv = new TextView(context);
+//				tvv.setText(byLocation.get(0).location);
+//				linLayout.addView(tvv);
+
+				TableLayout table = new TableLayout(context);
+				TableRow header = (TableRow) mInflater.inflate(R.layout.room_row, null);
+
+				((TextView) header.findViewById(R.id.roomname))
+				.setText("Room");
+				((TextView) header.findViewById(R.id.hasFeatures))
+				.setText("Has Requested Features");
+				((TextView) header.findViewById(R.id.roomsize))
+				.setText("Capacity");
+				((TextView) header.findViewById(R.id.available))
+				.setText("Available?");
+				header.removeView(header.findViewById(R.id.reserveRoomButton));
+				table.addView(header);
+
+//				linLayout.add
+
+				for (Room room: byLocation){
+
+					Log.i("displayRoomResults","in room");
+
+
+					TableRow roomRow = (TableRow) mInflater.inflate(R.layout.room_row, null);
+
+					((TextView) roomRow.findViewById(R.id.roomname))
+					.setText(room.room);
+					((TextView) roomRow.findViewById(R.id.hasFeatures))
+					.setText(room.reqFeatures);
+					((TextView) roomRow.findViewById(R.id.roomsize))
+					.setText(room.seating);
+					((TextView) roomRow.findViewById(R.id.available))
+					.setText(room.available);
+
+					((Button)roomRow.findViewById(R.id.reserveRoomButton)).setTag(new int[]{outer, inner});
+
+					table.addView(roomRow);
+					inner++;
+				}
+				linLayout.addView(table);
+				outer++;
+			}
+		}
+
+		catch (Exception e) {
+			Log.e("displayRoomResults", "Exception in displayRooms",e);
+//			TextView tv = new TextView(this);
+//			tv.setText(e.toString());
+//			setContentView(tv);
+		}
+		ScrollView sv = new ScrollView(context);
+		sv.addView(linLayout);
+		setContentView(sv);
+
+//		setContentView(view);
+
+	}
+
+	public void roomSelected(View view)
+	{
+		int[]tag = (int[])view.getTag();
+		Room selected = allRooms.get(tag[0]).get(tag[1]);
+		String roomLink = selected.reserveLink;
+		roomLink = roomLink.substring(roomLink.indexOf("roomID"));
+		String id = roomLink.substring(roomLink.indexOf("=")+1, roomLink.indexOf("&"));
+
+		//just sending bundle from last intent, with room id appended
+		Bundle bundle = new Bundle();
+		bundle.putString("roomID", id);
+		bundle.putString("year", year);
+		bundle.putString("month", month);
+		bundle.putString("day", day);
+
+
+		Intent intent = new Intent(this,finalizeRoomReservation.class);
+		intent.putExtras(bundle);
+		startActivity(intent);
+
+	}
+	//needed for next activity - finalizing reservation
+	String year;
+	String month;
+	String day;
+
 	public String createURIfromData(Bundle bundle)
 	{
 		int [] date = bundle.getIntArray("Date");
@@ -86,14 +195,14 @@ public class displayRoomResults extends Activity {
 			build.path("//www.lib.utexas.edu/studyrooms/index.php");
 
 			build.appendQueryParameter("year", ""+date[0]);
-
+			this.year = ""+date[0];
 			date[1]++; //add 1 (month was 0 indexed, need 1 indexed)
 			String month =""+ ((date[1]>9)?date[1]:"0"+date[1]); //add 0 to month if less than 10
 			build.appendQueryParameter("month", month);
-
+			this.month = month;
 			String day =""+ ((date[2]>9)?date[2]:"0"+date[2]); //add 0 to day if less than 10
 			build.appendQueryParameter("day", day);
-
+			this.day = day;
 			int startHour = date[3];
 
 			//round startMinute to nearest 15 minutes

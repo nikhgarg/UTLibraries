@@ -34,6 +34,8 @@
         <activity android:name=".renewBooks" />
         <activity android:name=".saveBooks" />
         <activity android:name=".libraryMaps" />
+        <activity android:name=".finalizeRoomReservation" />
+
     </application>
 
 </manifest>

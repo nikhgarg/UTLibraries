@@ -1,45 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/roomrowrow"
     android:layout_width="wrap_content"
     android:layout_height="match_parent" >
-
+
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/roomname"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="Small Text"
         android:textAppearance="?android:attr/textAppearanceSmall" />
-
+
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/hasFeatures"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="Small Text"
         android:textAppearance="?android:attr/textAppearanceSmall" />
-
+
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/roomsize"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="Small Text"
         android:textAppearance="?android:attr/textAppearanceSmall" />
-
+
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/available"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="Small Text"
         android:textAppearance="?android:attr/textAppearanceSmall" />
-
+
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/reserveRoomButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="@string/reserve" />
+        android:text="@string/reserve"
+        android:onClick="roomSelected" />
 
 </TableRow>
