@@ -27,18 +27,6 @@ import android.widget.Spinner;
 
 public class finalizeRoomReservation extends Activity {
 
-	String roomId = "";
-	String date = "";
-	String groupName;
-	String startHour;
-	String startMinute;
-	String startPM;
-	String endHour;
-	String endMinute;
-	String endPM;
-	String room;
-	String location;
-	boolean success;
 	Context context;
 
 	/** Called when the activity is first created. */
@@ -60,35 +48,50 @@ public class finalizeRoomReservation extends Activity {
 
 	}
 
+	String roomId = "";
+	String date = "";
+	String room;
+	String location;
+
 	public void finalizeReservation(View view) {
 
+		String groupName;
+		String startHour;
+		String startMinute;
+		String startPM;
+		String endHour;
+		String endMinute;
+		String endPM;
+
+		boolean success;
+
 		EditText et = (EditText) findViewById(R.id.groupNameEnter);
-		 groupName = et.getText().toString();
+		groupName = et.getText().toString();
 		Spinner spinner = (Spinner) findViewById(R.id.startHourSpinner);
-		 startHour = 1 + spinner.getSelectedItemPosition() + ""; // time
+		startHour = 1 + spinner.getSelectedItemPosition() + ""; // time
 		// is 0
 		// indexed
 		spinner = (Spinner) findViewById(R.id.endHourSpinner);
-		 endHour = 1 + spinner.getSelectedItemPosition() + ""; // time is
+		endHour = 1 + spinner.getSelectedItemPosition() + ""; // time is
 		// 0
 		// indexed
 		spinner = (Spinner) findViewById(R.id.startMinuteSpinner);
-		 startMinute = 15 * spinner.getSelectedItemPosition() + ""; // time
+		startMinute = 15 * spinner.getSelectedItemPosition() + ""; // time
 		// is
 		// 0
 		// indexed
 		spinner = (Spinner) findViewById(R.id.endMinuteSpinner);
-		 endMinute = 15 * spinner.getSelectedItemPosition() + ""; // time
+		endMinute = 15 * spinner.getSelectedItemPosition() + ""; // time
 		// is 0
 		// indexed
 		spinner = (Spinner) findViewById(R.id.startPMSpinner);
-		 startPM = (spinner.getSelectedItemPosition() == 0) ? "PM" : "AM";
+		startPM = (spinner.getSelectedItemPosition() == 0) ? "PM" : "AM";
 		spinner = (Spinner) findViewById(R.id.endPMSpinner);
-		 endPM = (spinner.getSelectedItemPosition() == 0) ? "PM" : "AM";
+		endPM = (spinner.getSelectedItemPosition() == 0) ? "PM" : "AM";
 
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
 		nameValuePairs
-		.add(new BasicNameValuePair("reservationName", groupName));
+				.add(new BasicNameValuePair("reservationName", groupName));
 		nameValuePairs.add(new BasicNameValuePair("startHour", startHour));
 		nameValuePairs.add(new BasicNameValuePair("startMinute", startMinute));
 		nameValuePairs.add(new BasicNameValuePair("isStartPM", startPM));
@@ -123,50 +126,56 @@ public class finalizeRoomReservation extends Activity {
 				// System.out.println(next);
 				html += next;
 				next = in.readLine();
-
-				// TODO: create alert dialog
-
 			}
-			createConfirmationDialog(html);
+			createConfirmationDialog(html, roomId, date, groupName, startHour,
+					startMinute, startPM, endHour, endMinute, endPM);
 		} catch (Exception e) {
-//			e.printStackTrace();
-			Log.e("finalizeRoomReservation", "error in finalizeReservation",e);
+			// e.printStackTrace();
+			Log.e("finalizeRoomReservation", "error in finalizeReservation", e);
 		}
 		Log.i("finalizeRoomReservation", html);
 	}
 
-	String reserveResult = "";
-
-	private void createConfirmationDialog(String html) {
+	private void createConfirmationDialog(String html, String roomId,
+			String date, String groupName, String startHour,
+			String startMinute, String startPM, String endHour,
+			String endMinute, String endPM) {
+		boolean successtemp = false;
 		String result = parseRoomResults.parseConfirmation(html);
-		Log.i("finalizeRoomReservation", "in createConfirmationDialog. result = " + result);
-		reserveResult = result;
-//		showDialog(0);
+		Log.i("finalizeRoomReservation",
+				"in createConfirmationDialog. result = " + result);
+		String reserveResult = result;
+		// showDialog(0);
 
 		Log.i("finalizeRoomReservation", "inside create dialog");
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		if (reserveResult.contains("Error"))
 			builder.setTitle("Error");
-		else{
-			success = true;
+		else {
+			successtemp = true;
 			builder.setTitle("Success");
-			reserveResult+=String.format("\nLocation:%s\nRoom:%s\nGroup Name:%s\nDate:%s\nStart Time:%s:%02d %s\nEnd Time:%s:%02d %s\n",
-						location, room, groupName, date, startHour, Integer.parseInt(startMinute), startPM, endHour, Integer.parseInt(endMinute), endPM);
+			reserveResult += String
+					.format("\nLocation:%s\nRoom:%s\nGroup Name:%s\nDate:%s\nStart Time:%s:%02d %s\nEnd Time:%s:%02d %s\n",
+							location, room, groupName, date, startHour,
+							Integer.parseInt(startMinute), startPM, endHour,
+							Integer.parseInt(endMinute), endPM);
 		}
-		builder.setMessage(reserveResult)
-				.setCancelable(false)
-				.setPositiveButton("OK",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int id) {
-								dialog.dismiss();
-								if (success){
-									Intent intent = new Intent(context,
-											WelcomeScreen.class);
-									startActivity(intent);
-								}
-							}
-						}).show();
+
+		final boolean success = successtemp; // had temporary value earlier because this
+												// needs to final for method
+												// function below
+
+		builder.setMessage(reserveResult).setCancelable(false)
+				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						dialog.dismiss();
+						if (success) {
+							Intent intent = new Intent(context,
+									WelcomeScreen.class);
+							startActivity(intent);
+						}
+					}
+				}).show();
 		// .setNegativeButton("No", new DialogInterface.OnClickListener() {
 		// public void onClick(DialogInterface dialog, int id) {
 		// dialog.cancel();
@@ -177,6 +186,5 @@ public class finalizeRoomReservation extends Activity {
 		// reservation, maybe
 
 	}
-
 
 }

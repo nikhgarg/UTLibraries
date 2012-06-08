@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -78,7 +79,7 @@ public class BookBaseAdapter extends BaseAdapter {
 
 			convertView.setTag(holder);
 			//convertView.setClickable(true);
-			
+
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
@@ -100,6 +101,9 @@ public class BookBaseAdapter extends BaseAdapter {
 				b.callNo.size());
 
 		holder.copiesTable.removeAllViews();
+		holder.copiesTable.setStretchAllColumns(true);
+		holder.copiesTable.setShrinkAllColumns(true);
+		holder.copiesTable.setGravity(Gravity.CENTER);
 
 		for (int i = 0; i < min; i++) {
 
@@ -143,7 +147,7 @@ public class BookBaseAdapter extends BaseAdapter {
 					{
 						//do nothing. just make new file - do not have  read from old
 					}
-					savedBooks.add(b); 
+					savedBooks.add(b);
 					FileOutputStream fos = null;
 					ObjectOutputStream oos = null;
 					fos = context.openFileOutput(FILENAME, Context.MODE_PRIVATE); 	//change this back to append

@@ -9,26 +9,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_column="0"
+        android:gravity = "center"
         android:text="Location"
+        android:textSize="12sp"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
         android:id="@+id/callNo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        
         android:layout_column="1"
+        android:gravity = "center"
         android:text="call No"
+                android:textSize="12sp"
+
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
         android:id="@+id/status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        
         android:layout_column="2"
         android:layout_gravity="right"
+        android:gravity = "center"
         android:text="status"
+                        android:textSize="12sp"
+
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </TableRow>
