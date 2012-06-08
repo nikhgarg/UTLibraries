@@ -9,9 +9,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -86,21 +88,24 @@ public class displayRoomResults extends Activity {
 			int outer = 0, inner = 0; //setting tags in table rows so that know which button was pressed
 
 
-//			setContentView(view);
-//			linLayout.removeAllViews();
+			//			setContentView(view);
+			//			linLayout.removeAllViews();
 			for (ArrayList<Room> byLocation : rooms)
 			{
 				Log.i("displayRoomResults","in by Location");
 				TextView tv = new TextView(context);
 				tv.setText(byLocation.get(0).location);
+				tv.setTypeface(Typeface.DEFAULT_BOLD, Typeface.BOLD);
+				tv.setTextSize(20);
 				linLayout.addView(tv);
 
-//				TextView tvv = new TextView(context);
-//				tvv.setText(byLocation.get(0).location);
-//				linLayout.addView(tvv);
-
 				TableLayout table = new TableLayout(context);
+				table.setStretchAllColumns(true);
+				table.setShrinkAllColumns(true);
+				table.setGravity(Gravity.CENTER);
+
 				TableRow header = (TableRow) mInflater.inflate(R.layout.room_row, null);
+				header.setGravity(Gravity.CENTER);
 
 				((TextView) header.findViewById(R.id.roomname))
 				.setText("Room");
@@ -111,17 +116,24 @@ public class displayRoomResults extends Activity {
 				((TextView) header.findViewById(R.id.available))
 				.setText("Available?");
 				header.removeView(header.findViewById(R.id.reserveRoomButton));
+				TextView takeupbuttonspace = new TextView(context);
+				takeupbuttonspace.setText("");
+				header.addView(takeupbuttonspace);
+
+				for (int i=0;i<header.getChildCount();i++)
+				{
+					View v = header.getChildAt(i);
+					if (v instanceof TextView){
+						((TextView)v).setGravity(Gravity.CENTER);
+					}
+				}
 				table.addView(header);
-
-//				linLayout.add
-
+				inner = 0;
 				for (Room room: byLocation){
-
 					Log.i("displayRoomResults","in room");
 
-
 					TableRow roomRow = (TableRow) mInflater.inflate(R.layout.room_row, null);
-
+					roomRow.setGravity(Gravity.CENTER);
 					((TextView) roomRow.findViewById(R.id.roomname))
 					.setText(room.room);
 					((TextView) roomRow.findViewById(R.id.hasFeatures))
@@ -133,6 +145,12 @@ public class displayRoomResults extends Activity {
 
 					((Button)roomRow.findViewById(R.id.reserveRoomButton)).setTag(new int[]{outer, inner});
 
+					for (int i=0;i<roomRow.getChildCount();i++)
+					{
+						View v = roomRow.getChildAt(i);
+						if (v instanceof TextView)
+							((TextView)v).setGravity(Gravity.CENTER);
+					}
 					table.addView(roomRow);
 					inner++;
 				}
@@ -140,18 +158,17 @@ public class displayRoomResults extends Activity {
 				outer++;
 			}
 		}
-
 		catch (Exception e) {
 			Log.e("displayRoomResults", "Exception in displayRooms",e);
-//			TextView tv = new TextView(this);
-//			tv.setText(e.toString());
-//			setContentView(tv);
+			//			TextView tv = new TextView(this);
+			//			tv.setText(e.toString());
+			//			setContentView(tv);
 		}
 		ScrollView sv = new ScrollView(context);
 		sv.addView(linLayout);
 		setContentView(sv);
 
-//		setContentView(view);
+		//		setContentView(view);
 
 	}
 
@@ -169,6 +186,8 @@ public class displayRoomResults extends Activity {
 		bundle.putString("year", year);
 		bundle.putString("month", month);
 		bundle.putString("day", day);
+		bundle.putString("location", selected.location);
+		bundle.putString("room", selected.room);
 
 
 		Intent intent = new Intent(this,finalizeRoomReservation.class);
