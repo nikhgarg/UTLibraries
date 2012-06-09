@@ -413,6 +413,7 @@
     <string name="finalizeroomreservation">Finalize Room Reservation</string>
     <string name="location">location</string>
     <string name="room">Room</string>
+    <string name="location1">Location</string>
 
 
 </resources>

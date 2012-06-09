@@ -24,6 +24,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 public class finalizeRoomReservation extends Activity {
 
@@ -46,6 +47,27 @@ public class finalizeRoomReservation extends Activity {
 		location = bundle.getString("location");
 		room = bundle.getString("room");
 
+		TextView tv = (TextView) findViewById(R.id.locationText);
+		tv.setText("Location: " + location);
+
+		tv = (TextView) findViewById(R.id.roomText);
+		tv.setText("Room: " + room);
+
+		Spinner spinner = (Spinner) findViewById(R.id.startHourSpinner);
+		spinner.setSelection(bundle.getInt("startHour")-1); //0 index again
+		spinner = (Spinner) findViewById(R.id.endHourSpinner);
+		spinner.setSelection(bundle.getInt("endHour")-1);
+		spinner = (Spinner) findViewById(R.id.startMinuteSpinner);
+		spinner.setSelection(bundle.getInt("startMinute")/15);
+
+		spinner = (Spinner) findViewById(R.id.endMinuteSpinner);
+		spinner.setSelection(bundle.getInt("endMinute")/15);
+
+		spinner = (Spinner) findViewById(R.id.startPMSpinner);
+		spinner.setSelection((bundle.getString("startPM").equals("PM"))?0:1);
+
+		spinner = (Spinner) findViewById(R.id.endPMSpinner);
+		spinner.setSelection((bundle.getString("endPM").equals("PM"))?0:1);
 	}
 
 	String roomId = "";
@@ -63,8 +85,6 @@ public class finalizeRoomReservation extends Activity {
 		String endMinute;
 		String endPM;
 
-		boolean success;
-
 		EditText et = (EditText) findViewById(R.id.groupNameEnter);
 		groupName = et.getText().toString();
 		Spinner spinner = (Spinner) findViewById(R.id.startHourSpinner);
@@ -73,17 +93,13 @@ public class finalizeRoomReservation extends Activity {
 		// indexed
 		spinner = (Spinner) findViewById(R.id.endHourSpinner);
 		endHour = 1 + spinner.getSelectedItemPosition() + ""; // time is
-		// 0
-		// indexed
+
 		spinner = (Spinner) findViewById(R.id.startMinuteSpinner);
 		startMinute = 15 * spinner.getSelectedItemPosition() + ""; // time
-		// is
-		// 0
-		// indexed
+
 		spinner = (Spinner) findViewById(R.id.endMinuteSpinner);
 		endMinute = 15 * spinner.getSelectedItemPosition() + ""; // time
-		// is 0
-		// indexed
+
 		spinner = (Spinner) findViewById(R.id.startPMSpinner);
 		startPM = (spinner.getSelectedItemPosition() == 0) ? "PM" : "AM";
 		spinner = (Spinner) findViewById(R.id.endPMSpinner);

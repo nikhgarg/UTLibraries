@@ -27,7 +27,9 @@ public class reserveStudyRoom extends Activity {
 	int sEndHour;
 	int sStartMinute;
 	int sEndMinute;
-	
+	String sStartPM;
+	String sEndPM;
+
 	int numberOfPeople = 0; //index entry from Spinner
 
 	boolean[] buildingChoice = new boolean[4];// { anyBuilding, finearts,
@@ -38,22 +40,38 @@ public class reserveStudyRoom extends Activity {
 	{
 		Spinner spinner = (Spinner) findViewById(R.id.numberPeopleSpinner);
 		numberOfPeople = spinner.getSelectedItemPosition();
-		
+		spinner = (Spinner) findViewById(R.id.startHourSpinner);
+		sStartHour = 1 + spinner.getSelectedItemPosition();
+
+		spinner = (Spinner) findViewById(R.id.endHourSpinner);
+		sEndHour = 1 + spinner.getSelectedItemPosition();
+
+		spinner = (Spinner) findViewById(R.id.startMinuteSpinner);
+		sStartMinute = 15 * spinner.getSelectedItemPosition();
+		spinner = (Spinner) findViewById(R.id.endMinuteSpinner);
+		sEndMinute = 15 * spinner.getSelectedItemPosition();
+
+		spinner = (Spinner) findViewById(R.id.startPMSpinner);
+		sStartPM = (spinner.getSelectedItemPosition() == 0) ? "PM" : "AM";
+		spinner = (Spinner) findViewById(R.id.endPMSpinner);
+		sEndPM = (spinner.getSelectedItemPosition() == 0) ? "PM" : "AM";
+
     	Intent intent = new Intent(this, displayRoomResults.class);
     	Bundle bundle = new Bundle();
     	bundle.putIntArray("Date", new int[]{sYear, sMonth, sDay, sStartHour, sStartMinute, sEndHour, sEndMinute});
+    	bundle.putStringArray("PM", new String[] {sStartPM, sEndPM});
     	bundle.putInt("number", numberOfPeople);
     	bundle.putBooleanArray("building", buildingChoice);
     	bundle.putBooleanArray("room", roomRequirementsChoice);
     	intent.putExtras(bundle);
     	startActivity(intent);
 	}
-	
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.reserve_room_input2);
+		setContentView(R.layout.reserve_room_input3);
 		cal = Calendar.getInstance();
 		sMonth = cal.get(Calendar.MONTH); // getting current date and time for
 		// default pick
@@ -61,23 +79,24 @@ public class reserveStudyRoom extends Activity {
 		sYear = cal.get(Calendar.YEAR);
 		sStartHour = cal.get(Calendar.HOUR_OF_DAY);
 		sStartMinute = cal.get(Calendar.MINUTE);
-		sEndHour = (sStartHour + 1) % 24;
+		sEndHour = (sStartHour + 1) % 12;
 		sEndMinute = sStartMinute;
 		buildingChoice[0] = true; // default is any building
 
 
 	}
-	
+
 	public void launchDateDialog(View view) {
 		showDialog(0);
 	}
 
 	public void launchStartTimeDialog(View view) {
-		showDialog(1);
+
+//		showDialog(1);
 	}
 
 	public void launchEndTimeDialog(View view) {
-		showDialog(2);
+//		showDialog(2);
 	}
 
 	public void launchBuildingDialog(View view) {
@@ -97,20 +116,20 @@ public class reserveStudyRoom extends Activity {
 			sDay = dayOfMonth;
 		}
 	};
-	private TimePickerDialog.OnTimeSetListener sStartTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
-
-		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-			sStartHour = hourOfDay;
-			sStartMinute = minute;
-		}
-	};
-	private TimePickerDialog.OnTimeSetListener sEndTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
-
-		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-			sEndHour = hourOfDay;
-			sEndMinute = minute;
-		}
-	};
+//	private TimePickerDialog.OnTimeSetListener sStartTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+//
+//		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+//			sStartHour = hourOfDay;
+//			sStartMinute = minute;
+//		}
+//	};
+//	private TimePickerDialog.OnTimeSetListener sEndTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+//
+//		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+//			sEndHour = hourOfDay;
+//			sEndMinute = minute;
+//		}
+//	};
 	private DialogInterface.OnMultiChoiceClickListener sBuildingSetListener = new DialogInterface.OnMultiChoiceClickListener() {
 		public void onClick(DialogInterface dialog, int item, boolean isChecked) {
 			buildingChoice[item] = isChecked;
@@ -128,12 +147,12 @@ public class reserveStudyRoom extends Activity {
 		case 0:
 			return new DatePickerDialog(this, sDateSetListener, sYear, sMonth,
 					sDay);
-		case 1:
-			return new TimePickerDialog(this, sStartTimeSetListener,
-					sStartHour, sStartMinute, false);
-		case 2:
-			return new TimePickerDialog(this, sEndTimeSetListener, sEndHour,
-					sEndMinute, false);
+//		case 1:
+//			return new TimePickerDialog(this, sStartTimeSetListener,
+//					sStartHour, sStartMinute, false);
+//		case 2:
+//			return new TimePickerDialog(this, sEndTimeSetListener, sEndHour,
+//					sEndMinute, false);
 		case 3:
 			AlertDialog.Builder ald = new AlertDialog.Builder(this);
 			ald.setTitle("Please Enter your Room Choice");

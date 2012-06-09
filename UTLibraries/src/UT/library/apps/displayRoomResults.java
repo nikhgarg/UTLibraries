@@ -87,9 +87,6 @@ public class displayRoomResults extends Activity {
 
 			int outer = 0, inner = 0; //setting tags in table rows so that know which button was pressed
 
-
-			//			setContentView(view);
-			//			linLayout.removeAllViews();
 			for (ArrayList<Room> byLocation : rooms)
 			{
 				Log.i("displayRoomResults","in by Location");
@@ -188,7 +185,12 @@ public class displayRoomResults extends Activity {
 		bundle.putString("day", day);
 		bundle.putString("location", selected.location);
 		bundle.putString("room", selected.room);
-
+		bundle.putInt("startHour", startHour);
+		bundle.putInt("endHour", endHour);
+		bundle.putInt("startMinute", startMinute);
+		bundle.putInt("endMinute", endMinute);
+		bundle.putString("startPM", startPM);
+		bundle.putString("endPM", endPM);
 
 		Intent intent = new Intent(this,finalizeRoomReservation.class);
 		intent.putExtras(bundle);
@@ -199,6 +201,12 @@ public class displayRoomResults extends Activity {
 	String year;
 	String month;
 	String day;
+	int startHour;
+	int startMinute;
+	int endHour;
+	int endMinute;
+	String startPM;
+	String endPM;
 
 	public String createURIfromData(Bundle bundle)
 	{
@@ -206,6 +214,9 @@ public class displayRoomResults extends Activity {
 		int number = bundle.getInt("number");
 		boolean [] building = bundle.getBooleanArray("building");
 		boolean [] roomreq = bundle.getBooleanArray("room");
+		String [] pm = bundle.getStringArray("PM");
+		startPM = pm[0];
+		endPM = pm[1];
 
 		try {
 
@@ -222,55 +233,54 @@ public class displayRoomResults extends Activity {
 			String day =""+ ((date[2]>9)?date[2]:"0"+date[2]); //add 0 to day if less than 10
 			build.appendQueryParameter("day", day);
 			this.day = day;
-			int startHour = date[3];
 
+			 startHour = date[3];
+
+			 startMinute = date[4];
 			//round startMinute to nearest 15 minutes
-			int startMinute = date[4];
-			startMinute = (int) (Math.round(startMinute/15.0))*15;
-			if (startMinute==60){
-				startMinute=0;
-				startHour = (startHour+1)%24;
-			}
-			String startPm = "am";
-			if (startHour>=12)
-			{
-				startPm = "pm";
-				if (startHour>12)
-					startHour-=12;
-			}
-			else if (startHour==0)
-				startHour = 12;
+//			startMinute = (int) (Math.round(startMinute/15.0))*15;
+//			if (startMinute==60){
+//				startMinute=0;
+//				startHour = (startHour+1)%24;
+////			}
+//			String startPm = "am";
+//			if (startHour>=12)
+//			{
+//				startPm = "pm";
+//				if (startHour>12)
+//					startHour-=12;
+//			}
+//			else if (startHour==0)
+//				startHour = 12;
+
 			build.appendQueryParameter("startHour", ""+startHour);
 
 			build.appendQueryParameter("startMinute", ""+startMinute);
-			build.appendQueryParameter("isStartPM", startPm);
+			build.appendQueryParameter("isStartPM", pm[0]);
 
-			int endHour = date[5];
+			 endHour = date[5];
 
 			//round endMinute to nearest 15 minutes
-			int endMinute = date[6];
-			endMinute = (int) (Math.round(endMinute/15.0))*15;
-			if(endMinute==60)
-			{
-				endMinute = 0;
-				endHour = (endHour +1)%24;
-			}
-
-			String endPm = "am";
-			if (endHour>=12)
-			{
-				endPm = "pm";
-				if (endHour>12)
-					endHour-=12;
-			}
-			else if (endHour==0)
-				endHour = 12;
+			 endMinute = date[6];
+//			endMinute = (int) (Math.round(endMinute/15.0))*15;
+//			if(endMinute==60)
+//			{
+//				endMinute = 0;
+//				endHour = (endHour +1)%24;
+//			}
+//
+//			String endPm = "am";
+//			if (endHour>=12)
+//			{
+//				endPm = "pm";
+//				if (endHour>12)
+//					endHour-=12;
+//			}
+//			else if (endHour==0)
+//				endHour = 12;
 			build.appendQueryParameter("endHour", ""+endHour);
-
-
 			build.appendQueryParameter("endMinute", ""+endMinute);
-
-			build.appendQueryParameter("isEndPM", endPm);
+			build.appendQueryParameter("isEndPM", pm[1]);
 
 			if (building[0])
 				build.appendQueryParameter("building", "any");

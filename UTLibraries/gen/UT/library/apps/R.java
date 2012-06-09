@@ -215,15 +215,16 @@ containing a value of this type.
         public static final int main_list_item=0x7f03000b;
         public static final int renew_books=0x7f03000c;
         public static final int reserve_room_input2=0x7f03000d;
-        public static final int room_layout=0x7f03000e;
-        public static final int room_results=0x7f03000f;
-        public static final int room_results2=0x7f030010;
-        public static final int room_row=0x7f030011;
-        public static final int saved_books=0x7f030012;
-        public static final int search=0x7f030013;
-        public static final int search_results5=0x7f030014;
-        public static final int settings=0x7f030015;
-        public static final int single_copy_info_row=0x7f030016;
+        public static final int reserve_room_input3=0x7f03000e;
+        public static final int room_layout=0x7f03000f;
+        public static final int room_results=0x7f030010;
+        public static final int room_results2=0x7f030011;
+        public static final int room_row=0x7f030012;
+        public static final int saved_books=0x7f030013;
+        public static final int search=0x7f030014;
+        public static final int search_results5=0x7f030015;
+        public static final int settings=0x7f030016;
+        public static final int single_copy_info_row=0x7f030017;
     }
     public static final class string {
         public static final int FieldPrompt=0x7f060006;
@@ -256,6 +257,7 @@ containing a value of this type.
         public static final int limitavailable=0x7f06000d;
         public static final int loadmoreresultsbutton=0x7f060012;
         public static final int location=0x7f06003b;
+        public static final int location1=0x7f06003d;
         public static final int next=0x7f060014;
         public static final int numberofpeople=0x7f060025;
         public static final int password=0x7f06001b;

@@ -9,12 +9,12 @@
         android:layout_height="wrap_content"
         android:text="@string/finalizeroomreservation"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-
+
     <TextView
         android:id="@+id/locationText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/location"
+        android:text="@string/location1"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
