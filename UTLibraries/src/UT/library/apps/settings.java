@@ -29,9 +29,7 @@ public class settings extends Activity {
 		//code downloaded from https://github.com/johannilsson/android-actionbar/blob/master/README.md
 		ActionBar actionBar = (ActionBar) findViewById(R.id.actionbar);
 		actionBar.setTitle("Settings");
-		actionBar.setBackgroundColor(Color.parseColor("#ff4500"));
-		actionBar.setHomeLogo(R.drawable.book_image_placeholder);
-		actionBar.setHomeAction(new IntentAction(this,new Intent(this, WelcomeScreen.class) , R.drawable.book_image_placeholder));
+		actionBar.setHomeAction(new IntentAction(this,new Intent(this, WelcomeScreen.class) , R.drawable.home));
 		//----------------------
 
 

@@ -3,17 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-
+
     <TextView
         android:id="@+id/publicationList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignRight="@+id/titleList"
         android:layout_below="@+id/titleList"
+        android:layout_toLeftOf="@+id/saveBookButton"
         android:text="Small Text"
         android:textAppearance="?android:attr/textAppearanceSmall" />
-
+
     <TextView
         android:id="@+id/otherInfoList"
         android:layout_width="wrap_content"
@@ -23,14 +23,22 @@
         android:layout_toLeftOf="@+id/saveBookButton"
         android:text="Small Text"
         android:textAppearance="?android:attr/textAppearanceSmall" />
-
+
+    <Button
+        android:id="@+id/saveBookButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/titleList"
+        android:text="@string/savebook" />
+
     <TextView
         android:id="@+id/titleList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/saveBookButton"
         android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -39,18 +47,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/otherInfoList"
+        android:layout_below="@+id/saveBookButton"
         android:stretchColumns="true" >
-
-
     </TableLayout>
-
-    <Button
-        android:id="@+id/saveBookButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/copiesTable"
-        android:layout_alignParentRight="true"
-        android:text="@string/savebook" />
 
 </RelativeLayout>

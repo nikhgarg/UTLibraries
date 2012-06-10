@@ -415,6 +415,7 @@
     <string name="room">Room</string>
     <string name="location1">Location</string>
     <string name="longstringtest">asaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</string>
+    <string name="available">AVAILABLE</string>
 
 
 </resources>

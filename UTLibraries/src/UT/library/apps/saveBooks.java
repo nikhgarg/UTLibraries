@@ -160,8 +160,8 @@ public class saveBooks extends Activity {
 		ActionBar actionBar = (ActionBar) findViewById(R.id.actionbar);
 		// You can also assign the title programmatically by passing a CharSequence or resource id.
 		actionBar.setTitle("Saved Books");
-		actionBar.setBackgroundColor(Color.parseColor("#ff4500"));
-		actionBar.setHomeLogo(R.drawable.book_image_placeholder);
+		actionBar.setHomeAction(new IntentAction(this, new Intent(this,
+				WelcomeScreen.class), R.drawable.home)); // go	// home
 		actionBar.addAction(new IntentAction(this, new Intent(this, settings.class), R.drawable.book_image_placeholder)); //go to settings
 		//----------------------
 

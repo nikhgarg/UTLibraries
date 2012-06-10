@@ -14,6 +14,9 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 
+import com.markupartist.android.widget.ActionBar;
+import com.markupartist.android.widget.ActionBar.IntentAction;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -37,6 +40,17 @@ public class finalizeRoomReservation extends Activity {
 
 		setContentView(R.layout.finalize_room_reservation);
 		context = this;
+
+		// code downloaded from
+		// https://github.com/johannilsson/android-actionbar/blob/master/README.md
+		ActionBar actionBar = (ActionBar) findViewById(R.id.actionbar);
+		actionBar.setHomeAction(new IntentAction(this, new Intent(this,WelcomeScreen.class), R.drawable.home)); // go	// home
+		actionBar.setTitle("Finalize Room Reservation");
+		//	actionBar.setHomeLogo(R.drawable.book_image_placeholder);
+		actionBar.addAction(new IntentAction(this, new Intent(this, settings.class), R.drawable.book_image_placeholder)); //go to settings
+		//----------------------
+
+
 		Bundle bundle = getIntent().getExtras();
 
 		// get times, date, room id from previous screen

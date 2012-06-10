@@ -6,12 +6,11 @@
     android:shrinkColumns="*"
     android:stretchColumns="*" >
 
-    <TextView
-        android:id="@+id/textView3"
+    <com.markupartist.android.widget.ActionBar
+        android:id="@+id/actionbar"
+        style="@style/customactionbar"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/reserve_room_header"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_height="wrap_content" />
 
     <TableRow
         android:id="@+id/tableRow1"
@@ -34,7 +33,7 @@
             android:onClick="launchDateDialog"
             android:text="@string/enter" />
     </TableRow>
-
+
     <TableRow
         android:id="@+id/tableRow2"
         android:layout_width="wrap_content"
@@ -69,7 +68,7 @@
             android:layout_weight="1"
             android:entries="@array/PM" />
     </TableRow>
-
+
     <TableRow
         android:id="@+id/tableRow2"
         android:layout_width="wrap_content"
@@ -177,9 +176,9 @@
             android:id="@+id/button4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_span="4"
             android:onClick="enterRoomSearch"
-            android:text="@android:string/search_go"
-            android:layout_span="4" />
+            android:text="@android:string/search_go" />
     </TableRow>
 
 </TableLayout>

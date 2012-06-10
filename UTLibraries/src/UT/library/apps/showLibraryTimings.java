@@ -24,7 +24,7 @@ public class showLibraryTimings extends Activity {
 	private class RefreshAction implements Action {
 		@Override
 		public int getDrawable() {
-			return R.drawable.book_image_placeholder; // need to replace with
+			return R.drawable.refresh; // need to replace with
 			// Refresh icon
 		}
 		@Override
@@ -52,13 +52,12 @@ public class showLibraryTimings extends Activity {
 
 		setContentView(R.layout.library_hours);
 		context = this;
-		//code downloaded from https://github.com/johannilsson/android-actionbar/blob/master/README.md
+		// code downloaded from
+		// https://github.com/johannilsson/android-actionbar/blob/master/README.md
 		ActionBar actionBar = (ActionBar) findViewById(R.id.actionbar);
-		// You can also assign the title programmatically by passing a
-		// CharSequence or resource id.
+		actionBar.setHomeAction(new IntentAction(this, new Intent(this,WelcomeScreen.class), R.drawable.home)); // go	// home
 		actionBar.setTitle("Library Hours");
 		//	actionBar.setHomeLogo(R.drawable.book_image_placeholder);
-		actionBar.setHomeAction(new IntentAction(this,new Intent(this, WelcomeScreen.class) , R.drawable.book_image_placeholder)); //go home (already there)
 		actionBar.addAction(new IntentAction(this, new Intent(this, settings.class), R.drawable.book_image_placeholder)); //go to settings
 		actionBar.addAction(new RefreshAction());
 		//----------------------

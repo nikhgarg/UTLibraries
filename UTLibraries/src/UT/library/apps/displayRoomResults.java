@@ -38,23 +38,19 @@ public class displayRoomResults extends Activity {
 		Bundle bundle = getIntent().getExtras();
 		setContentView(R.layout.room_results2);
 
+		// code downloaded from
+		// https://github.com/johannilsson/android-actionbar/blob/master/README.md
+		ActionBar actionBar = (ActionBar) findViewById(R.id.actionbar);
+		actionBar.setHomeAction(new IntentAction(this, new Intent(this,WelcomeScreen.class), R.drawable.home)); // go	// home
+		actionBar.setTitle("Room Results");
+		//	actionBar.setHomeLogo(R.drawable.book_image_placeholder);
+		actionBar.addAction(new IntentAction(this, new Intent(this, settings.class), R.drawable.book_image_placeholder)); //go to settings
+		//----------------------
+
 		LayoutInflater mInflater = LayoutInflater.from(this);
 
 		View view = mInflater.inflate(R.layout.room_results2,null);
 		LinearLayout linLayout = (LinearLayout) view.findViewById(R.id.roomsLinearLayout);
-
-		// code downloaded from
-		// https://github.com/johannilsson/android-actionbar/blob/master/README.md
-		ActionBar actionBar = (ActionBar) linLayout.findViewById(R.id.actionbar);
-		actionBar.setTitle("Room Results");
-		actionBar.setBackgroundColor(Color.parseColor("#ff4500"));
-		actionBar.setHomeAction(new IntentAction(this, new Intent(this,
-				WelcomeScreen.class), R.drawable.book_image_placeholder)); // go home
-
-		actionBar.addAction(new IntentAction(this, new Intent(this,
-				settings.class), R.drawable.book_image_placeholder)); // go to
-		// settings
-		// ----------------------
 
 		//log into UT direct with new client
 		DefaultHttpClient client = new DefaultHttpClient();

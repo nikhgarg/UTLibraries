@@ -2,6 +2,9 @@ package UT.library.apps;
 
 import java.util.Calendar;
 
+import com.markupartist.android.widget.ActionBar;
+import com.markupartist.android.widget.ActionBar.IntentAction;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -72,6 +75,16 @@ public class reserveStudyRoom extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.reserve_room_input3);
+
+		// code downloaded from
+		// https://github.com/johannilsson/android-actionbar/blob/master/README.md
+		ActionBar actionBar = (ActionBar) findViewById(R.id.actionbar);
+		actionBar.setHomeAction(new IntentAction(this, new Intent(this,WelcomeScreen.class), R.drawable.home)); // go	// home
+		actionBar.setTitle("Room Search");
+		//	actionBar.setHomeLogo(R.drawable.book_image_placeholder);
+		actionBar.addAction(new IntentAction(this, new Intent(this, settings.class), R.drawable.book_image_placeholder)); //go to settings
+		//----------------------
+
 		cal = Calendar.getInstance();
 		sMonth = cal.get(Calendar.MONTH); // getting current date and time for
 		// default pick

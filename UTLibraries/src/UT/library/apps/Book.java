@@ -28,7 +28,7 @@ public class Book implements Serializable {
 	public ArrayList<String> callNo = new ArrayList<String>();
 	public ArrayList<String> currentStatus = new ArrayList<String>();
 	public String detailURL="";
-	
+
 	public HashMap<String, String> bookDetails = new LinkedHashMap<String, String>();
 
 	public Book()
@@ -38,12 +38,12 @@ public class Book implements Serializable {
 
 	public void cleanUp()
 	{
-		String [] toPrint = {title, publication, 
-				//location, callNo, 
-				otherFields, 
+		String [] toPrint = {title, publication,
+				//location, callNo,
+				otherFields,
 				//currentStatus
 		};
-		String [] ignoreWords = {"Location", "Call No.", "Current Status", "Add to Clipboard", "Request"}; 
+		String [] ignoreWords = {"Location", "Call No.", "Current Status", "Add to Clipboard", "Request", "More..."};
 
 
 		for (int i=0;i<toPrint.length;i++)

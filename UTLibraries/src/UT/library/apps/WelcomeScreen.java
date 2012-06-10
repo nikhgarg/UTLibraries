@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -31,10 +32,9 @@ public class WelcomeScreen extends Activity {
 		ActionBar actionBar = (ActionBar) findViewById(R.id.actionbar);
 		// You can also assign the title programmatically by passing a
 		// CharSequence or resource id.
-		actionBar.setTitle("UTLibraries");
-		actionBar.setBackgroundColor(Color.parseColor("#ff4500"));
-		actionBar.setHomeLogo(R.drawable.book_image_placeholder);
-	//	actionBar.setHomeAction(new IntentAction(this,new Intent(this, WelcomeScreen.class) , )); //go home (already there)
+		actionBar.setTitle("\t\t\tUTLibraries");
+		actionBar.setGravity(Gravity.CENTER);
+		actionBar.setHomeLogo(R.drawable.home);
 		actionBar.addAction(new IntentAction(this, new Intent(this, settings.class), R.drawable.book_image_placeholder)); //go to settings
 		//----------------------
 

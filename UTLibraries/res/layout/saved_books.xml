@@ -5,14 +5,18 @@
 
     <com.markupartist.android.widget.ActionBar
         android:id="@+id/actionbar"
-        style="@style/ActionBar" />
+        style="@style/customactionbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+		/>
 
     <ListView
         android:id="@+id/savedBooksListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/actionbar" >
+        android:layout_below="@+id/actionbar"
+        android:cacheColorHint="@color/snow2" >
     </ListView>
 
 </RelativeLayout>

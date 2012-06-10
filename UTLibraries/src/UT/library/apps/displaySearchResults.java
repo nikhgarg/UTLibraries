@@ -312,7 +312,7 @@ public class displaySearchResults extends Activity {
 	private class nextPage implements Action {
 		@Override
 		public int getDrawable() {
-			return R.drawable.book_image_placeholder; // need to replace with
+			return R.drawable.next; // need to replace with
 			// next icon
 		}
 
@@ -342,7 +342,7 @@ public class displaySearchResults extends Activity {
 
 	private class prevPage implements Action {
 		public int getDrawable() {
-			return R.drawable.book_image_placeholder; // need to replace with
+			return R.drawable.previous; // need to replace with
 			// prev icon
 		}
 
@@ -500,13 +500,8 @@ public class displaySearchResults extends Activity {
 		// code downloaded from
 		// https://github.com/johannilsson/android-actionbar/blob/master/README.md
 		actionBar = (ActionBar) findViewById(R.id.actionbar);
-		// You can also assign the title programmatically by passing a
-		// CharSequence or resource id.
 		actionBar.setTitle("Search Results");
-		actionBar.setBackgroundColor(Color.parseColor("#ff4500"));
-		actionBar.setHomeAction(new IntentAction(this, new Intent(this,
-				WelcomeScreen.class), R.drawable.book_image_placeholder)); // go
-		// home
+		actionBar.setHomeAction(new IntentAction(this, new Intent(this,WelcomeScreen.class), R.drawable.home)); // go	// home
 
 		actionBar.addAction(new IntentAction(this, new Intent(this,
 				settings.class), R.drawable.book_image_placeholder)); // go to

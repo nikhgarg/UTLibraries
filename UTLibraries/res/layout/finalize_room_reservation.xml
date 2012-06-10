@@ -3,12 +3,12 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
-    <TextView
-        android:id="@+id/textView3"
+    <com.markupartist.android.widget.ActionBar
+        android:id="@+id/actionbar"
+        style="@style/customactionbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/finalizeroomreservation"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+		/>
 
     <TextView
         android:id="@+id/locationText"

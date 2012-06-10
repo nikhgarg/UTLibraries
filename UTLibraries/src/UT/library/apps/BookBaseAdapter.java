@@ -54,118 +54,129 @@ public class BookBaseAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		ViewHolder holder;
-		if (convertView == null) {
-			convertView = mInflater.inflate(R.layout.book_layout2, null);
-			holder = new ViewHolder();
-			holder.title = (TextView) convertView.findViewById(R.id.titleList);
-			// holder.image = (ImageView) convertView
-			// .findViewById(R.id.bookImageList);
-			// holder.location = (TextView) convertView
-			// .findViewById(R.id.locationList);
-			holder.publication = (TextView) convertView
-			.findViewById(R.id.publicationList);
-			// holder.callNo = (TextView) convertView
-			// .findViewById(R.id.callNoList);
-			// holder.status = (TextView) convertView
-			// .findViewById(R.id.statusList);
-			holder.other = (TextView) convertView
-			.findViewById(R.id.otherInfoList);
-			holder.saveBook = (Button) convertView
-			.findViewById(R.id.saveBookButton);
+		try{
+			ViewHolder holder;
+			if (convertView == null) {
+				convertView = mInflater.inflate(R.layout.book_layout2, null);
+				holder = new ViewHolder();
+				holder.title = (TextView) convertView.findViewById(R.id.titleList);
+				// holder.image = (ImageView) convertView
+				// .findViewById(R.id.bookImageList);
+				// holder.location = (TextView) convertView
+				// .findViewById(R.id.locationList);
+				holder.publication = (TextView) convertView
+				.findViewById(R.id.publicationList);
+				// holder.callNo = (TextView) convertView
+				// .findViewById(R.id.callNoList);
+				// holder.status = (TextView) convertView
+				// .findViewById(R.id.statusList);
+				holder.other = (TextView) convertView.findViewById(R.id.otherInfoList);
+				holder.saveBook = (Button) convertView.findViewById(R.id.saveBookButton);
 
-			holder.copiesTable = (TableLayout) convertView
-			.findViewById(R.id.copiesTable);
+				holder.copiesTable = (TableLayout) convertView.findViewById(R.id.copiesTable);
 
-			convertView.setTag(holder);
-			//convertView.setClickable(true);
+				convertView.setTag(holder);
+				// convertView.setClickable(true);
 
-		} else {
-			holder = (ViewHolder) convertView.getTag();
-		}
-
-		final Book b = bookArrayList.get(position);
-		b.cleanUp();
-
-		// ImageDownloader imgD = new ImageDownloader();
-		// imgD.download(b.imageURL, holder.image);
-
-		holder.title.setText(b.numberinorder + ". " + b.title);
-		// holder.location.setText(b.location);
-		holder.publication.setText(b.publication);
-		// holder.callNo.setText(b.callNo);
-		// holder.status.setText(b.currentStatus);
-		holder.other.setText(b.otherFields);
-
-		int min = (int) Math.min(
-				Math.min(b.location.size(), b.currentStatus.size()),
-				b.callNo.size());
-
-		holder.copiesTable.removeAllViews();
-//		holder.copiesTable.setStretchAllColumns(true);
-//		holder.copiesTable.setShrinkAllColumns(true);
-		holder.copiesTable.setGravity(Gravity.CENTER);
-
-		for (int i = 0; i < min; i++) {
-
-			TableRow row = (TableRow) mInflater.inflate(
-					R.layout.single_copy_info_row, null);
-			((TextView) row.findViewById(R.id.location)).setText(b.location
-					.get(i));
-			((TextView) row.findViewById(R.id.callNo)).setText(b.callNo.get(i));
-			((TextView) row.findViewById(R.id.status)).setText(b.currentStatus
-					.get(i));
-
-			holder.copiesTable.addView(row);
-		}
-		holder.saveBook.setFocusable(false);  //needed to make listview clickable
-		holder.saveBook.setOnClickListener(new OnClickListener() {
-			@SuppressWarnings("unchecked")
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				try{
-					String FILENAME = "Saved_Books";
-					boolean first = true;
-
-					try{
-						FileInputStream fileIn = context.openFileInput(FILENAME);
-						ObjectInputStream in = new ObjectInputStream(fileIn);
-						Object nextObject = null;
-						//					if (in.available()>0)
-						nextObject = in.readObject();
-						savedBooks.clear();
-						//instead of using savedBooks,  just read from file everytime
-						if (nextObject!=null&&nextObject instanceof ArrayList<?>){
-							Log.i("BookBaseAdapter", "class of nextObject: " + nextObject.getClass().toString());
-							savedBooks = (ArrayList<Book>)nextObject;
-							Log.i("BookBaseAdapter", savedBooks.toString());
-						}
-						in.close();
-						fileIn.close();
-					}
-					catch(java.io.FileNotFoundException e)
-					{
-						//do nothing. just make new file - do not have  read from old
-					}
-					savedBooks.add(b);
-					FileOutputStream fos = null;
-					ObjectOutputStream oos = null;
-					fos = context.openFileOutput(FILENAME, Context.MODE_PRIVATE); 	//change this back to append
-					oos = new ObjectOutputStream(fos);
-					oos.writeObject(savedBooks);
-					oos.close();
-					fos.close();
-
-				}
-				catch(Exception e)
-				{
-					Log.e("BookBaseAdapter", "exception in onClick", e);
-				}
+			} else {
+				holder = (ViewHolder) convertView.getTag();
 			}
-		});
 
-		return convertView;
+			final Book b = bookArrayList.get(position);
+			b.cleanUp();
+
+			// ImageDownloader imgD = new ImageDownloader();
+			// imgD.download(b.imageURL, holder.image);
+
+			holder.title.setText(b.numberinorder + ". " + b.title);
+			// holder.location.setText(b.location);
+			holder.publication.setText(b.publication);
+			// holder.callNo.setText(b.callNo);
+			// holder.status.setText(b.currentStatus);
+			holder.other.setText(b.otherFields);
+
+			int min = (int) Math.min(
+					Math.min(b.location.size(), b.currentStatus.size()),
+					b.callNo.size());
+
+			holder.copiesTable.removeAllViews();
+			// holder.copiesTable.setStretchAllColumns(true);
+			// holder.copiesTable.setShrinkAllColumns(true);
+			holder.copiesTable.setGravity(Gravity.CENTER);
+
+			for (int i = 0; i < min; i++) {
+
+				TableRow row = (TableRow) mInflater.inflate(
+						R.layout.single_copy_info_row, null);
+				((TextView) row.findViewById(R.id.location)).setText(b.location
+						.get(i));
+				((TextView) row.findViewById(R.id.callNo)).setText(b.callNo.get(i));
+				((TextView) row.findViewById(R.id.status)).setText(b.currentStatus
+						.get(i));
+
+				holder.copiesTable.addView(row);
+			}
+			holder.saveBook.setFocusable(false); // needed to make listview
+			// clickable
+			holder.saveBook.setOnClickListener(new OnClickListener() {
+				@SuppressWarnings("unchecked")
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					try {
+						String FILENAME = "Saved_Books";
+						boolean first = true;
+
+						try {
+							FileInputStream fileIn = context
+							.openFileInput(FILENAME);
+							ObjectInputStream in = new ObjectInputStream(fileIn);
+							Object nextObject = null;
+							// if (in.available()>0)
+							nextObject = in.readObject();
+							savedBooks.clear();
+							// instead of using savedBooks, just read from file
+							// everytime
+							if (nextObject != null
+									&& nextObject instanceof ArrayList<?>) {
+								Log.i("BookBaseAdapter", "class of nextObject: "
+										+ nextObject.getClass().toString());
+								savedBooks = (ArrayList<Book>) nextObject;
+								Log.i("BookBaseAdapter", savedBooks.toString());
+							}
+							in.close();
+							fileIn.close();
+						} catch (java.io.FileNotFoundException e) {
+							// do nothing. just make new file - do not have read
+							// from old
+						}
+						savedBooks.add(b);
+						FileOutputStream fos = null;
+						ObjectOutputStream oos = null;
+						fos = context
+						.openFileOutput(FILENAME, Context.MODE_PRIVATE); // change
+						// this
+						// back
+						// to
+						// append
+						oos = new ObjectOutputStream(fos);
+						oos.writeObject(savedBooks);
+						oos.close();
+						fos.close();
+
+					} catch (Exception e) {
+						Log.e("BookBaseAdapter", "exception in onClick", e);
+					}
+				}
+			});
+
+			return convertView;
+		}
+		catch(Exception e)
+		{
+			Log.e("BookBaseAdapter", "inside getView", e);
+			return null;
+		}
 	}
 
 	static class ViewHolder {

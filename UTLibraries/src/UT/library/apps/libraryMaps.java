@@ -1,18 +1,25 @@
 package UT.library.apps;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.markupartist.android.widget.ActionBar;
+import com.markupartist.android.widget.ActionBar.Action;
+import com.markupartist.android.widget.ActionBar.IntentAction;
+
 public class libraryMaps extends Activity {
+
+	String []locations;
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -31,8 +38,17 @@ public class libraryMaps extends Activity {
 				"Life Science Library Location Guide",
 				"Kuehne Physics Mathematics Astronomy Library (PMA) Map",
 				"Kuehne Physics Mathematics Astronomy Library (PMA) Locaton Guide" };
-
+		this.locations = locations;
 		setContentView(R.layout.main2);
+
+		// code downloaded from
+		// https://github.com/johannilsson/android-actionbar/blob/master/README.md
+		ActionBar actionBar = (ActionBar) findViewById(R.id.actionbar);
+		actionBar.setHomeAction(new IntentAction(this, new Intent(this,WelcomeScreen.class), R.drawable.home)); // go	// home
+		actionBar.setTitle("Library Maps");
+		//	actionBar.setHomeLogo(R.drawable.book_image_placeholder);
+		actionBar.addAction(new IntentAction(this, new Intent(this, settings.class), R.drawable.book_image_placeholder)); //go to settings
+		//----------------------
 
 		ListView listview = (ListView) findViewById(R.id.mainPageListView);
 		listview.setAdapter(new ArrayAdapter<String>(this,
@@ -57,7 +73,7 @@ public class libraryMaps extends Activity {
 					R.drawable.pcl_06 };
 			final String[] title = { "1st Floor", "2nd Floor", "3rd Floor",
 					"4th Floor", "5th Floor", "6th Floor" };
-			showImages(images, title);
+			showImages(images, title, position);
 			break;
 		case 1:
 			final int[] images1 = { R.drawable.pcl_book1, R.drawable.pcl_book2,
@@ -67,138 +83,180 @@ public class libraryMaps extends Activity {
 			final String[] title1 = { "Call Nos: A-GV", "Call Nos: H-HX",
 					"Call Nos: J-PK", "Call Nos: PL-ZA", "Dewey Decimal #s",
 					"Oversize Materials", "Special Materials" };
-			showImages(images1, title1);
+			showImages(images1, title1, position);
 			break;
 		case 2:
 			final int[] images2 = { R.drawable.apl_0 };
 			final String[] title2 = { "Archit. Planning Lib. Map" };
-			showImages(images2, title2);
+			showImages(images2, title2, position);
 			break;
 		case 3:
 			final int[] images3 = { R.drawable.blac_01, R.drawable.blac_02,
 					R.drawable.blac_03, R.drawable.blac_04, };
 			final String[] title3 = { "1st Floor", "2nd Floor", "3rd Floor",
 					"4th Floor" };
-			showImages(images3, title3);
+			showImages(images3, title3, position);
 			break;
 		case 4:
 			final int[] images4 = { R.drawable.blac_loc1, R.drawable.blac_loc2 };
 			final String[] title4 = { "Library of Congress", "Other" };
-			showImages(images4, title4);
+			showImages(images4, title4, position);
 			break;
 		case 5:
 			final int[] images5 = { R.drawable.chemistry_01 };
 			final String[] title5 = { "1st Floor" };
-			showImages(images5, title5);
+			showImages(images5, title5, position);
 			break;
 		case 6:
 			final int[] images6 = { R.drawable.chemistry_loc1 };
 			final String[] title6 = { "Chem. Loc. Guide" };
-			showImages(images6, title6);
+			showImages(images6, title6, position);
 			break;
 		case 7:
 			final int[] images7 = { R.drawable.classics_01 };
 			final String[] title7 = { "1st Floor" };
-			showImages(images7, title7);
+			showImages(images7, title7, position);
 			break;
 		case 8:
 			final int[] images8 = { R.drawable.classics_loc1,
 					R.drawable.classics_loc2 };
 			final String[] title8 = { "Locations Guide", "Locations Guide Cont" };
-			showImages(images8, title8);
+			showImages(images8, title8, position);
 			break;
 		case 9:
 			final int[] images9 = { R.drawable.engineering_01,
 					R.drawable.engineering_02 };
 			final String[] title9 = { "1st Floor", "Mezzanine Level" };
-			showImages(images9, title9);
+			showImages(images9, title9, position);
 			break;
 		case 10:
 			final int[] images10 = { R.drawable.engineering_loc1 };
 			final String[] title10 = { "Locations Guide" };
-			showImages(images10, title10);
+			showImages(images10, title10, position);
 			break;
 		case 11:
 			final int[] images11 = { R.drawable.finearts_03,
 					R.drawable.finearts_04, R.drawable.finearts_05 };
 			final String[] title11 = { "3rd Floor", "4th Floor", "5th Floor" };
-			showImages(images11, title11);
+			showImages(images11, title11, position);
 			break;
 		case 12:
 			final int[] images12 = { R.drawable.finearts_loc03,
 					R.drawable.finearts_loc04, R.drawable.finearts_loc05 };
 			final String[] title12 = { "3rd Floor Guide", "4th Floor Guide",
 					"5th Floor Guide" };
-			showImages(images12, title12);
+			showImages(images12, title12, position);
 			break;
 		case 13:
 			final int[] images13 = { R.drawable.geology };
 			final String[] title13 = { "Geology 1st Floor Guide" };
-			showImages(images13, title13);
+			showImages(images13, title13, position);
 			break;
 
 		case 14:
 			final int[] images16 = { R.drawable.finearts_03,
 					R.drawable.finearts_04, R.drawable.finearts_05 };
 			final String[] title16 = { "3rd Floor", "4th Floor", "5th Floor" };
-			showImages(images16, title16);
+			showImages(images16, title16, position);
 			break;
 		case 15:
 			final int[] images17 = { R.drawable.finearts_loc03,
 					R.drawable.finearts_loc04, R.drawable.finearts_loc05 };
 			final String[] title17 = { "3rd Floor Guide", "4th Floor Guide",
 					"5th Floor Guide" };
-			showImages(images17, title17);
+			showImages(images17, title17, position);
 			break;
 		case 16:
 			final int[] images14 = { R.drawable.pma_01, R.drawable.pma_02 };
 			final String[] title14 = { "Main Level", "Upper Level" };
-			showImages(images14, title14);
+			showImages(images14, title14, position);
 			break;
 		case 17:
 			final int[] images15 = { R.drawable.pma_loc };
 			final String[] title15 = { "Stacks Guide" };
-			showImages(images15, title15);
+			showImages(images15, title15, position);
 			break;
 
 		}
 	}
 
-	public void showImages(final int[] images, final String[] title) {
+	public void showImages(final int[] images, final String[] title, int position) {
+		try{
 		final int[] pos = new int[1]; // need array because it is a mutable
 		// final object. int and Integer are
 		// immutable.
 		setContentView(R.layout.librarymap);
+
 		final TextView textview = (TextView) findViewById(R.id.libraryMapHeader);
 		final ImageView imageview = (ImageView) findViewById(R.id.mapimage);
 		imageview.setImageResource(images[pos[0]]);
 		textview.setText(title[pos[0]]);
-		Button next = (Button) findViewById(R.id.nextMapButton);
-		Button prev = (Button) findViewById(R.id.prevMapButton);
+//		Button next = (Button) findViewById(R.id.nextMapButton);
+//		Button prev = (Button) findViewById(R.id.prevMapButton);
 
-		next.setOnClickListener(new OnClickListener() {
-
+		// code downloaded from
+		// https://github.com/johannilsson/android-actionbar/blob/master/README.md
+		ActionBar actionBar = (ActionBar) findViewById(R.id.actionbar);
+		actionBar.setHomeAction(new IntentAction(this, new Intent(this,WelcomeScreen.class), R.drawable.home)); // go	// home
+		actionBar.setTitle(locations[position]);
+		actionBar.addAction(new IntentAction(this, new Intent(this, settings.class), R.drawable.book_image_placeholder)); //go to settings
+		actionBar.addAction(new Action(){
 			@Override
-			public void onClick(View v) {
+			public int getDrawable() {
+				return R.drawable.previous;
+			}
+			@Override
+			public void performAction(View view) {
+				if (pos[0] > 0)
+				pos[0]--;
+			imageview.setImageResource(images[pos[0]]);
+			textview.setText(title[pos[0]]);
+			}
+		});
+		actionBar.addAction(new Action(){
+			@Override
+			public int getDrawable() {
+				return R.drawable.next;
+			}
+			@Override
+			public void performAction(View view) {
 				if (pos[0] < images.length - 1)
 					pos[0]++;
 				imageview.setImageResource(images[pos[0]]);
 				textview.setText(title[pos[0]]);
 			}
 		});
+		//----------------------
 
-		prev.setOnClickListener(new OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				if (pos[0] > 0)
-					pos[0]--;
-				imageview.setImageResource(images[pos[0]]);
-				textview.setText(title[pos[0]]);
-			}
-
-		});
+//
+//		next.setOnClickListener(new OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				if (pos[0] < images.length - 1)
+//					pos[0]++;
+//				imageview.setImageResource(images[pos[0]]);
+//				textview.setText(title[pos[0]]);
+//			}
+//		});
+//
+//		prev.setOnClickListener(new OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				if (pos[0] > 0)
+//					pos[0]--;
+//				imageview.setImageResource(images[pos[0]]);
+//				textview.setText(title[pos[0]]);
+//			}
+//
+//		});
 
 	}
-
+		catch(Exception e)
+		{
+			Log.e("libraryMaps", "exception in showImages",e);
+		}
+	}
 }
