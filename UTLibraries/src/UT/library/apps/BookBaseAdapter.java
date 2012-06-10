@@ -85,6 +85,7 @@ public class BookBaseAdapter extends BaseAdapter {
 		}
 
 		final Book b = bookArrayList.get(position);
+		b.cleanUp();
 
 		// ImageDownloader imgD = new ImageDownloader();
 		// imgD.download(b.imageURL, holder.image);
@@ -101,8 +102,8 @@ public class BookBaseAdapter extends BaseAdapter {
 				b.callNo.size());
 
 		holder.copiesTable.removeAllViews();
-		holder.copiesTable.setStretchAllColumns(true);
-		holder.copiesTable.setShrinkAllColumns(true);
+//		holder.copiesTable.setStretchAllColumns(true);
+//		holder.copiesTable.setShrinkAllColumns(true);
 		holder.copiesTable.setGravity(Gravity.CENTER);
 
 		for (int i = 0; i < min; i++) {

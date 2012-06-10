@@ -1,29 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableRow xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/singleCopyInfoRow"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content" >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:baselineAligned="false" >
 
     <TextView
         android:id="@+id/location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_column="0"
-        android:gravity = "center"
-        android:text="Location"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/longstringtest"
+        android:textAppearance="?android:attr/textAppearanceSmall"
         android:textSize="12sp"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:maxWidth="160dp" />
 
     <TextView
         android:id="@+id/callNo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_column="1"
-        android:gravity = "center"
+        android:layout_weight="1"
+        android:gravity="center"
         android:text="call No"
-                android:textSize="12sp"
-
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textSize="12sp"
+        android:maxWidth="120dp" />
 
     <TextView
         android:id="@+id/status"
@@ -31,10 +35,11 @@
         android:layout_height="wrap_content"
         android:layout_column="2"
         android:layout_gravity="right"
-        android:gravity = "center"
+        android:layout_weight="1"
+        android:gravity="center"
         android:text="status"
-                        android:textSize="12sp"
-
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textSize="12sp"
+        android:maxWidth="120dp" />
 
 </TableRow>

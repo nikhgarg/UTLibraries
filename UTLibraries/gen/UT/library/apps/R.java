@@ -258,6 +258,7 @@ containing a value of this type.
         public static final int loadmoreresultsbutton=0x7f060012;
         public static final int location=0x7f06003b;
         public static final int location1=0x7f06003d;
+        public static final int longstringtest=0x7f06003e;
         public static final int next=0x7f060014;
         public static final int numberofpeople=0x7f060025;
         public static final int password=0x7f06001b;
