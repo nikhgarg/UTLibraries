@@ -6,7 +6,10 @@ import java.util.ArrayList;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -16,6 +19,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -28,28 +32,32 @@ import com.markupartist.android.widget.ActionBar.IntentAction;
 
 public class displayRoomResults extends Activity {
 
-
+	Context context;
 	ArrayList<ArrayList<Room>> allRooms;
-
+	ProgressDialog dialog;
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Bundle bundle = getIntent().getExtras();
+		dialog = ProgressDialog.show(this, "", "Loading. Please wait...", true);
 		setContentView(R.layout.room_results2);
+		context = this;
+		LayoutInflater mInflater = LayoutInflater.from(this);
+
+		View view = mInflater.inflate(R.layout.room_results2,null);
+
+
+
+		LinearLayout linLayout = (LinearLayout) view.findViewById(R.id.roomsLinearLayout);
 
 		// code downloaded from
 		// https://github.com/johannilsson/android-actionbar/blob/master/README.md
-		ActionBar actionBar = (ActionBar) findViewById(R.id.actionbar);
+		ActionBar actionBar = (ActionBar) linLayout.findViewById(R.id.actionbar);
 		actionBar.setHomeAction(new IntentAction(this, new Intent(this,WelcomeScreen.class), R.drawable.home)); // go	// home
 		actionBar.setTitle("Room Results");
 		actionBar.addAction(new IntentAction(this, new Intent(this, settings.class), R.drawable.gear)); //go to settings
 		//----------------------
-
-		LayoutInflater mInflater = LayoutInflater.from(this);
-
-		View view = mInflater.inflate(R.layout.room_results2,null);
-		LinearLayout linLayout = (LinearLayout) view.findViewById(R.id.roomsLinearLayout);
 
 		//log into UT direct with new client
 		DefaultHttpClient client = new DefaultHttpClient();
@@ -63,8 +71,25 @@ public class displayRoomResults extends Activity {
 		//parse rooms page
 		allRooms = parseRoomResults.extractRooms(html);
 
-		//TODO:	display prettily. either improve listview or implement using tables
-		displayAllRooms(allRooms, linLayout, mInflater);
+		if (allRooms.size()==0)
+		{
+			//		View view = findViewById(R.id.searchResultsLinearLayout);
+			final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setMessage("Sorry, there are no rooms that match the given criteria. Please modify search parameters and try again.").setCancelable(true)
+			.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int id) {
+					Intent intent = new Intent(context, reserveStudyRoom.class);
+					startActivity(intent);
+					dialog.dismiss();
+				}
+			}
+			);
+			dialog.dismiss();
+			final AlertDialog alert = builder.create();
+			alert.show();
+		}
+		dialog.dismiss();
+		displayAllRooms(allRooms, linLayout, mInflater,view);
 		//		RoomBaseAdapter roomAdapter = new RoomBaseAdapter(this,allRooms);
 		//		ListView listview = (ListView) findViewById(R.id.roomResultsListView);
 		//		listview.setAdapter(roomAdapter);
@@ -74,7 +99,7 @@ public class displayRoomResults extends Activity {
 
 	}
 
-	public void displayAllRooms (ArrayList<ArrayList<Room>> rooms, LinearLayout linLayout, LayoutInflater mInflater)
+	public void displayAllRooms (ArrayList<ArrayList<Room>> rooms, LinearLayout linLayout, LayoutInflater mInflater, View view)
 	{
 		Context context = this;
 
@@ -229,50 +254,50 @@ public class displayRoomResults extends Activity {
 			build.appendQueryParameter("day", day);
 			this.day = day;
 
-			 startHour = date[3];
+			startHour = date[3];
 
-			 startMinute = date[4];
+			startMinute = date[4];
 			//round startMinute to nearest 15 minutes
-//			startMinute = (int) (Math.round(startMinute/15.0))*15;
-//			if (startMinute==60){
-//				startMinute=0;
-//				startHour = (startHour+1)%24;
-////			}
-//			String startPm = "am";
-//			if (startHour>=12)
-//			{
-//				startPm = "pm";
-//				if (startHour>12)
-//					startHour-=12;
-//			}
-//			else if (startHour==0)
-//				startHour = 12;
+			//			startMinute = (int) (Math.round(startMinute/15.0))*15;
+			//			if (startMinute==60){
+			//				startMinute=0;
+			//				startHour = (startHour+1)%24;
+			////			}
+			//			String startPm = "am";
+			//			if (startHour>=12)
+			//			{
+			//				startPm = "pm";
+			//				if (startHour>12)
+			//					startHour-=12;
+			//			}
+			//			else if (startHour==0)
+			//				startHour = 12;
 
 			build.appendQueryParameter("startHour", ""+startHour);
 
 			build.appendQueryParameter("startMinute", ""+startMinute);
 			build.appendQueryParameter("isStartPM", pm[0]);
 
-			 endHour = date[5];
+			endHour = date[5];
 
 			//round endMinute to nearest 15 minutes
-			 endMinute = date[6];
-//			endMinute = (int) (Math.round(endMinute/15.0))*15;
-//			if(endMinute==60)
-//			{
-//				endMinute = 0;
-//				endHour = (endHour +1)%24;
-//			}
-//
-//			String endPm = "am";
-//			if (endHour>=12)
-//			{
-//				endPm = "pm";
-//				if (endHour>12)
-//					endHour-=12;
-//			}
-//			else if (endHour==0)
-//				endHour = 12;
+			endMinute = date[6];
+			//			endMinute = (int) (Math.round(endMinute/15.0))*15;
+			//			if(endMinute==60)
+			//			{
+			//				endMinute = 0;
+			//				endHour = (endHour +1)%24;
+			//			}
+			//
+			//			String endPm = "am";
+			//			if (endHour>=12)
+			//			{
+			//				endPm = "pm";
+			//				if (endHour>12)
+			//					endHour-=12;
+			//			}
+			//			else if (endHour==0)
+			//				endHour = 12;
 			build.appendQueryParameter("endHour", ""+endHour);
 			build.appendQueryParameter("endMinute", ""+endMinute);
 			build.appendQueryParameter("isEndPM", pm[1]);

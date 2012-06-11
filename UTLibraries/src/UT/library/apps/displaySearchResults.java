@@ -8,13 +8,15 @@ import java.util.ArrayList;
 import org.apache.http.client.methods.HttpGet;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,8 +65,6 @@ public class displaySearchResults extends Activity {
 						"searchscope",
 						getResources()
 						.getStringArray(R.array.searchscopeValues)[data.location]);
-			//TODO: rewrite with boolean arrays
-
 			if (!data.materialType[0]){
 
 				for (int i=1;i<data.materialType.length;i++)
@@ -216,6 +216,14 @@ public class displaySearchResults extends Activity {
 					allBooks.addAll(tempBooks);
 					catalogHTML = "";
 
+					if (allBooks.size()==0)
+					{
+						allResultsQed=true;
+						pageLoading = false;
+						handleZeroResults();
+						return;
+					}
+
 					in.close();
 					if (parseResults4.nextPageUrl != null) {
 						libraryURL = new URL(parseResults4.nextPageUrl);
@@ -225,19 +233,50 @@ public class displaySearchResults extends Activity {
 					Log.i("displaySearchResults", "next page URL:" + libraryURL);
 
 				} catch (Exception e) {
-					Toast toast = Toast
-					.makeText(
-							context,
-							"Could not load web data. Please check network connection and try again later.",
-							Toast.LENGTH_SHORT);
-					toast.show();
-					Log.i("displaySearchResults", "Exception in getURIdata:"
-							+ e.toString());
+					handler.post(new Runnable(){
+						@Override
+						public void run() {
+							Toast toast = Toast
+							.makeText(
+									context,
+									"Could not load web data. Please check network connection and try again later.",
+									Toast.LENGTH_SHORT);
+							toast.show();
+							// TODO Auto-generated method stub
+
+						}
+					});
+					Log.e("displaySearchResults", "Exception in getURIdata",e);
+					return;
 				}
 			}
 		}
 	}
 
+	public void handleZeroResults()
+	{
+
+		Looper.prepare();
+		handler.post(new Runnable() {
+			@Override
+			public void run() {
+				//		View view = findViewById(R.id.searchResultsLinearLayout);
+				final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+				builder.setMessage("Sorry, no results were found. Please modify search parameters and try again.").setCancelable(true)
+				.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						dialog.dismiss();
+						Intent intent = new Intent(context, searchInputScreen.class);
+						startActivity(intent);
+					}
+				}
+				);
+				final AlertDialog alert = builder.create();
+				dialog.cancel(); //loading dialog
+				alert.show();
+			}
+		});
+	}
 	ArrayList<Book> allBooks = new ArrayList<Book>();
 	int currentViewNumStart = 0; // start index of books currently displayed
 	int currentViewNumEnd = 0; // end index of books currently displayed
@@ -281,6 +320,7 @@ public class displaySearchResults extends Activity {
 				listViewData.clear();
 				for (int i = start; i < end; i++)
 					listViewData.add(allBooks.get(i));
+				Looper.prepare();
 				handler.post(new Runnable() {
 					@Override
 					public void run() {
@@ -292,6 +332,7 @@ public class displaySearchResults extends Activity {
 						// header.setText(String.format("%d-%d/%d",
 						// currentViewNumStart + 1, currentViewNumEnd,
 						// parseResults4.numResults));
+						Log.i("displaSearchResults", "displayResults: inside handler");
 						ListView listview = (ListView) findViewById(R.id.searchResultsListView5);
 						listview.setAdapter(new BookBaseAdapter(context,
 								listViewData));
@@ -521,6 +562,8 @@ public class displaySearchResults extends Activity {
 			URL libraryURL = new URL(httpget.getURI().toString());
 			// if (!pageLoading)
 			new Thread(new getURIdata(libraryURL)).start();
+
+
 
 			if (allResultsQed && !shownFirst) {
 				displayResults(0);

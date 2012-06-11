@@ -12,6 +12,9 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -26,7 +29,7 @@ public class renewBooks extends Activity {
 
 	DefaultHttpClient client;
 	ArrayList<cBook> cbooks;
-
+	ProgressDialog dialog;
 	public void displayCheckedOutBooks() {
 
 		// log into UT library account
@@ -43,6 +46,24 @@ public class renewBooks extends Activity {
 		cbooks = parseCheckedOut.parseCheckedOutBooks(html);
 		Log.i("renewBooks", "checked out books: " + cbooks.toString());
 
+		if (cbooks.size()==0)
+		{
+
+			//		View view = findViewById(R.id.searchResultsLinearLayout);
+			final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setMessage("You have no books checked out. What kind of student are you?").setCancelable(true)
+			.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int id) {
+					dialog.dismiss();
+				}
+			}
+			);
+			final AlertDialog alert = builder.create();
+			dialog.dismiss();
+			alert.show();
+
+		}
+		dialog.dismiss();
 		// actually display books (use listview);
 		ListView listview = (ListView) findViewById(R.id.checkedOutListView);
 		listview.setAdapter(new cBookBaseAdapter(this, cbooks));
@@ -96,6 +117,7 @@ public class renewBooks extends Activity {
 		super.onCreate(savedInstanceState);
 		// set Content view
 		setContentView(R.layout.renew_books);
+		dialog = ProgressDialog.show(this, "", "Loading. Please wait...", true);
 
 		// code downloaded from
 		// https://github.com/johannilsson/android-actionbar/blob/master/README.md
