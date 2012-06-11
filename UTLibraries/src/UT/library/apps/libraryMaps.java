@@ -46,8 +46,7 @@ public class libraryMaps extends Activity {
 		ActionBar actionBar = (ActionBar) findViewById(R.id.actionbar);
 		actionBar.setHomeAction(new IntentAction(this, new Intent(this,WelcomeScreen.class), R.drawable.home)); // go	// home
 		actionBar.setTitle("Library Maps");
-		//	actionBar.setHomeLogo(R.drawable.book_image_placeholder);
-		actionBar.addAction(new IntentAction(this, new Intent(this, settings.class), R.drawable.book_image_placeholder)); //go to settings
+		actionBar.addAction(new IntentAction(this, new Intent(this, settings.class), R.drawable.gear)); //go to settings
 		//----------------------
 
 		ListView listview = (ListView) findViewById(R.id.mainPageListView);
@@ -181,82 +180,18 @@ public class libraryMaps extends Activity {
 	}
 
 	public void showImages(final int[] images, final String[] title, int position) {
-		try{
-		final int[] pos = new int[1]; // need array because it is a mutable
-		// final object. int and Integer are
-		// immutable.
-		setContentView(R.layout.librarymap);
 
-		final TextView textview = (TextView) findViewById(R.id.libraryMapHeader);
-		final ImageView imageview = (ImageView) findViewById(R.id.mapimage);
-		imageview.setImageResource(images[pos[0]]);
-		textview.setText(title[pos[0]]);
-//		Button next = (Button) findViewById(R.id.nextMapButton);
-//		Button prev = (Button) findViewById(R.id.prevMapButton);
+		Bundle bundle = new Bundle();
+		bundle.putIntArray("images", images);
+		bundle.putStringArray("title",title);
+		bundle.putInt("position", position);
+		bundle.putStringArray("locations", locations);
 
-		// code downloaded from
-		// https://github.com/johannilsson/android-actionbar/blob/master/README.md
-		ActionBar actionBar = (ActionBar) findViewById(R.id.actionbar);
-		actionBar.setHomeAction(new IntentAction(this, new Intent(this,WelcomeScreen.class), R.drawable.home)); // go	// home
-		actionBar.setTitle(locations[position]);
-		actionBar.addAction(new IntentAction(this, new Intent(this, settings.class), R.drawable.book_image_placeholder)); //go to settings
-		actionBar.addAction(new Action(){
-			@Override
-			public int getDrawable() {
-				return R.drawable.previous;
-			}
-			@Override
-			public void performAction(View view) {
-				if (pos[0] > 0)
-				pos[0]--;
-			imageview.setImageResource(images[pos[0]]);
-			textview.setText(title[pos[0]]);
-			}
-		});
-		actionBar.addAction(new Action(){
-			@Override
-			public int getDrawable() {
-				return R.drawable.next;
-			}
-			@Override
-			public void performAction(View view) {
-				if (pos[0] < images.length - 1)
-					pos[0]++;
-				imageview.setImageResource(images[pos[0]]);
-				textview.setText(title[pos[0]]);
-			}
-		});
-		//----------------------
+		Intent intent = new Intent(this, libraryMapsShowImages.class);
+		intent.putExtras(bundle);
+		startActivity(intent);
 
 
-//
-//		next.setOnClickListener(new OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				if (pos[0] < images.length - 1)
-//					pos[0]++;
-//				imageview.setImageResource(images[pos[0]]);
-//				textview.setText(title[pos[0]]);
-//			}
-//		});
-//
-//		prev.setOnClickListener(new OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				if (pos[0] > 0)
-//					pos[0]--;
-//				imageview.setImageResource(images[pos[0]]);
-//				textview.setText(title[pos[0]]);
-//			}
-//
-//		});
 
-	}
-		catch(Exception e)
-		{
-			Log.e("libraryMaps", "exception in showImages",e);
-		}
 	}
 }

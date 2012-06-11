@@ -24,7 +24,7 @@ public class WelcomeScreen extends Activity {
 
 		// setContentView(R.layout.main);
 
-		String[] features = { "Search Catalog", "Library Hours", "Settings", "Reserve Study Room", "Checked Out Books", "Saved Books", "Library Maps" };
+		String[] features = { "Search Catalog", "Library Hours", "Reserve Study Room", "Checked Out Books", "Saved Books", "Library Maps" };
 
 		setContentView(R.layout.main2);
 
@@ -35,7 +35,7 @@ public class WelcomeScreen extends Activity {
 		actionBar.setTitle("\t\t\tUTLibraries");
 		actionBar.setGravity(Gravity.CENTER);
 		actionBar.setHomeLogo(R.drawable.home);
-		actionBar.addAction(new IntentAction(this, new Intent(this, settings.class), R.drawable.book_image_placeholder)); //go to settings
+		actionBar.addAction(new IntentAction(this, new Intent(this, settings.class), R.drawable.gear)); //go to settings
 		//----------------------
 
 		ListView listview = (ListView) findViewById(R.id.mainPageListView);
@@ -69,11 +69,11 @@ public class WelcomeScreen extends Activity {
 		switch (position) {
 		case 0:	intent = new Intent(this, searchInputScreen.class);	break;
 		case 1: intent = new Intent(this, showLibraryTimings.class);break;
-		case 2:	intent = new Intent(this, settings.class); break;
-		case 3: intent = new Intent(this,reserveStudyRoom.class); break;
-		case 4: intent = new Intent(this, renewBooks.class);break;
-		case 5: intent = new Intent(this, saveBooks.class);break;
-		case 6: intent = new Intent(this, libraryMaps.class); break;
+//		case 2:	intent = new Intent(this, settings.class); break;
+		case 2: intent = new Intent(this,reserveStudyRoom.class); break;
+		case 3: intent = new Intent(this, renewBooks.class);break;
+		case 4: intent = new Intent(this, saveBooks.class);break;
+		case 5: intent = new Intent(this, libraryMaps.class); break;
 
 		}
 		if(intent!=null)

@@ -162,7 +162,7 @@ public class saveBooks extends Activity {
 		actionBar.setTitle("Saved Books");
 		actionBar.setHomeAction(new IntentAction(this, new Intent(this,
 				WelcomeScreen.class), R.drawable.home)); // go	// home
-		actionBar.addAction(new IntentAction(this, new Intent(this, settings.class), R.drawable.book_image_placeholder)); //go to settings
+		actionBar.addAction(new IntentAction(this, new Intent(this, settings.class), R.drawable.gear)); //go to settings
 		//----------------------
 
 

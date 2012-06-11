@@ -81,8 +81,7 @@ public class reserveStudyRoom extends Activity {
 		ActionBar actionBar = (ActionBar) findViewById(R.id.actionbar);
 		actionBar.setHomeAction(new IntentAction(this, new Intent(this,WelcomeScreen.class), R.drawable.home)); // go	// home
 		actionBar.setTitle("Room Search");
-		//	actionBar.setHomeLogo(R.drawable.book_image_placeholder);
-		actionBar.addAction(new IntentAction(this, new Intent(this, settings.class), R.drawable.book_image_placeholder)); //go to settings
+		actionBar.addAction(new IntentAction(this, new Intent(this, settings.class), R.drawable.gear)); //go to settings
 		//----------------------
 
 		cal = Calendar.getInstance();
