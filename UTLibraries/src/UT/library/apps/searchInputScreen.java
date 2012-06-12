@@ -4,17 +4,18 @@ package UT.library.apps;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.markupartist.android.widget.ActionBar;
 import com.markupartist.android.widget.ActionBar.IntentAction;
@@ -22,6 +23,15 @@ import com.markupartist.android.widget.ActionBar.IntentAction;
 public class searchInputScreen extends Activity {
 
 	public void onGoButtonClicked(View v) {
+
+		if (!shared.connectedToInternet)
+		{
+			int duration = Toast.LENGTH_SHORT;
+			Toast toast = Toast.makeText(context, "This feature requires an internet connection. Please try again later.", duration);
+			toast.show();
+			return;
+		}
+
 		TextView ttest = new TextView(this);
 		SearchData fieldsData = new SearchData();
 
@@ -119,13 +129,19 @@ public class searchInputScreen extends Activity {
 		return null;
 	}
 
-
+	Context context;
 
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		context = this;
+		if (!shared.connectedToInternet)
+		{
+			int duration = Toast.LENGTH_LONG;
+			Toast toast = Toast.makeText(this, "This feature requires an internet connection. Please try again later.", duration);
+			toast.show();
+		}
 		Resources res = getResources();
 		materialType = new boolean [res.getStringArray(R.array.MaterialTypeTable).length];
 		languageType = new boolean [res.getStringArray(R.array.LanguageTable).length];

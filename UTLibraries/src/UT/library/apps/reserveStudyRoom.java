@@ -41,6 +41,9 @@ public class reserveStudyRoom extends Activity {
 
 	public void enterRoomSearch(View view)
 	{
+		if (!shared.checkLogInandInternetHeader(this))
+			return;
+
 		Spinner spinner = (Spinner) findViewById(R.id.numberPeopleSpinner);
 		numberOfPeople = spinner.getSelectedItemPosition();
 		spinner = (Spinner) findViewById(R.id.startHourSpinner);
@@ -75,6 +78,7 @@ public class reserveStudyRoom extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.reserve_room_input3);
+		shared.checkLogInandInternetHeader(this);
 
 		// code downloaded from
 		// https://github.com/johannilsson/android-actionbar/blob/master/README.md
@@ -102,15 +106,6 @@ public class reserveStudyRoom extends Activity {
 		showDialog(0);
 	}
 
-	public void launchStartTimeDialog(View view) {
-
-//		showDialog(1);
-	}
-
-	public void launchEndTimeDialog(View view) {
-//		showDialog(2);
-	}
-
 	public void launchBuildingDialog(View view) {
 		showDialog(3);
 	}
@@ -128,20 +123,7 @@ public class reserveStudyRoom extends Activity {
 			sDay = dayOfMonth;
 		}
 	};
-//	private TimePickerDialog.OnTimeSetListener sStartTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
-//
-//		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-//			sStartHour = hourOfDay;
-//			sStartMinute = minute;
-//		}
-//	};
-//	private TimePickerDialog.OnTimeSetListener sEndTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
-//
-//		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-//			sEndHour = hourOfDay;
-//			sEndMinute = minute;
-//		}
-//	};
+
 	private DialogInterface.OnMultiChoiceClickListener sBuildingSetListener = new DialogInterface.OnMultiChoiceClickListener() {
 		public void onClick(DialogInterface dialog, int item, boolean isChecked) {
 			buildingChoice[item] = isChecked;
@@ -159,12 +141,7 @@ public class reserveStudyRoom extends Activity {
 		case 0:
 			return new DatePickerDialog(this, sDateSetListener, sYear, sMonth,
 					sDay);
-//		case 1:
-//			return new TimePickerDialog(this, sStartTimeSetListener,
-//					sStartHour, sStartMinute, false);
-//		case 2:
-//			return new TimePickerDialog(this, sEndTimeSetListener, sEndHour,
-//					sEndMinute, false);
+
 		case 3:
 			AlertDialog.Builder ald = new AlertDialog.Builder(this);
 			ald.setTitle("Please Enter your Room Choice");

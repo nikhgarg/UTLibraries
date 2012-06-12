@@ -9,10 +9,11 @@ import net.htmlparser.jericho.Source;
 
 
 public class parseCheckedOut {
-	
+
 	public static ArrayList<cBook> parseCheckedOutBooks(String html)
 	{
 		ArrayList<cBook> books = new ArrayList<cBook>();
+		if (html==null)return null;
 		Source page = new Source(html);
 		List<Element> elems = page.getAllElementsByClass("patFuncEntry");
 		for (Element elem: elems)

@@ -29,7 +29,13 @@ public class showLibraryTimings extends Activity {
 		}
 		@Override
 		public void performAction(View view) {
-
+			if (!shared.connectedToInternet)
+			{
+				int duration = Toast.LENGTH_LONG;
+				Toast toast = Toast.makeText(context, "This feature requires an internet connection. Please try again later.", duration);
+				toast.show();
+				return;
+			}
 			try {
 				dialog = ProgressDialog.show(context, "",
 						"Loading. Please wait...", true);
@@ -47,8 +53,7 @@ public class showLibraryTimings extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		dialog = ProgressDialog.show(this, "",
-				"Loading. Please wait...", true);
+
 
 		setContentView(R.layout.library_hours);
 		context = this;
@@ -60,38 +65,47 @@ public class showLibraryTimings extends Activity {
 		actionBar.addAction(new IntentAction(this, new Intent(this, settings.class), R.drawable.gear)); //go to settings
 		actionBar.addAction(new RefreshAction());
 		//----------------------
+		if (!shared.connectedToInternet)
+		{
+			int duration = Toast.LENGTH_LONG;
+			Toast toast = Toast.makeText(this, "This feature requires an internet connection. Please try again later.", duration);
+			toast.show();
+		}
+		else{
+			dialog = ProgressDialog.show(this, "",
+					"Loading. Please wait...", true);
+			try {
+				webview = (WebView) findViewById(R.id.libraryHours);
 
-		try {
-			webview = (WebView) findViewById(R.id.libraryHours);
+				// --------------------------------copied code 			// copied WebView code from http://developer.android.com/reference/android/webkit/WebView.html
 
-			// --------------------------------copied code 			// copied WebView code from http://developer.android.com/reference/android/webkit/WebView.html
+				final Activity activity = this;
+				webview.setWebViewClient(new WebViewClient() {
+					public void onReceivedError(WebView view, int errorCode,
+							String description, String failingUrl) {
+						dialog.cancel();
+						Toast.makeText(
+								activity,
+								"Page Could Not Load. Please Try Again Later. "
+								+ description, Toast.LENGTH_SHORT).show();
+					}
+				});
+				// --------------------------------------end Copied
 
-			final Activity activity = this;
-			webview.setWebViewClient(new WebViewClient() {
-				public void onReceivedError(WebView view, int errorCode,
-						String description, String failingUrl) {
-					dialog.cancel();
-					Toast.makeText(
-							activity,
-							"Page Could Not Load. Please Try Again Later. "
-							+ description, Toast.LENGTH_SHORT).show();
+				String url = "http://www.lib.utexas.edu/about/hours/";
+
+				if (savedInstanceState != null){
+					webview.restoreState(savedInstanceState);
+					Log.i("showLibraryTimings", "restored saved state");
 				}
-			});
-			// --------------------------------------end Copied
+				else
+					webview.loadUrl(url);
+				dialog.cancel();
 
-			String url = "http://www.lib.utexas.edu/about/hours/";
+			} catch (Exception e) {
+				Log.i("showLibraryTimings", "exception in onCreate: " + e.toString());
 
-			if (savedInstanceState != null){
-				webview.restoreState(savedInstanceState);
-				Log.i("showLibraryTimings", "restored saved state");
 			}
-			else
-				webview.loadUrl(url);
-			dialog.cancel();
-
-		} catch (Exception e) {
-			Log.i("showLibraryTimings", "exception in onCreate: " + e.toString());
-
 		}
 	}
 

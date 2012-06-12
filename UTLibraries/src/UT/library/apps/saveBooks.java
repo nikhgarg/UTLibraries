@@ -204,6 +204,7 @@ public class saveBooks extends Activity {
 		context = this;
 		dialog = ProgressDialog.show(context, "",
 				"Loading. Please wait...", true);
+
 		setContentView(R.layout.saved_books);
 		handler = new Handler();
 		activityRunning = true;

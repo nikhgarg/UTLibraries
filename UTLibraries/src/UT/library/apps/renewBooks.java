@@ -40,8 +40,6 @@ public class renewBooks extends Activity {
 		public void run() {
 			// log into UT library account
 			client = new DefaultHttpClient();
-			shared.logIntoCatalog(context, client);
-
 			// get HTML for page
 			String html = shared.retrieveProtectedWebPage(context,client,
 			"https://catalog.lib.utexas.edu/patroninfo~S29/1160546/items");
@@ -125,7 +123,6 @@ public class renewBooks extends Activity {
 		setContentView(R.layout.renew_books);
 		context = this;
 		handler = new Handler();
-		dialog = ProgressDialog.show(context, "", "Loading. Please wait...", true);
 
 		// code downloaded from
 		// https://github.com/johannilsson/android-actionbar/blob/master/README.md
@@ -137,8 +134,10 @@ public class renewBooks extends Activity {
 				settings.class), R.drawable.gear)); // go to	// settings
 
 		// ----------------------
-
-		(new Thread(new displayCheckedOutBooksThread())).start();
+		if (shared.checkLogInandInternetHeader(this)){
+			dialog = ProgressDialog.show(context, "", "Loading. Please wait...", true);
+			(new Thread(new displayCheckedOutBooksThread())).start();
+		}
 	}
 
 }

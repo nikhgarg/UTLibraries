@@ -1,31 +1,32 @@
 package UT.library.apps;
 
-import com.markupartist.android.widget.ActionBar;
-import com.markupartist.android.widget.ActionBar.IntentAction;
-
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
+
+import com.markupartist.android.widget.ActionBar;
+import com.markupartist.android.widget.ActionBar.IntentAction;
 
 public class settings extends Activity {
 
 
 	public static SharedPreferences loginPreferences;
 	public static SharedPreferences.Editor editor;
+	Context context;
 
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.settings);
-
+		context = this;
 		//code downloaded from https://github.com/johannilsson/android-actionbar/blob/master/README.md
 		ActionBar actionBar = (ActionBar) findViewById(R.id.actionbar);
 		actionBar.setTitle("Settings");
@@ -46,22 +47,24 @@ public class settings extends Activity {
 		input.setText(savedUsername);
 		alt_bld.setView(input);
 		alt_bld.setMessage("Please Enter Your UTEID")
-				.setCancelable(true)
-				.setPositiveButton("OK",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int id) {
-							//	storeUsername();
-								String username = input.getText().toString();
-								editor.putString("uteid", username);
-								editor.commit();
-							}
-						})
-				.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int id) {
-						// Action for ‘NO’ Button
-						dialog.cancel();
-					}
-				});
+		.setCancelable(true)
+		.setPositiveButton("OK",
+				new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				//	storeUsername();
+				String username = input.getText().toString();
+				editor.putString("uteid", username);
+				editor.commit();
+				if (shared.connectedToInternet)
+					shared.checkLogInCredentials(context, true);
+			}
+		})
+		.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				// Action for ‘NO’ Button
+				dialog.cancel();
+			}
+		});
 
 		AlertDialog alert = alt_bld.create();
 		// Title for AlertDialog
@@ -80,22 +83,24 @@ public class settings extends Activity {
 		input.setText(savedPassword);
 		alt_bld.setView(input);
 		alt_bld.setMessage("Please Enter Your Password")
-				.setCancelable(true)
-				.setPositiveButton("OK",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int id) {
-							//	storeUsername();
-								String password = input.getText().toString();
-								editor.putString("password", password);
-								editor.commit();
-							}
-						})
-				.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int id) {
-						// Action for ‘NO’ Button
-						dialog.cancel();
-					}
-				});
+		.setCancelable(true)
+		.setPositiveButton("OK",
+				new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				//	storeUsername();
+				String password = input.getText().toString();
+				editor.putString("password", password);
+				editor.commit();
+				if (shared.connectedToInternet)
+					shared.checkLogInCredentials(context, true);
+			}
+		})
+		.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				// Action for ‘NO’ Button
+				dialog.cancel();
+			}
+		});
 
 		AlertDialog alert = alt_bld.create();
 		// Title for AlertDialog
