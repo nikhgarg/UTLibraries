@@ -223,6 +223,10 @@ public class displaySearchResults extends Activity {
 						handleZeroResults();
 						return;
 					}
+					else if (!shownFirst) {
+						displayResults(0);
+						shownFirst = true;
+					}
 
 					in.close();
 					if (parseResults4.nextPageUrl != null) {
@@ -325,7 +329,7 @@ public class displaySearchResults extends Activity {
 					@Override
 					public void run() {
 						dialog.cancel();
-						actionBar.setTitle(String.format("%d-%d/%d",
+						actionBar.setTitle("Search Results: "+ String.format("%d-%d/%d",
 								currentViewNumStart + 1, currentViewNumEnd,
 								parseResults4.numResults));
 

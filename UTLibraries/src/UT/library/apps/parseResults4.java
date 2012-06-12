@@ -95,7 +95,7 @@ public class parseResults4 {
 	}
 
 	public static ArrayList<Book> extractBooks(String HTML) {
-//		Source page = new Source(HTML);
+		//		Source page = new Source(HTML);
 		ArrayList<Book> allBooks = new ArrayList<Book>();
 		int briefIndex = HTML.indexOf("\"briefcitDetail\"");
 		String HTMLtemp = HTML;
@@ -130,7 +130,7 @@ public class parseResults4 {
 			//	List<Element> allElements = page.getAllElements();
 
 			Element a = page.getFirstElementByClass("browseSearchtool");
-			if (numResults<0)	
+			if (numResults<0)
 				for (Element aa : a.getChildElements()) {
 					if (aa.getName().equals("div")
 							&& aa.getAttributeValue("class") != null
@@ -146,15 +146,15 @@ public class parseResults4 {
 				}
 
 			a = page.getFirstElementByClass("browsePager");
-
-			for (Element aa : a.getChildElements()) {
-				for (Element aaa : aa.getChildElements()) {
-					if (aaa.getContent().getTextExtractor().toString()
-							.equals("Next") && aaa.getAttributeValue("href")!=null) {
-						nextPageUrl = "http://catalog.lib.utexas.edu" +  aaa.getAttributeValue("href");
+			if(a!=null)
+				for (Element aa : a.getChildElements()) {
+					for (Element aaa : aa.getChildElements()) {
+						if (aaa.getContent().getTextExtractor().toString()
+								.equals("Next") && aaa.getAttributeValue("href")!=null) {
+							nextPageUrl = "http://catalog.lib.utexas.edu" +  aaa.getAttributeValue("href");
+						}
 					}
 				}
-			}
 		}
 		catch(Exception e)
 		{
