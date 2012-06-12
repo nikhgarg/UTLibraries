@@ -528,19 +528,19 @@ public class displaySearchResults extends Activity {
 		listview.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				Log.i("displaySearchResult", "listview item clicked: "
-						+ position);
-				dialog = new ProgressDialog(context,R.style.CustomDialog);
-				dialog.setMessage("Loading. Please wait...");
-				dialog.show();
-//				dialog = ProgressDialog.show(this, "", "Loading. Please wait...", true);
-				(new fetchBookDetail(position, position)).run(); // in UI
-				// thread.
-				// new Thread(new fetchBookDetail(currentViewNumEnd, //not
-				// fetching details right now - slows down code too much
-				// currentViewNumEnd + resultsPerPage)).start();
-				displayBookDetail(position);
-
+				//TODO: disabled onclick for beta test until can figure out how to fix this
+//				Log.i("displaySearchResult", "listview item clicked: "
+//						+ position);
+//				dialog = new ProgressDialog(context,R.style.CustomDialog);
+//				dialog.setMessage("Loading. Please wait...");
+//				dialog.show();
+////				dialog = ProgressDialog.show(this, "", "Loading. Please wait...", true);
+//				(new fetchBookDetail(position, position)).run(); // in UI
+//				// thread.
+//				// new Thread(new fetchBookDetail(currentViewNumEnd, //not
+//				// fetching details right now - slows down code too much
+//				// currentViewNumEnd + resultsPerPage)).start();
+//				displayBookDetail(position);
 			}
 		});
 
