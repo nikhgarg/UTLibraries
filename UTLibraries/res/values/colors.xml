@@ -10,5 +10,6 @@
     <color name="actionbar_separator">@color/cool_gray3</color>
     <color name="actionbar_background_start">@color/burnt_orange</color>
     <color name="actionbar_background_end">@color/burnt_orange</color>
+    <color name="transparent">#00000000</color>
 
 </resources>

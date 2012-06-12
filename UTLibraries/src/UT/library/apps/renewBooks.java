@@ -135,7 +135,10 @@ public class renewBooks extends Activity {
 
 		// ----------------------
 		if (shared.checkLogInandInternetHeader(this)){
-			dialog = ProgressDialog.show(context, "", "Loading. Please wait...", true);
+			dialog = new ProgressDialog(this,R.style.CustomDialog);
+			dialog.setMessage("Loading. Please wait...");
+			dialog.show();
+//			dialog = ProgressDialog.show(this, "", "Loading. Please wait...", true);
 			(new Thread(new displayCheckedOutBooksThread())).start();
 		}
 	}

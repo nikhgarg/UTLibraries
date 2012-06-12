@@ -48,6 +48,7 @@ containing a value of this type.
         public static final int cool_gray3=0x7f040007;
         public static final int cool_gray6=0x7f040008;
         public static final int snow2=0x7f04000a;
+        public static final int transparent=0x7f04000c;
     }
     public static final class dimen {
         public static final int actionbar_height=0x7f050000;
@@ -115,6 +116,7 @@ containing a value of this type.
         public static final int zoom_out=0x7f020039;
     }
     public static final class id {
+        public static final int aboutButton=0x7f090066;
         public static final int actionbar=0x7f09000b;
         public static final int actionbar_actions=0x7f090006;
         public static final int actionbar_home=0x7f090001;
@@ -194,7 +196,7 @@ containing a value of this type.
         public static final int searchandsortInput=0x7f090013;
         public static final int searchstringInput=0x7f09000d;
         public static final int seating=0x7f090051;
-        public static final int singleCopyInfoRow=0x7f090066;
+        public static final int singleCopyInfoRow=0x7f090067;
         public static final int startHourSpinner=0x7f090033;
         public static final int startMinuteSpinner=0x7f090034;
         public static final int startPMSpinner=0x7f090035;
@@ -252,6 +254,7 @@ containing a value of this type.
         public static final int MaterialPrompt=0x7f060007;
         public static final int SearchString=0x7f060008;
         public static final int YearRange=0x7f060004;
+        public static final int about=0x7f060040;
         public static final int actionbar_activity_not_found=0x7f060002;
         public static final int anybuilding=0x7f060028;
         public static final int app_name=0x7f060001;

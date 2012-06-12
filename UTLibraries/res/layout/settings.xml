@@ -80,5 +80,14 @@
         android:layout_below="@+id/uteidButton"
         android:onClick="launchPasswordDialog"
         android:text="@string/store" />
+    <Button
+        android:id="@+id/aboutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/passwordButton"
+        android:text="@string/about"
+        android:onClick="launchAboutDialog" />
 
 </RelativeLayout>

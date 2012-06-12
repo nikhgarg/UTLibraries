@@ -37,8 +37,10 @@ public class showLibraryTimings extends Activity {
 				return;
 			}
 			try {
-				dialog = ProgressDialog.show(context, "",
-						"Loading. Please wait...", true);
+				dialog = new ProgressDialog(context,R.style.CustomDialog);
+				dialog.setMessage("Loading. Please wait...");
+				dialog.show();
+//				dialog = ProgressDialog.show(this, "", "Loading. Please wait...", true);
 				String url = "http://www.lib.utexas.edu/about/hours/";
 				webview.loadUrl(url);
 				dialog.cancel();
@@ -72,8 +74,10 @@ public class showLibraryTimings extends Activity {
 			toast.show();
 		}
 		else{
-			dialog = ProgressDialog.show(this, "",
-					"Loading. Please wait...", true);
+			dialog = new ProgressDialog(this,R.style.CustomDialog);
+			dialog.setMessage("Loading. Please wait...");
+			dialog.show();
+//			dialog = ProgressDialog.show(this, "", "Loading. Please wait...", true);
 			try {
 				webview = (WebView) findViewById(R.id.libraryHours);
 

@@ -101,9 +101,9 @@ public class parseRoomResults {
 							room.reserveLink = temp.substring(0,
 									temp.indexOf('\''));
 						} catch (Exception e) {
-							e.printStackTrace();
-							Log.i("parseRoomResults",
-							"could not parse reserve Link");
+//							e.printStackTrace();
+							Log.e("parseRoomResults",
+							"could not parse reserve Link",e);
 						}
 						break;
 					}

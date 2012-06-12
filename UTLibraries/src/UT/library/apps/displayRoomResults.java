@@ -47,7 +47,10 @@ public class displayRoomResults extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		bundle = getIntent().getExtras();
-		dialog = ProgressDialog.show(this, "", "Loading. Please wait...", true);
+		dialog = new ProgressDialog(this,R.style.CustomDialog);
+		dialog.setMessage("Loading. Please wait...");
+		dialog.show();
+//		dialog = ProgressDialog.show(this, "", "Loading. Please wait...", true);
 		setContentView(R.layout.room_results2);
 		context = this;
 		handler = new Handler();
@@ -70,14 +73,14 @@ public class displayRoomResults extends Activity {
 
 		@Override
 		public void run() {
-			Looper.prepare();
+//			Looper.prepare?();
 			//log into UT direct with new client
 			client = new DefaultHttpClient();
 			shared.logIntoUTDirect(context,client);
 
 			String uri = createURIfromData(bundle);
 			String html = shared.retrieveProtectedWebPage(context,client, uri);
-
+			Log.i("displayRoomResults", "getDataThread html:" + html);
 			//parse rooms page
 			allRooms = parseRoomResults.extractRooms(html);
 			handler.post(new Runnable(){

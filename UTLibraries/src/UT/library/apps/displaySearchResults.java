@@ -516,8 +516,10 @@ public class displaySearchResults extends Activity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.search_results5);
-		dialog = ProgressDialog.show(this, "", "Loading. Please wait...", true);
-		activityRunning = true;
+		dialog = new ProgressDialog(this,R.style.CustomDialog);
+		dialog.setMessage("Loading. Please wait...");
+		dialog.show();
+//		dialog = ProgressDialog.show(this, "", "Loading. Please wait...", true);		activityRunning = true;
 		// header = (TextView) findViewById(R.id.searchResultsHeader);
 		context = this;
 		ListView listview = (ListView) findViewById(R.id.searchResultsListView5);
@@ -528,8 +530,10 @@ public class displaySearchResults extends Activity {
 					int position, long id) {
 				Log.i("displaySearchResult", "listview item clicked: "
 						+ position);
-				dialog = ProgressDialog.show(context, "",
-						"Loading. Please wait...", true);
+				dialog = new ProgressDialog(context,R.style.CustomDialog);
+				dialog.setMessage("Loading. Please wait...");
+				dialog.show();
+//				dialog = ProgressDialog.show(this, "", "Loading. Please wait...", true);
 				(new fetchBookDetail(position, position)).run(); // in UI
 				// thread.
 				// new Thread(new fetchBookDetail(currentViewNumEnd, //not

@@ -202,8 +202,10 @@ public class saveBooks extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		context = this;
-		dialog = ProgressDialog.show(context, "",
-				"Loading. Please wait...", true);
+		dialog = new ProgressDialog(this,R.style.CustomDialog);
+		dialog.setMessage("Loading. Please wait...");
+		dialog.show();
+//		dialog = ProgressDialog.show(this, "", "Loading. Please wait...", true);
 
 		setContentView(R.layout.saved_books);
 		handler = new Handler();

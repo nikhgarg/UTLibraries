@@ -52,7 +52,7 @@ public class shared {
 		String html = "";
 
 		try{
-			//			logIntoUTDirect(client);
+			logIntoUTDirect(context, client);
 			HttpGet httpget = new HttpGet();
 			httpget.setURI(new URI(uri));
 			HttpResponse response = client.execute(httpget);
@@ -141,7 +141,7 @@ public class shared {
 
 	public static boolean checkLogInCredentials(Context context, boolean showToast)
 	{
-		boolean correct;
+		boolean correct = false;
 		try{
 			DefaultHttpClient client = new DefaultHttpClient();
 			String html="";
@@ -157,6 +157,11 @@ public class shared {
 			nameValuePairs.add(new BasicNameValuePair("PASSWORDS", password));
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs, HTTP.ASCII));
 			HttpResponse response = client.execute(httppost);
+
+
+			HttpGet httpget = new HttpGet();
+			httpget.setURI(new URI("https://utdirect.utexas.edu/utdirect/index.WBX"));
+			response = client.execute(httpget);
 			BufferedReader in = new BufferedReader(new InputStreamReader(
 					response.getEntity().getContent()));
 
@@ -165,8 +170,9 @@ public class shared {
 				//	System.out.println(next);
 				html+=next;
 				next = in.readLine();
+				correct |=  (html.contains("UT Direct - My Home"));
+				if (correct)break;
 			}
-			correct = ! (html.contains("This is an invalid UT EID"));
 			if (!correct && showToast){
 				int duration = Toast.LENGTH_LONG;
 				Toast toast = Toast.makeText(context, "Could not Log in. Please check UTEID/Password.", duration);
