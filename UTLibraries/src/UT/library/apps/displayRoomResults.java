@@ -11,21 +11,22 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.markupartist.android.widget.ActionBar;
 import com.markupartist.android.widget.ActionBar.IntentAction;
@@ -35,21 +36,24 @@ public class displayRoomResults extends Activity {
 	Context context;
 	ArrayList<ArrayList<Room>> allRooms;
 	ProgressDialog dialog;
+	DefaultHttpClient client;
+	Bundle bundle;
+	LinearLayout linLayout;
+	LayoutInflater mInflater;
+	View view;
+	Handler handler;
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Bundle bundle = getIntent().getExtras();
+		bundle = getIntent().getExtras();
 		dialog = ProgressDialog.show(this, "", "Loading. Please wait...", true);
 		setContentView(R.layout.room_results2);
 		context = this;
-		LayoutInflater mInflater = LayoutInflater.from(this);
-
-		View view = mInflater.inflate(R.layout.room_results2,null);
-
-
-
-		LinearLayout linLayout = (LinearLayout) view.findViewById(R.id.roomsLinearLayout);
+		handler = new Handler();
+		mInflater = LayoutInflater.from(context);
+		view = mInflater.inflate(R.layout.room_results2,null);
+		linLayout = (LinearLayout) view.findViewById(R.id.roomsLinearLayout);
 
 		// code downloaded from
 		// https://github.com/johannilsson/android-actionbar/blob/master/README.md
@@ -59,44 +63,47 @@ public class displayRoomResults extends Activity {
 		actionBar.addAction(new IntentAction(this, new Intent(this, settings.class), R.drawable.gear)); //go to settings
 		//----------------------
 
-		//log into UT direct with new client
-		DefaultHttpClient client = new DefaultHttpClient();
-		shared.logIntoUTDirect(this,client);
+		(new Thread(new getDataThread())).start();
+	}
 
-		String uri = createURIfromData(bundle);
+	private class getDataThread implements Runnable{
 
-		//TODO: implement this in a different thread
-		String html = shared.retrieveProtectedWebPage(this,client, uri);
+		@Override
+		public void run() {
+			Looper.prepare();
+			//log into UT direct with new client
+			client = new DefaultHttpClient();
+			shared.logIntoUTDirect(context,client);
 
-		//parse rooms page
-		allRooms = parseRoomResults.extractRooms(html);
+			String uri = createURIfromData(bundle);
+			String html = shared.retrieveProtectedWebPage(context,client, uri);
 
-		if (allRooms.size()==0)
-		{
-			//		View view = findViewById(R.id.searchResultsLinearLayout);
-			final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setMessage("Sorry, there are no rooms that match the given criteria. Please modify search parameters and try again.").setCancelable(true)
-			.setNeutralButton("OK", new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog, int id) {
-					Intent intent = new Intent(context, reserveStudyRoom.class);
-					startActivity(intent);
+			//parse rooms page
+			allRooms = parseRoomResults.extractRooms(html);
+			handler.post(new Runnable(){
+				public void run() {
+					if (allRooms.size()==0)
+					{
+						//		View view = findViewById(R.id.searchResultsLinearLayout);
+						final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+						builder.setMessage("Sorry, there are no rooms that match the given criteria. Please modify search parameters and try again.").setCancelable(true)
+						.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int id) {
+								Intent intent = new Intent(context, reserveStudyRoom.class);
+								startActivity(intent);
+								dialog.dismiss();
+							}
+						}
+						);
+						dialog.dismiss();
+						final AlertDialog alert = builder.create();
+						alert.show();
+					}
 					dialog.dismiss();
+					displayAllRooms(allRooms, linLayout, mInflater,view);
 				}
-			}
-			);
-			dialog.dismiss();
-			final AlertDialog alert = builder.create();
-			alert.show();
+			});
 		}
-		dialog.dismiss();
-		displayAllRooms(allRooms, linLayout, mInflater,view);
-		//		RoomBaseAdapter roomAdapter = new RoomBaseAdapter(this,allRooms);
-		//		ListView listview = (ListView) findViewById(R.id.roomResultsListView);
-		//		listview.setAdapter(roomAdapter);
-
-
-
-
 	}
 
 	public void displayAllRooms (ArrayList<ArrayList<Room>> rooms, LinearLayout linLayout, LayoutInflater mInflater, View view)
@@ -177,16 +184,10 @@ public class displayRoomResults extends Activity {
 		}
 		catch (Exception e) {
 			Log.e("displayRoomResults", "Exception in displayRooms",e);
-			//			TextView tv = new TextView(this);
-			//			tv.setText(e.toString());
-			//			setContentView(tv);
 		}
 		ScrollView sv = new ScrollView(context);
 		sv.addView(linLayout);
 		setContentView(sv);
-
-		//		setContentView(view);
-
 	}
 
 	public void roomSelected(View view)

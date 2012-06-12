@@ -1,23 +1,26 @@
 package UT.library.apps;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-import com.markupartist.android.widget.ActionBar;
-import com.markupartist.android.widget.ActionBar.IntentAction;
-
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.markupartist.android.widget.ActionBar;
+import com.markupartist.android.widget.ActionBar.IntentAction;
 
 public class saveBooks extends Activity {
 
@@ -26,13 +29,14 @@ public class saveBooks extends Activity {
 	int oldSize = 0; //size of saved, enables monitoring of book deletions
 	Context context;
 	boolean activityRunning = false; //to break out of threads.
+	Handler handler;
 
 	// retrieve books from file
 	//returns true if there are books saved, false otherwise
 	@SuppressWarnings("unchecked")
 	public boolean retrieveSavedBooks(){
 		try{
-			FileInputStream fileIn = this.openFileInput("Saved_Books");
+			FileInputStream fileIn = context.openFileInput("Saved_Books");
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 			//			if (fileIn.read()!=-1) //if file has at least 1 object
 			//			{
@@ -46,9 +50,10 @@ public class saveBooks extends Activity {
 			}
 			else
 			{
-				TextView ttest = new TextView(this);
-				ttest.setText("Sorry. You have not saved any books yet");
-				setContentView(ttest);
+				//TODO fix this, have some sort of view for when no books saved, display then
+				//				TextView ttest = new TextView(context);
+				//				ttest.setText("Sorry. You have not saved any books yet");
+				//				setContentView(ttest);
 				return false;
 			}
 			in.close();
@@ -57,45 +62,91 @@ public class saveBooks extends Activity {
 		}
 		catch(java.io.FileNotFoundException e)
 		{
-			TextView ttest = new TextView(this);
-			ttest.setText("Sorry. You have not saved any books yet");
-			setContentView(ttest);
+//			TextView ttest = new TextView(context);
+//			ttest.setText("Sorry. You have not saved any books yet");
+//			setContentView(ttest);
 			return false;
 		}
 		catch(Exception e)
 		{
 			Log.e("saveBooks", "exception in retrieveSavedBooks", e);
+			return false;
 		}
-		return true;
+		return saved.size()>0;
 	}
-	// display retrieved books
-	public void displaySavedBooks() {
-		// to do: prettify
-		// add display if no results
-		try {
-			adapter=new sBookBaseAdapter(this, saved);
-			ListView listview = (ListView) findViewById(R.id.savedBooksListView);
-			listview.setAdapter(adapter);
-			dialog.cancel();
-		} catch (Exception e) {
-			Log.e("saveBooks", "Exception in displaySavedBooks", e);
+
+	private class displaySavedBooks implements Runnable{
+
+		@Override
+		// display retrieved books
+		public void run() {
+			// to do: prettify
+			// add display if no results
+			String FILENAME = "Saved_Books";
+			File file = context.getFileStreamPath(FILENAME);
+			boolean booksSaved;
+			if(file.exists()){
+				 booksSaved = retrieveSavedBooks();
+			}
+			else {
+				 booksSaved = false;
+			}
+			final boolean finalBooksSaved = booksSaved;
+				try {
+					handler.post(new Runnable(){
+						public void run() {
+							if (finalBooksSaved){
+								adapter=new sBookBaseAdapter(context, saved);
+								ListView listview = (ListView) findViewById(R.id.savedBooksListView);
+								listview.setAdapter(adapter);
+								dialog.cancel();
+							}
+							else{
+								//TODO: dialog when no saved books
+								final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+								builder.setMessage("You have no saved books.").setCancelable(true)
+								.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog, int id) {
+										dialog.dismiss();
+										Intent intent = new Intent(context,WelcomeScreen.class);
+										startActivity(intent);
+									}
+								}
+								);
+								final AlertDialog alert = builder.create();
+								dialog.dismiss();
+								alert.show();
+
+							}
+						}
+					});
+
+				} catch (Exception e) {
+					Log.e("saveBooks", "Exception in displaySavedBooks", e);
+				}
+			}
 		}
-	}
+
+
 
 	// rewrite the file (so to remove books that were deleted)
 	public void updateSaveFile() {
 		try {
 			String FILENAME = "Saved_Books";
-			FileOutputStream fos = null;
-			ObjectOutputStream oos = null;
-			fos = this.openFileOutput(FILENAME, Context.MODE_PRIVATE);
-			oos = new ObjectOutputStream(fos);
-			for (Book b : saved) {
-				oos.writeObject(b);
-				Log.i("saveBooks", "saved Book title: " + b.title);
+			File file = context.getFileStreamPath(FILENAME);
+			if(file.exists()){
+				FileOutputStream fos = null;
+				ObjectOutputStream oos = null;
+				fos = context.openFileOutput(FILENAME, Context.MODE_PRIVATE);
+				oos = new ObjectOutputStream(fos);
+				for (Book b : saved) {
+					oos.writeObject(b);
+					Log.i("saveBooks", "saved Book title: " + b.title);
+				}
+				oos.close();
+				fos.close();
 			}
-			oos.close();
-			fos.close();
+			else return;
 		} catch (Exception e) {
 			Log.e("saveBooks", "exception updateSaveFile: ", e);
 		}
@@ -150,26 +201,25 @@ public class saveBooks extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		dialog = ProgressDialog.show(this, "",
+		context = this;
+		dialog = ProgressDialog.show(context, "",
 				"Loading. Please wait...", true);
 		setContentView(R.layout.saved_books);
-		context = this;
+		handler = new Handler();
 		activityRunning = true;
 
 		//code downloaded from https://github.com/johannilsson/android-actionbar/blob/master/README.md
 		ActionBar actionBar = (ActionBar) findViewById(R.id.actionbar);
 		// You can also assign the title programmatically by passing a CharSequence or resource id.
 		actionBar.setTitle("Saved Books");
-		actionBar.setHomeAction(new IntentAction(this, new Intent(this,
+		actionBar.setHomeAction(new IntentAction(context, new Intent(context,
 				WelcomeScreen.class), R.drawable.home)); // go	// home
-		actionBar.addAction(new IntentAction(this, new Intent(this, settings.class), R.drawable.gear)); //go to settings
+		actionBar.addAction(new IntentAction(context, new Intent(context, settings.class), R.drawable.gear)); //go to settings
 		//----------------------
 
-
-		boolean booksSaved = retrieveSavedBooks();
-		if(booksSaved){
-			displaySavedBooks();
-			new Thread(new checkArrayChanged()).start();
-		}
+		//		if(booksSaved){
+		(new Thread(new displaySavedBooks())).start();
+		(new Thread(new checkArrayChanged())).start();
+		//		}
 	}
 }

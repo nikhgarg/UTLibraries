@@ -164,7 +164,7 @@ containing a value of this type.
         public static final int otherInfoList=0x7f090021;
         public static final int passwordButton=0x7f090061;
         public static final int passwordText=0x7f090060;
-        public static final int publicationList=0x7f09001e;
+        public static final int publicationList=0x7f090020;
         public static final int publisherInput=0x7f090012;
         public static final int publisherbox=0x7f090017;
         public static final int relativeLayout1=0x7f09000a;
@@ -180,7 +180,7 @@ containing a value of this type.
         public static final int roomrowrow=0x7f090051;
         public static final int roomsLinearLayout=0x7f090050;
         public static final int roomsize=0x7f090054;
-        public static final int saveBookButton=0x7f090020;
+        public static final int saveBookButton=0x7f09001f;
         public static final int savedBooksListView=0x7f090055;
         public static final int saveloginBox=0x7f09005d;
         public static final int saveloginText=0x7f09005c;
@@ -207,7 +207,7 @@ containing a value of this type.
         public static final int textView3=0x7f09003d;
         public static final int textView4=0x7f090045;
         public static final int title=0x7f090023;
-        public static final int titleList=0x7f09001f;
+        public static final int titleList=0x7f09001e;
         public static final int uteidButton=0x7f09005e;
         public static final int uteidText=0x7f09005f;
         public static final int yearendInput=0x7f090011;

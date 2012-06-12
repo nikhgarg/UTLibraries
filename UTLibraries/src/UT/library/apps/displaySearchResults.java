@@ -256,7 +256,7 @@ public class displaySearchResults extends Activity {
 	public void handleZeroResults()
 	{
 
-		Looper.prepare();
+//		Looper.prepare();
 		handler.post(new Runnable() {
 			@Override
 			public void run() {
@@ -320,7 +320,7 @@ public class displaySearchResults extends Activity {
 				listViewData.clear();
 				for (int i = start; i < end; i++)
 					listViewData.add(allBooks.get(i));
-				Looper.prepare();
+//				Looper.prepare();
 				handler.post(new Runnable() {
 					@Override
 					public void run() {

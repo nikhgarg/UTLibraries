@@ -64,8 +64,7 @@ public class BookBaseAdapter extends BaseAdapter {
 				// .findViewById(R.id.bookImageList);
 				// holder.location = (TextView) convertView
 				// .findViewById(R.id.locationList);
-				holder.publication = (TextView) convertView
-				.findViewById(R.id.publicationList);
+				holder.publication = (TextView) convertView.findViewById(R.id.publicationList);
 				// holder.callNo = (TextView) convertView
 				// .findViewById(R.id.callNoList);
 				// holder.status = (TextView) convertView
