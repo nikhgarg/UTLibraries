@@ -46,13 +46,16 @@ public class shared {
 
 	public static boolean connectedToInternet = false;
 	public static boolean logInWorks = false;
+	public static boolean displayedLogInCheck = false;
+	public static boolean displayedInternetCheck = false;
 
 	public static String retrieveProtectedWebPage (Context context,DefaultHttpClient client, String uri)
 	{
 		String html = "";
 
 		try{
-			logIntoUTDirect(context, client);
+			boolean success = logIntoUTDirect(context, client);
+			Log.i("shared", "retrieveprotectedwebpage log in success: " + success);
 			HttpGet httpget = new HttpGet();
 			httpget.setURI(new URI(uri));
 			HttpResponse response = client.execute(httpget);
@@ -92,8 +95,8 @@ public class shared {
 			nameValuePairs.add(new BasicNameValuePair("LOGON", username));  			//use my info for testing
 			nameValuePairs.add(new BasicNameValuePair("PASSWORDS", password));
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs, HTTP.ASCII));
-			HttpResponse response = client.execute(httppost);
-			//			response.getEntity().getContent().close();
+//			HttpResponse response = client.execute(httppost);
+//						response.getEntity().getContent().close();
 		}
 		catch(Exception e)
 		{
@@ -177,9 +180,12 @@ public class shared {
 				int duration = Toast.LENGTH_LONG;
 				Toast toast = Toast.makeText(context, "Could not Log in. Please check UTEID/Password.", duration);
 				toast.show();
+				displayedLogInCheck = false;
+
 			}
 			else if (correct && showToast)
 			{
+				displayedLogInCheck = true;
 				int duration = Toast.LENGTH_LONG;
 				Toast toast = Toast.makeText(context, "Log in successful. Please feel free to access any of the app's features.", duration);
 				toast.show();

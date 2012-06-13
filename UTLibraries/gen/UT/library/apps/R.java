@@ -320,10 +320,11 @@ containing a value of this type.
         public static final int ActionBarHomeLogo=0x7f070003;
         public static final int ActionBarItem=0x7f070001;
         public static final int ActionBarProgressBar=0x7f070004;
-        public static final int CustomDialog=0x7f070008;
-        public static final int CustomSpinnerTheme=0x7f070006;
+        public static final int CustomDialog=0x7f070009;
+        public static final int CustomSpinnerTheme=0x7f070007;
         public static final int CustomTheme=0x7f070005;
-        public static final int customactionbar=0x7f070007;
+        public static final int WindowTitleBackground=0x7f070006;
+        public static final int customactionbar=0x7f070008;
     }
     public static final class styleable {
         /** Attributes that can be used with a ActionBar.

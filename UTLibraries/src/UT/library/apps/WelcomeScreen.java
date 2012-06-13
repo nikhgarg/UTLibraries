@@ -44,8 +44,8 @@ public class WelcomeScreen extends Activity {
 		actionBar.addAction(new IntentAction(this, new Intent(this, settings.class), R.drawable.gear)); //go to settings
 		//----------------------
 
-		if (shared.checkInternetConnection(this, true, "You are not connected to the internet. App functionality will be limited."))
-			shared.checkLogInCredentials(this, true);
+		if (shared.checkInternetConnection(this, !shared.displayedInternetCheck, "You are not connected to the internet. App functionality will be limited."))
+			shared.checkLogInCredentials(this, !shared.displayedLogInCheck);
 
 		ListView listview = (ListView) findViewById(R.id.mainPageListView);
 		listview.setAdapter(new ArrayAdapter<String>(this,R.layout.main_list_item, features));

@@ -40,6 +40,7 @@ public class renewBooks extends Activity {
 		public void run() {
 			// log into UT library account
 			client = new DefaultHttpClient();
+			shared.logIntoCatalog(context,client);
 			// get HTML for page
 			String html = shared.retrieveProtectedWebPage(context,client,
 			"https://catalog.lib.utexas.edu/patroninfo~S29/1160546/items");
@@ -50,7 +51,7 @@ public class renewBooks extends Activity {
 			cbooks = parseCheckedOut.parseCheckedOutBooks(html);
 			Log.i("renewBooks", "checked out books: " + cbooks.toString());
 
-			Looper.prepare();
+//			Looper.prepare();
 			handler.post(new Runnable(){
 				public void run() {
 					if (cbooks.size()==0)
