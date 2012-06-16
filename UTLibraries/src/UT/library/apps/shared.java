@@ -163,7 +163,7 @@ public class shared {
 
 
 			HttpGet httpget = new HttpGet();
-			httpget.setURI(new URI("https://utdirect.utexas.edu/utdirect/index.WBX"));
+			httpget.setURI(new URI("https://www.utdirect.utexas.edu/utdirect/index.WBX"));
 			response = client.execute(httpget);
 			BufferedReader in = new BufferedReader(new InputStreamReader(
 					response.getEntity().getContent()));
