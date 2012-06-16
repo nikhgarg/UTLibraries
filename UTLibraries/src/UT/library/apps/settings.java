@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
@@ -20,6 +21,7 @@ public class settings extends Activity {
 	public static SharedPreferences loginPreferences;
 	public static SharedPreferences.Editor editor;
 	Context context;
+	Handler handler;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -27,6 +29,7 @@ public class settings extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.settings);
 		context = this;
+		handler = new Handler();
 		// code downloaded from
 		// https://github.com/johannilsson/android-actionbar/blob/master/README.md
 		ActionBar actionBar = (ActionBar) findViewById(R.id.actionbar);
@@ -74,8 +77,8 @@ public class settings extends Activity {
 				String username = input.getText().toString();
 				editor.putString("uteid", username);
 				editor.commit();
-				if (shared.connectedToInternet)
-					shared.checkLogInCredentials(context, true);
+				shared.checkLogInCredentials(context, handler, true, "You are not connected to the internet. Cannot check log in credentials at this time.");
+
 			}
 		})
 		.setNegativeButton("Cancel",
@@ -111,8 +114,7 @@ public class settings extends Activity {
 				String password = input.getText().toString();
 				editor.putString("password", password);
 				editor.commit();
-				if (shared.connectedToInternet)
-					shared.checkLogInCredentials(context, true);
+				shared.checkLogInCredentials(context, handler, true, "You are not connected to the internet. Cannot check log in credentials at this time.");
 			}
 		})
 		.setNegativeButton("Cancel",
