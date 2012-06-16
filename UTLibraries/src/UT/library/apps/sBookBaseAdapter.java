@@ -10,6 +10,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -66,7 +67,7 @@ public class sBookBaseAdapter extends BaseAdapter {
 			// .findViewById(R.id.statusList);
 			holder.other = (TextView) convertView
 			.findViewById(R.id.otherInfoList);
-			holder.saveBook = (Button) convertView
+			holder.saveBook = (ImageButton) convertView
 			.findViewById(R.id.saveBookButton);
 
 			holder.copiesTable = (TableLayout) convertView
@@ -88,7 +89,6 @@ public class sBookBaseAdapter extends BaseAdapter {
 		// holder.callNo.setText(b.callNo);
 		// holder.status.setText(b.currentStatus);
 		holder.other.setText(b.otherFields);
-		holder.saveBook.setText("Delete");
 
 		int min = (int) Math.min(
 				Math.min(b.location.size(), b.currentStatus.size()),
@@ -108,7 +108,8 @@ public class sBookBaseAdapter extends BaseAdapter {
 
 			holder.copiesTable.addView(row);
 		}
-		holder.saveBook.setText("Delete");
+//		holder.saveBook.setText("Delete");
+		holder.saveBook.setImageDrawable(context.getResources().getDrawable(R.drawable.cross));
 		holder.saveBook.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -131,7 +132,7 @@ public class sBookBaseAdapter extends BaseAdapter {
 		TextView status;
 		TextView other;
 		TextView number;
-		Button saveBook;
+		ImageButton saveBook;
 
 	}
 

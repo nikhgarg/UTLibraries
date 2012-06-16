@@ -38,7 +38,7 @@
             android:textAppearance="?android:attr/textAppearanceSmall" >
         </TextView>
 
-        <Button
+        <ImageButton
             android:id="@+id/saveBookButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -48,8 +48,10 @@
             android:gravity="center"
             android:minWidth="120dp"
             android:maxWidth="240dp"
-            android:text="@string/savebook" >
-        </Button>
+            android:text="@string/savebook"
+            android:src="@drawable/save_book"
+            >
+        </ImageButton>
     </TableRow>
 
     <TableRow

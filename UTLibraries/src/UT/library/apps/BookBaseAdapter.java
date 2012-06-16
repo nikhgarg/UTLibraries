@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -70,7 +70,7 @@ public class BookBaseAdapter extends BaseAdapter {
 				// holder.status = (TextView) convertView
 				// .findViewById(R.id.statusList);
 				holder.other = (TextView) convertView.findViewById(R.id.otherInfoList);
-				holder.saveBook = (Button) convertView.findViewById(R.id.saveBookButton);
+				holder.saveBook = (ImageButton) convertView.findViewById(R.id.saveBookButton);
 
 				holder.copiesTable = (TableLayout) convertView.findViewById(R.id.copiesTable);
 
@@ -188,7 +188,7 @@ public class BookBaseAdapter extends BaseAdapter {
 		TextView status;
 		TextView other;
 		TextView number;
-		Button saveBook;
+		ImageButton saveBook;
 
 	}
 
