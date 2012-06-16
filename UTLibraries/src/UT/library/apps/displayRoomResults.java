@@ -57,6 +57,7 @@ public class displayRoomResults extends Activity {
 		mInflater = LayoutInflater.from(context);
 		view = mInflater.inflate(R.layout.room_results2,null);
 		linLayout = (LinearLayout) view.findViewById(R.id.roomsLinearLayout);
+		shared.checkLogInCredentials(this, handler, !shared.displayedLogInCheck, "You are not connected to the internet. Please try again later.");
 
 		// code downloaded from
 		// https://github.com/johannilsson/android-actionbar/blob/master/README.md
@@ -75,6 +76,7 @@ public class displayRoomResults extends Activity {
 		public void run() {
 //			Looper.prepare?();
 			//log into UT direct with new client
+
 			client = new DefaultHttpClient();
 			shared.logIntoUTDirect(context,client);
 

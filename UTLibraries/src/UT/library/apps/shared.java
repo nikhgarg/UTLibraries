@@ -96,8 +96,8 @@ public class shared {
 			nameValuePairs.add(new BasicNameValuePair("LOGON", username));  			//use my info for testing
 			nameValuePairs.add(new BasicNameValuePair("PASSWORDS", password));
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs, HTTP.ASCII));
-			//			HttpResponse response = client.execute(httppost);
-			//						response.getEntity().getContent().close();
+						HttpResponse response = client.execute(httppost);
+									response.getEntity().getContent().close();
 		}
 		catch(Exception e)
 		{
