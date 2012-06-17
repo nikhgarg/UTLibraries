@@ -46,6 +46,7 @@
         android:id="@+id/yearstartInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/materialtypebutton"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/goButton"
@@ -85,7 +86,6 @@
         android:id="@+id/onlyavailablebox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/searchandsortInput"
         android:text="@string/limitavailable" />
@@ -94,7 +94,6 @@
         android:id="@+id/goButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/onlyavailablebox"
         android:layout_marginLeft="18dp"

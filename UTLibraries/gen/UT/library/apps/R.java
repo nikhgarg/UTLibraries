@@ -147,10 +147,9 @@ containing a value of this type.
         public static final int endPMSpinner=0x7f0a003a;
         public static final int fieldtypeInput=0x7f0a000c;
         public static final int finalizeButton=0x7f0a003b;
-        public static final int goButton=0x7f0a0010;
+        public static final int goButton=0x7f0a0011;
         public static final int groupNameEnter=0x7f0a0030;
         public static final int hasFeatures=0x7f0a0059;
-        public static final int languageInput=0x7f0a005d;
         public static final int libraryHours=0x7f0a003c;
         public static final int libraryMapHeader=0x7f0a003d;
         public static final int location=0x7f0a0050;
@@ -158,14 +157,13 @@ containing a value of this type.
         public static final int locationText=0x7f0a002d;
         public static final int mainPageListView=0x7f0a003f;
         public static final int mapimage=0x7f0a003e;
-        public static final int materialtypeInput=0x7f0a005c;
-        public static final int materialtypebutton=0x7f0a0018;
+        public static final int materialtypebutton=0x7f0a0010;
         public static final int numberPeopleSpinner=0x7f0a004a;
-        public static final int onlyavailablebox=0x7f0a0014;
+        public static final int onlyavailablebox=0x7f0a0015;
         public static final int otherInfoList=0x7f0a0024;
         public static final int publicationList=0x7f0a0021;
-        public static final int publisherInput=0x7f0a0012;
-        public static final int publisherbox=0x7f0a0017;
+        public static final int publisherInput=0x7f0a0013;
+        public static final int publisherbox=0x7f0a0018;
         public static final int relativeLayout1=0x7f0a000a;
         public static final int renewBox=0x7f0a002b;
         public static final int renewMarkedButton=0x7f0a0041;
@@ -185,12 +183,12 @@ containing a value of this type.
         public static final int saveBookButton=0x7f0a0022;
         public static final int savedBooksListView=0x7f0a005b;
         public static final int screen=0x7f0a0000;
-        public static final int searchResultsLinearLayout=0x7f0a005e;
-        public static final int searchResultsListView5=0x7f0a005f;
-        public static final int searchandsortInput=0x7f0a0013;
+        public static final int searchResultsLinearLayout=0x7f0a005c;
+        public static final int searchResultsListView5=0x7f0a005d;
+        public static final int searchandsortInput=0x7f0a0014;
         public static final int searchstringInput=0x7f0a000d;
         public static final int seating=0x7f0a0054;
-        public static final int singleCopyInfoRow=0x7f0a0060;
+        public static final int singleCopyInfoRow=0x7f0a005e;
         public static final int startHourSpinner=0x7f0a0033;
         public static final int startMinuteSpinner=0x7f0a0034;
         public static final int startPMSpinner=0x7f0a0035;
@@ -211,10 +209,10 @@ containing a value of this type.
         public static final int textView6=0x7f0a004c;
         public static final int title=0x7f0a0027;
         public static final int titleList=0x7f0a001f;
-        public static final int yearendInput=0x7f0a0011;
-        public static final int yearendbox=0x7f0a0016;
+        public static final int yearendInput=0x7f0a0012;
+        public static final int yearendbox=0x7f0a0017;
         public static final int yearstartInput=0x7f0a000f;
-        public static final int yearstartbox=0x7f0a0015;
+        public static final int yearstartbox=0x7f0a0016;
     }
     public static final class layout {
         public static final int actionbar=0x7f030000;
@@ -235,10 +233,9 @@ containing a value of this type.
         public static final int room_results2=0x7f03000f;
         public static final int room_row=0x7f030010;
         public static final int saved_books=0x7f030011;
-        public static final int search=0x7f030012;
-        public static final int search_results5=0x7f030013;
-        public static final int settingslayout=0x7f030014;
-        public static final int single_copy_info_row=0x7f030015;
+        public static final int search_results5=0x7f030012;
+        public static final int settingslayout=0x7f030013;
+        public static final int single_copy_info_row=0x7f030014;
     }
     public static final class string {
         public static final int FieldPrompt=0x7f070006;
