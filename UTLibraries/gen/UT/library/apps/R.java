@@ -247,7 +247,8 @@ containing a value of this type.
         public static final int search=0x7f030014;
         public static final int search_results5=0x7f030015;
         public static final int settings=0x7f030016;
-        public static final int single_copy_info_row=0x7f030017;
+        public static final int settingslayout=0x7f030017;
+        public static final int single_copy_info_row=0x7f030018;
     }
     public static final class string {
         public static final int FieldPrompt=0x7f070006;
@@ -274,6 +275,7 @@ containing a value of this type.
         public static final int data=0x7f07004a;
         public static final int date=0x7f070021;
         public static final int deletedata=0x7f07004d;
+        public static final int deletedatakey=0x7f070050;
         public static final int empty=0x7f07001c;
         public static final int endtime=0x7f070023;
         public static final int enter=0x7f070027;

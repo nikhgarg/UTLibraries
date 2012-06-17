@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <CheckBoxPreference
-        android:enabled="true"
-        android:selectable="true"
-        android:summary="@string/autologinsummary"
-        android:title="@string/autologin" />
-    <CheckBoxPreference />
-
     <PreferenceCategory android:title="@string/logininfo" >
     </PreferenceCategory>
 
@@ -31,13 +24,14 @@
         android:title="@string/password" />
 
     <PreferenceCategory android:title="@string/data" >
-        <Preference android:title="@string/deletedata" />
+        <Preference android:title="@string/deletedata" android:key="@string/deletedatakey"/>
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/miscellaneous" >
         <Preference
             android:enabled="true"
+            android:key="@string/about"
             android:selectable="true"
-            android:title="@string/about" android:key="@string/about"/>
+            android:title="@string/about" />
     </PreferenceCategory>
 
 </PreferenceScreen>

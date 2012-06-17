@@ -429,9 +429,10 @@
     <string name="data">Data</string>
     <string name="miscellaneous">Miscellaneous</string>
     <string name="abouttext">"This app was developed by Nikhil Garg, an ECE and Plan II student at UT Austin, part of the Class of 2015. "</string>
-    <string name="deletedata">Delete all data</string>
+    <string name="deletedata">Delete All Data</string>
     <string name="uteidlower">uteid</string>
     <string name="passwordlower">password</string>
+    <string name="deletedatakey">deletedata</string>
 
 
 </resources>
