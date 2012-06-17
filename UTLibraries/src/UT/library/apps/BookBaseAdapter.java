@@ -124,7 +124,7 @@ public class BookBaseAdapter extends BaseAdapter {
 					// TODO Auto-generated method stub
 					try {
 						String FILENAME = "Saved_Books";
-						boolean first = true;
+//						boolean first = true;
 
 						try {
 							FileInputStream fileIn = context

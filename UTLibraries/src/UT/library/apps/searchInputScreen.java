@@ -14,7 +14,6 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.markupartist.android.widget.ActionBar;
@@ -32,7 +31,7 @@ public class searchInputScreen extends Activity {
 			return;
 		}
 
-		TextView ttest = new TextView(this);
+//		TextView ttest = new TextView(this);
 		SearchData fieldsData = new SearchData();
 
 		EditText getEditText = (EditText) findViewById(R.id.searchstringInput);

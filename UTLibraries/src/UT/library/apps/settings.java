@@ -14,6 +14,8 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
+import android.text.InputType;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.markupartist.android.widget.ActionBar;
@@ -21,8 +23,8 @@ import com.markupartist.android.widget.ActionBar.IntentAction;
 
 public class settings extends PreferenceActivity {
 
-	public static SharedPreferences loginPreferences;
-	public static SharedPreferences.Editor editor;
+	//	public static SharedPreferences loginPreferences;
+	//	public static SharedPreferences.Editor editor;
 	Context context;
 	Handler handler;
 
@@ -32,6 +34,9 @@ public class settings extends PreferenceActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.settingslayout);
 		addPreferencesFromResource(R.xml.settings2);
+
+
+
 		context = this;
 		handler = new Handler();
 		// code downloaded from
@@ -59,8 +64,21 @@ public class settings extends PreferenceActivity {
 			}
 		});
 
+		myPref = (Preference) findPreference("uteid");
+		myPref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+			public boolean onPreferenceClick(Preference preference) {
+				launchUteidDialog();
+				return true;
+			}
+		});
 
-		//TODO: delete all data, autlogin
+		myPref = (Preference) findPreference("password");
+		myPref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+			public boolean onPreferenceClick(Preference preference) {
+				launchPasswordDialog();
+				return true;
+			}
+		});
 
 		//		loginPreferences = this.getSharedPreferences("login", MODE_PRIVATE);
 		//		editor = loginPreferences.edit();
@@ -87,113 +105,117 @@ public class settings extends PreferenceActivity {
 
 	}
 
-		public void launchDeleteDataDialog() {
-			AlertDialog.Builder alt_bld = new AlertDialog.Builder(this);
-			final TextView tv = new TextView(this);
-			String about = "Are you sure you want to delete all your data? This includes login data and saved books.";
-			tv.setText(about);
-			tv.setTextColor(getResources().getColor(R.color.snow2));
-			alt_bld.setView(tv);
-			alt_bld.setCancelable(true).setTitle("Delete Data")
-			.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog, int id) {
-					//delete login data
-					SharedPreferences prefs =  PreferenceManager.getDefaultSharedPreferences(context);
-					Editor editor = prefs.edit();
-					editor.clear().commit();
-					//delete saved books
-					String FILENAME = "Saved_Books";
-					File file = context.getFileStreamPath(FILENAME);
-					if(file.exists()){
-						context.deleteFile(FILENAME);
-					}
-
-					Intent intent = new Intent(context, settings.class);
-					startActivity(intent);
+	public void launchDeleteDataDialog() {
+		AlertDialog.Builder alt_bld = new AlertDialog.Builder(this);
+		final TextView tv = new TextView(this);
+		String about = "Are you sure you want to delete all your data? This includes login data and saved books.";
+		tv.setText(about);
+		tv.setTextColor(getResources().getColor(R.color.snow2));
+		alt_bld.setView(tv);
+		alt_bld.setCancelable(true).setTitle("Delete Data")
+		.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				//delete login data
+				SharedPreferences prefs =  PreferenceManager.getDefaultSharedPreferences(context);
+				Editor editor = prefs.edit();
+				editor.clear().commit();
+				//delete saved books
+				String FILENAME = "Saved_Books";
+				File file = context.getFileStreamPath(FILENAME);
+				if(file.exists()){
+					context.deleteFile(FILENAME);
 				}
-			})
-			.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					//do nothing upon cancel
-				}
-			});
 
-			AlertDialog alert = alt_bld.create();
-			alert.show();
+				Intent intent = new Intent(context, settings.class);
+				startActivity(intent);
+			}
+		})
+		.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				//do nothing upon cancel
+			}
+		});
 
-		}
+		AlertDialog alert = alt_bld.create();
+		alert.show();
+
+	}
 
 
-	//	public void launchUteidDialog(View view) {
-	//		String savedUsername = loginPreferences.getString("uteid", "");
-	//		AlertDialog.Builder alt_bld = new AlertDialog.Builder(this);
-	//		final EditText input = new EditText(this);
-	//		input.setText(savedUsername);
-	//		alt_bld.setView(input);
-	//		alt_bld.setMessage("Please Enter Your UTEID")
-	//		.setCancelable(true)
-	//		.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-	//			public void onClick(DialogInterface dialog, int id) {
-	//				// storeUsername();
-	//				String username = input.getText().toString();
-	//				editor.putString("uteid", username);
-	//				editor.commit();
-	//				shared.checkLogInCredentials(context, handler, true, "You are not connected to the internet. Cannot check log in credentials at this time.");
-	//
-	//			}
-	//		})
-	//		.setNegativeButton("Cancel",
-	//				new DialogInterface.OnClickListener() {
-	//			public void onClick(DialogInterface dialog, int id) {
-	//				// Action for ‘NO’ Button
-	//				dialog.cancel();
-	//			}
-	//		});
-	//
-	//		AlertDialog alert = alt_bld.create();
-	//		// Title for AlertDialog
-	//		// alert.setTitle("AlertDialogExample");
-	//		// Icon for AlertDialog
-	//		// alert.setIcon(R.drawable.ic_launcher);
-	//		alert.show();
-	//
-	//	}
+	public void launchUteidDialog() {
+		SharedPreferences loginPreferences =  PreferenceManager.getDefaultSharedPreferences(context);
+		final SharedPreferences.Editor editor = loginPreferences.edit();
+		String savedUsername = loginPreferences.getString("uteid", "");
+		AlertDialog.Builder alt_bld = new AlertDialog.Builder(this);
+		final EditText input = new EditText(this);
+		input.setText(savedUsername);
+		alt_bld.setView(input);
+		alt_bld.setMessage("Please Enter Your UTEID")
+		.setCancelable(true)
+		.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				// storeUsername();
+				String username = input.getText().toString();
+				editor.putString("uteid", username);
+				editor.commit();
+				shared.checkLogInCredentials(context, handler, true, "You are not connected to the internet. Cannot check log in credentials at this time.");
 
-	//	public void launchPasswordDialog(View view) {
-	//		String savedPassword = loginPreferences.getString("password", "");
-	//		AlertDialog.Builder alt_bld = new AlertDialog.Builder(this);
-	//		final EditText input = new EditText(this);
-	//		input.setInputType(InputType.TYPE_CLASS_TEXT
-	//				| InputType.TYPE_TEXT_VARIATION_PASSWORD);
-	//		input.setText(savedPassword);
-	//		alt_bld.setView(input);
-	//		alt_bld.setMessage("Please Enter Your Password")
-	//		.setCancelable(true)
-	//		.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-	//			public void onClick(DialogInterface dialog, int id) {
-	//				// storeUsername();
-	//				String password = input.getText().toString();
-	//				editor.putString("password", password);
-	//				editor.commit();
-	//				shared.checkLogInCredentials(context, handler, true, "You are not connected to the internet. Cannot check log in credentials at this time.");
-	//			}
-	//		})
-	//		.setNegativeButton("Cancel",
-	//				new DialogInterface.OnClickListener() {
-	//			public void onClick(DialogInterface dialog, int id) {
-	//				// Action for ‘NO’ Button
-	//				dialog.cancel();
-	//			}
-	//		});
-	//
-	//		AlertDialog alert = alt_bld.create();
-	//		// Title for AlertDialog
-	//		// alert.setTitle("AlertDialogExample");
-	//		// Icon for AlertDialog
-	//		// alert.setIcon(R.drawable.ic_launcher);
-	//		alert.show();
-	//
-	//	}
+			}
+		})
+		.setNegativeButton("Cancel",
+				new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				// Action for ‘NO’ Button
+				dialog.cancel();
+			}
+		});
+
+		AlertDialog alert = alt_bld.create();
+		// Title for AlertDialog
+		// alert.setTitle("AlertDialogExample");
+		// Icon for AlertDialog
+		// alert.setIcon(R.drawable.ic_launcher);
+		alert.show();
+
+	}
+
+	public void launchPasswordDialog() {
+		SharedPreferences loginPreferences =  PreferenceManager.getDefaultSharedPreferences(context);
+		final SharedPreferences.Editor editor = loginPreferences.edit();
+		String savedPassword = loginPreferences.getString("password", "");
+		AlertDialog.Builder alt_bld = new AlertDialog.Builder(this);
+		final EditText input = new EditText(this);
+		input.setInputType(InputType.TYPE_CLASS_TEXT
+				| InputType.TYPE_TEXT_VARIATION_PASSWORD);
+		input.setText(savedPassword);
+		alt_bld.setView(input);
+		alt_bld.setMessage("Please Enter Your Password")
+		.setCancelable(true)
+		.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				// storeUsername();
+				String password = input.getText().toString();
+				editor.putString("password", password);
+				editor.commit();
+				shared.checkLogInCredentials(context, handler, true, "You are not connected to the internet. Cannot check log in credentials at this time.");
+			}
+		})
+		.setNegativeButton("Cancel",
+				new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				// Action for ‘NO’ Button
+				dialog.cancel();
+			}
+		});
+
+		AlertDialog alert = alt_bld.create();
+		// Title for AlertDialog
+		// alert.setTitle("AlertDialogExample");
+		// Icon for AlertDialog
+		// alert.setIcon(R.drawable.ic_launcher);
+		alert.show();
+
+	}
 
 }

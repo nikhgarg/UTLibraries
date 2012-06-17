@@ -2,29 +2,19 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <PreferenceCategory android:title="@string/logininfo" >
+        <Preference
+            android:key="@string/uteidlower"
+            android:summary="@string/uteidsummary"
+            android:title="@string/uteid" />
+        <Preference
+            android:key="@string/passwordlower"
+            android:summary="@string/uteidsummary"
+            android:title="@string/password" />
     </PreferenceCategory>
-
-    <EditTextPreference
-        android:dialogMessage="@string/uteidprompt"
-        android:dialogTitle="UTEID"
-        android:enabled="true"
-        android:key="@string/uteidlower"
-        android:negativeButtonText="@string/cancel"
-        android:positiveButtonText="@string/Ok"
-        android:summary="@string/uteidsummary"
-        android:title="@string/uteid" />
-    <EditTextPreference
-        android:dialogMessage="@string/passwordprompt"
-        android:dialogTitle="@string/password"
-        android:inputType="textPassword"
-        android:key="@string/passwordlower"
-        android:negativeButtonText="@string/cancel"
-        android:positiveButtonText="@string/Ok"
-        android:summary="@string/uteidsummary"
-        android:title="@string/password" />
-
     <PreferenceCategory android:title="@string/data" >
-        <Preference android:title="@string/deletedata" android:key="@string/deletedatakey"/>
+        <Preference
+            android:key="@string/deletedatakey"
+            android:title="@string/deletedata" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/miscellaneous" >
         <Preference

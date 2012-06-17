@@ -200,7 +200,7 @@ public class shared {
 						public void run() {
 							if (!correct && showToast){
 								int duration = Toast.LENGTH_LONG;
-								Toast toast = Toast.makeText(context, "Could not Log in. Please check UTEID/Password.", duration);
+								Toast toast = Toast.makeText(context, "Could not log in. Please check UTEID/Password combination.", duration);
 								toast.show();
 								displayedLogInCheck = false;
 

@@ -13,10 +13,8 @@
             android:id="@+id/titleList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:text="Large Text"
+
+            android:text="@string/large_text"
             android:textAppearance="?android:attr/textAppearanceMedium" >
         </TextView>
     </TableRow>
@@ -64,9 +62,7 @@
             android:id="@+id/otherInfoList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/publicationList"
-            android:text="Small Text"
+            android:text="@string/small_text"
             android:textAppearance="?android:attr/textAppearanceSmall" >
         </TextView>
     </TableRow>
@@ -81,8 +77,6 @@
             android:id="@+id/copiesTable"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/saveBookButton"
             android:stretchColumns="true" >
         </TableLayout>
     </TableRow>

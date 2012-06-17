@@ -11,7 +11,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_toLeftOf="@+id/reserveRoomButton"
-        android:text="Large Text"
+        android:text="@string/large_text"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
 
@@ -22,7 +22,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignRight="@+id/location"
         android:layout_below="@+id/location"
-        android:text="Small Text"
+        android:text="@string/small_text"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
 
@@ -33,7 +33,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/roomNumber"
         android:layout_toLeftOf="@+id/reserveRoomButton"
-        android:text="Small Text"
+        android:text="@string/small_text"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
 
@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/reqFeatures"
-        android:text="Small Text"
+        android:text="@string/small_text"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
@@ -60,7 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/seating"
-        android:text="Small Text"
+        android:text="@string/small_text"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </RelativeLayout>

@@ -34,7 +34,7 @@ public class parseResults4 {
 				nextKey=nextValue="";
 			}
 		}
-		int num = furtherParse.indexOf("bibInfoLabel");
+//		int num = furtherParse.indexOf("bibInfoLabel");
 	}
 
 	static int reccount = 0;

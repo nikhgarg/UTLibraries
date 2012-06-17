@@ -24,7 +24,7 @@
         android:layout_weight="1"
         android:gravity="center"
         android:minWidth="150dp"
-        android:text="call No"
+        android:text="@string/call_no"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textSize="12sp" />
 

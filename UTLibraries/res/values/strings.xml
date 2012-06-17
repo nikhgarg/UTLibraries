@@ -420,7 +420,7 @@
     <string name="autologinsummary">The app will login everytime you open it</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
-    <string name="Ok">Ok</string>
+    <string name="Ok">OK</string>
     <string name="uteidsummary">Don\'t worry, your data will stay on your device</string>
     <string name="login">Login Details</string>
     <string name="uteidprompt">Please enter your UTEID</string>
@@ -433,6 +433,11 @@
     <string name="uteidlower">uteid</string>
     <string name="passwordlower">password</string>
     <string name="deletedatakey">deletedata</string>
+    <string name="call_no">call No</string>
+    <string name="group_name">Group Name</string>
+    <string name="large_text">Large Text</string>
+    <string name="medium_text">Medium Text</string>
+    <string name="small_text">Small Text</string>
 
 
 </resources>
