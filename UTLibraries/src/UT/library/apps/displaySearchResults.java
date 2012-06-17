@@ -46,6 +46,18 @@ public class displaySearchResults extends Activity {
 	private Uri buildURIfromData(SearchData data) {
 		try {
 
+			//TODO: also fix sorting for numbers
+
+			//simple -> 			   http://catalog.lib.utexas.edu/search/?searchtype=X&SORT=D&searcharg=test&searchscope=29
+			//advanced search -> 	   http://catalog.lib.utexas.edu/search/X?SEARCH=(test)&searchscope=29&SORT=D
+			//numbers ->
+				//library of congress: http://catalog.lib.utexas.edu/search/c?SEARCH=1&searchscope=29&sortdropdown=-
+				//other call number:   http://catalog.lib.utexas.edu/search/h?SEARCH=2&searchscope=23&sortdropdown=-
+				//dewey call number:   http://catalog.lib.utexas.edu/search/e?SEARCH=3&searchscope=29&sortdropdown=-
+				//us doc #:			   http://catalog.lib.utexas.edu/search/g?SEARCH=4&searchscope=29&sortdropdown=-
+				//isbn:				   http://catalog.lib.utexas.edu/search/i?SEARCH=1&searchscope=29&sortdropdown=-
+				//oclc:				   http://catalog.lib.utexas.edu/search/o?SEARCH=6&searchscope=29&sortdropdown=-
+
 			Uri.Builder build = new Uri.Builder();
 			build.scheme("http");
 			build.path("//catalog.lib.utexas.edu/search/X");
@@ -83,17 +95,6 @@ public class displaySearchResults extends Activity {
 
 			}
 
-			//			// Language
-			//			if (data.language != 0)
-			//				build.appendQueryParameter(
-			//						"l",
-			//						getResources().getStringArray(R.array.langValues)[data.language]);
-			//			// Material Type
-			//			if (data.materialType != 0)
-			//				build.appendQueryParameter(
-			//						"m",
-			//						getResources().getStringArray(
-			//								R.array.materialtypeValues)[data.materialType]);
 
 			// Year Start, Year Start, 2 associated checkboxes
 			if (data.useYearStart)
