@@ -22,9 +22,9 @@
         <item>Perry-Castañeda Library (Group Study Rooms)</item>
         <item>Perry-Castañeda Library (Presentation Practice Rooms)</item>
     </string-array>
-        <string-array name="searchHeader">
+    <string-array name="searchHeader">
         <item>Advanced Search</item>
-        <item>By ISBN</item>
+        <item>By Number</item>
         <item>Simple</item>
     </string-array>
     <string-array name="timeHour">
@@ -221,6 +221,14 @@
         <item> Sort by relevance </item>
         <item> Sort by date </item>
         <item> Sort by title </item>
+    </string-array>
+    <string-array name="numberTypeTable">
+        <item>Library of Congress Call Number</item>
+        <item>Other Call Number</item>
+        <item>Dewey Call Number</item>
+        <item>US Document Number</item>
+        <item>ISBN/ISSN/Music Publisher Number/Library of Congress Control Number</item>
+        <item>OCLC Number</item>
     </string-array>
     <string-array name="langValues">
         <item></item>
@@ -443,6 +451,5 @@
     <string name="large_text">Large Text</string>
     <string name="medium_text">Medium Text</string>
     <string name="small_text">Small Text</string>
-
 
 </resources>

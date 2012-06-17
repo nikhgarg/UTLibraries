@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.FrameLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -16,12 +18,15 @@ import com.markupartist.android.widget.ActionBar.IntentAction;
 public class searchInputScreen extends Activity {
 
 	Context context;
+	LayoutInflater mInflater;
 
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		context = this;
+		mInflater = LayoutInflater.from(context);
+		View current;
 		if (!shared.connectedToInternet)
 		{
 			int duration = Toast.LENGTH_LONG;
@@ -32,6 +37,8 @@ public class searchInputScreen extends Activity {
 
 		//      TextView ttest = new TextView(this);
 		setContentView(R.layout.search_input_header);
+
+		final FrameLayout frame = (FrameLayout) findViewById(R.id.frame);
 
 		//		LinearLayout linlayout = (LinearLayout) findViewById(R.id.searchInputHeader);
 		//		View searchType = (Layout) getResources().getLayout(R.layout.advanced_search_input);
@@ -48,22 +55,29 @@ public class searchInputScreen extends Activity {
 		searchType.setOnItemSelectedListener(new OnItemSelectedListener(){
 
 			@Override
-			public void onItemSelected(AdapterView<?> arg0, View arg1,
+			public void onItemSelected(AdapterView<?> parent, View view,
 					int position, long id) {
-				Intent intent=null;
+				//				if (current!=null) removeView(current);
+				int count = frame.getChildCount();
+				View child;
+				//really bad way to do it, need to do with visibility
+				for (int i=0;i<count;i++)
+				{
+					 child = frame.getChildAt(i);
+					if(child!=null)
+						child.setVisibility(View.GONE);
+				}
 				switch(position){
 				case 0:
-					intent = new Intent(context, searchInputScreen_advanced.class); break;
+					mInflater.inflate(R.layout.advanced_search_input, frame, true); break;
+				case 1:
+					mInflater.inflate(R.layout.search_input_numbers, frame,true);break;
+				case 2:
+					mInflater.inflate(R.layout.search_input_simple, frame,true);break;
 				}
-				if (intent!=null)
-					startActivity(intent);
-				//TODO: change search input based on item position selected
-
 			}
-
 			@Override
 			public void onNothingSelected(AdapterView<?> arg0) {
-
 			}});
 	}
 }

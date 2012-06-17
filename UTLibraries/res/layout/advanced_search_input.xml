@@ -3,18 +3,11 @@
     android:layout_width="wrap_content"
     android:layout_height="fill_parent" >
 
-    <com.markupartist.android.widget.ActionBar
-        android:id="@+id/actionbar"
-        style="@style/customactionbar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
     <Spinner
         android:id="@+id/fieldtypeInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/actionbar"
         android:entries="@array/FieldTypeTable"
         android:prompt="@string/FieldPrompt" />
 
@@ -23,7 +16,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/actionbar"
         android:layout_toRightOf="@+id/fieldtypeInput"
         android:hint="@string/SearchString"
         android:inputType="textWebEditText" >
