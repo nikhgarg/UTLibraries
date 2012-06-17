@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -86,7 +87,8 @@ public class shared {
 	public static boolean logIntoUTDirect(Context context, DefaultHttpClient client)
 	{
 		try{
-			SharedPreferences loginPreferences = context.getSharedPreferences("login", Context.MODE_PRIVATE);
+			SharedPreferences loginPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+//			SharedPreferences loginPreferences = context.getSharedPreferences("login", Context.MODE_PRIVATE);
 			String username = loginPreferences.getString("uteid", "");
 			String password = loginPreferences.getString("password","");
 
@@ -116,7 +118,8 @@ public class shared {
 	public static boolean logIntoCatalog (Context context,DefaultHttpClient client)
 	{
 		try{
-			SharedPreferences loginPreferences = context.getSharedPreferences("login", Context.MODE_PRIVATE);
+			SharedPreferences loginPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+//			SharedPreferences loginPreferences = context.getSharedPreferences("login", Context.MODE_PRIVATE);
 			String username = loginPreferences.getString("uteid", "");
 			String password = loginPreferences.getString("password","");
 
@@ -161,10 +164,12 @@ public class shared {
 					DefaultHttpClient client = new DefaultHttpClient();
 					String html="";
 
-					SharedPreferences loginPreferences = context.getSharedPreferences("login", Context.MODE_PRIVATE);
+					SharedPreferences loginPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+//					SharedPreferences loginPreferences = context.getSharedPreferences("login", Context.MODE_PRIVATE);
 					String username = loginPreferences.getString("uteid", "");
 					String password = loginPreferences.getString("password","");
 
+					Log.i("shared", "uteid:" + username + " password: " + password);
 
 					HttpPost httppost = new HttpPost ("https://utdirect.utexas.edu/security-443/logon_check.logonform");
 					List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);

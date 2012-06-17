@@ -417,6 +417,21 @@
     <string name="longstringtest">asaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</string>
     <string name="available">AVAILABLE</string>
     <string name="about">About</string>
+    <string name="autologinsummary">The app will login everytime you open it</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="Ok">Ok</string>
+    <string name="uteidsummary">Don\'t worry, your data will stay on your device</string>
+    <string name="login">Login Details</string>
+    <string name="uteidprompt">Please enter your UTEID</string>
+    <string name="passwordprompt">Please enter your password</string>
+    <string name="logininfo">Login Info</string>
+    <string name="data">Data</string>
+    <string name="miscellaneous">Miscellaneous</string>
+    <string name="abouttext">"This app was developed by Nikhil Garg, an ECE and Plan II student at UT Austin, part of the Class of 2015. "</string>
+    <string name="deletedata">Delete all data</string>
+    <string name="uteidlower">uteid</string>
+    <string name="passwordlower">password</string>
 
 
 </resources>
