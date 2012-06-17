@@ -9,21 +9,22 @@ package UT.library.apps;
 
 public final class R {
     public static final class array {
-        public static final int FieldTypeTable=0x7f090006;
-        public static final int LanguageTable=0x7f090007;
-        public static final int LocationTable=0x7f090009;
-        public static final int MaterialTypeTable=0x7f090008;
-        public static final int PM=0x7f090003;
-        public static final int fieldtypeValues=0x7f09000e;
-        public static final int langValues=0x7f09000b;
-        public static final int materialtypeValues=0x7f09000c;
+        public static final int FieldTypeTable=0x7f090007;
+        public static final int LanguageTable=0x7f090008;
+        public static final int LocationTable=0x7f09000a;
+        public static final int MaterialTypeTable=0x7f090009;
+        public static final int PM=0x7f090004;
+        public static final int fieldtypeValues=0x7f09000f;
+        public static final int langValues=0x7f09000c;
+        public static final int materialtypeValues=0x7f09000d;
         public static final int reserveRoomBuildingNames=0x7f090000;
-        public static final int reserveRoomNumberOfPeople=0x7f090004;
-        public static final int reserveRoomRoomRequirements=0x7f090005;
-        public static final int searchandsorttable=0x7f09000a;
-        public static final int searchscopeValues=0x7f09000d;
-        public static final int timeHour=0x7f090001;
-        public static final int timeMinute=0x7f090002;
+        public static final int reserveRoomNumberOfPeople=0x7f090005;
+        public static final int reserveRoomRoomRequirements=0x7f090006;
+        public static final int searchHeader=0x7f090001;
+        public static final int searchandsorttable=0x7f09000b;
+        public static final int searchscopeValues=0x7f09000e;
+        public static final int timeHour=0x7f090002;
+        public static final int timeMinute=0x7f090003;
     }
     public static final class attr {
         /** <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
@@ -118,7 +119,8 @@ containing a value of this type.
         public static final int zoom_out=0x7f02003b;
     }
     public static final class id {
-        public static final int actionbar=0x7f0a000b;
+        public static final int actionbar=0x7f0a000c;
+        public static final int actionbar2=0x7f0a005d;
         public static final int actionbar_actions=0x7f0a0006;
         public static final int actionbar_home=0x7f0a0001;
         public static final int actionbar_home_bg=0x7f0a0003;
@@ -145,11 +147,12 @@ containing a value of this type.
         public static final int endHourSpinner=0x7f0a0038;
         public static final int endMinuteSpinner=0x7f0a0039;
         public static final int endPMSpinner=0x7f0a003a;
-        public static final int fieldtypeInput=0x7f0a000c;
+        public static final int fieldtypeInput=0x7f0a000b;
         public static final int finalizeButton=0x7f0a003b;
         public static final int goButton=0x7f0a0011;
         public static final int groupNameEnter=0x7f0a0030;
         public static final int hasFeatures=0x7f0a0059;
+        public static final int layout_Include=0x7f0a005f;
         public static final int libraryHours=0x7f0a003c;
         public static final int libraryMapHeader=0x7f0a003d;
         public static final int location=0x7f0a0050;
@@ -183,12 +186,14 @@ containing a value of this type.
         public static final int saveBookButton=0x7f0a0022;
         public static final int savedBooksListView=0x7f0a005b;
         public static final int screen=0x7f0a0000;
-        public static final int searchResultsLinearLayout=0x7f0a005c;
-        public static final int searchResultsListView5=0x7f0a005d;
+        public static final int searchInputHeader=0x7f0a005c;
+        public static final int searchInputSpinner=0x7f0a005e;
+        public static final int searchResultsLinearLayout=0x7f0a0060;
+        public static final int searchResultsListView5=0x7f0a0061;
         public static final int searchandsortInput=0x7f0a0014;
         public static final int searchstringInput=0x7f0a000d;
         public static final int seating=0x7f0a0054;
-        public static final int singleCopyInfoRow=0x7f0a005e;
+        public static final int singleCopyInfoRow=0x7f0a0062;
         public static final int startHourSpinner=0x7f0a0033;
         public static final int startMinuteSpinner=0x7f0a0034;
         public static final int startPMSpinner=0x7f0a0035;
@@ -233,9 +238,10 @@ containing a value of this type.
         public static final int room_results2=0x7f03000f;
         public static final int room_row=0x7f030010;
         public static final int saved_books=0x7f030011;
-        public static final int search_results5=0x7f030012;
-        public static final int settingslayout=0x7f030013;
-        public static final int single_copy_info_row=0x7f030014;
+        public static final int search_input_header=0x7f030012;
+        public static final int search_results5=0x7f030013;
+        public static final int settingslayout=0x7f030014;
+        public static final int single_copy_info_row=0x7f030015;
     }
     public static final class string {
         public static final int FieldPrompt=0x7f070006;

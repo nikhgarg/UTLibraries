@@ -41,6 +41,8 @@
         <activity android:name=".saveBooks" />
         <activity android:name=".libraryMaps" />
         <activity android:name=".finalizeRoomReservation" />
+        <activity android:name=".searchInputScreen_advanced" >
+        </activity>
         <activity
             android:name=".libraryMapsShowImages"
             android:screenOrientation="portrait" />

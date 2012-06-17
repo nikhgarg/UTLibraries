@@ -7,8 +7,7 @@
         android:id="@+id/actionbar"
         style="@style/customactionbar"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-		/>
+        android:layout_height="wrap_content" />
 
     <Spinner
         android:id="@+id/fieldtypeInput"
@@ -46,8 +45,8 @@
         android:id="@+id/yearstartInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/materialtypebutton"
         android:layout_alignParentLeft="true"
+        android:layout_below="@+id/materialtypebutton"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/goButton"
         android:hint="@string/yearstart"
@@ -124,17 +123,16 @@
         android:layout_above="@+id/searchandsortInput"
         android:layout_toRightOf="@+id/publisherInput"
         android:text="@string/usefield" />
-
+
     <Button
         android:id="@+id/materialtypebutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/locationInput"
-        android:text="@string/choosematerialtype"
         android:onClick="chooseMaterialType"
-         />
-
+        android:text="@string/choosematerialtype" />
+
     <Button
         android:id="@+id/chooselanguagebutton"
         android:layout_width="wrap_content"
@@ -142,7 +140,7 @@
         android:layout_alignBaseline="@+id/materialtypebutton"
         android:layout_alignBottom="@+id/materialtypebutton"
         android:layout_alignParentRight="true"
-        android:text="@string/chooselanguage"
-        android:onClick="chooseLanguage" />
+        android:onClick="chooseLanguage"
+        android:text="@string/chooselanguage" />
 
 </RelativeLayout>
