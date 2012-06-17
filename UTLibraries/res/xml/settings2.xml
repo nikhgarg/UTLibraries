@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <CheckBoxPreference
+        android:enabled="true"
+        android:selectable="true"
+        android:summary="@string/autologinsummary"
+        android:title="@string/autologin" />
+    <CheckBoxPreference />
+
+    <PreferenceCategory android:title="@string/logininfo" >
+    </PreferenceCategory>
+
+    <EditTextPreference
+        android:dialogMessage="@string/uteidprompt"
+        android:dialogTitle="UTEID"
+        android:enabled="true"
+        android:key="@string/uteidlower"
+        android:negativeButtonText="@string/cancel"
+        android:positiveButtonText="@string/Ok"
+        android:summary="@string/uteidsummary"
+        android:title="@string/uteid" />
+    <EditTextPreference
+        android:dialogMessage="@string/passwordprompt"
+        android:dialogTitle="@string/password"
+        android:inputType="textPassword"
+        android:key="@string/passwordlower"
+        android:negativeButtonText="@string/cancel"
+        android:positiveButtonText="@string/Ok"
+        android:summary="@string/uteidsummary"
+        android:title="@string/password" />
+
+    <PreferenceCategory android:title="@string/data" >
+        <Preference android:title="@string/deletedata" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/miscellaneous" >
+        <Preference
+            android:enabled="true"
+            android:selectable="true"
+            android:title="@string/about" android:key="@string/about"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>
