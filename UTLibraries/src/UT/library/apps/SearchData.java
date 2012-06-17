@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 public class SearchData implements Parcelable {
 
+	public int metaFieldType = 0; //eg: advanced search, by number, simple, etc
 	public int fieldType=0;
 	public String searchString = "";
 	public int location = 0;
@@ -28,6 +29,7 @@ public class SearchData implements Parcelable {
 	}
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeInt(metaFieldType);
 		dest.writeInt(fieldType);
 		dest.writeString(searchString);
 		dest.writeInt(location);
@@ -44,6 +46,7 @@ public class SearchData implements Parcelable {
 	}
 	public SearchData(Parcel in)
 	{
+		metaFieldType = in.readInt();
 		fieldType = in.readInt();
 		searchString = in.readString();
 		location = in.readInt();
