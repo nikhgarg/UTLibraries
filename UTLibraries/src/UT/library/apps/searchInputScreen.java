@@ -32,10 +32,6 @@ public class searchInputScreen extends Activity {
 	boolean[] materialType;
 	boolean[] languageType;
 
-	public static final int Advanced = 0;
-	public static final int Numbers = 1;
-	public static final int Simple = 2;
-
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -99,11 +95,11 @@ public class searchInputScreen extends Activity {
 //		}
 		View child = null;
 		switch(position){
-		case Advanced:
+		case SearchData.Advanced:
 			child = mInflater.inflate(R.layout.advanced_search_input, frame, true); break;
-		case Numbers:
+		case SearchData.Numbers:
 			child = mInflater.inflate(R.layout.search_input_numbers, frame,true);break;
-		case Simple:
+		case SearchData.Simple:
 			child = mInflater.inflate(R.layout.search_input_simple, frame,true);break;
 		}
 		searchMetaType = position;
@@ -176,7 +172,7 @@ public class searchInputScreen extends Activity {
 		fieldsData.matLength = 1;
 		//----------------------
 
-		if (smt==Advanced)//inputs for advanced search
+		if (smt==SearchData.Advanced)//inputs for advanced search
 		{
 			getEditText = (EditText) findViewById(R.id.publisherInput);
 			checkbox = (CheckBox) findViewById(R.id.publisherbox);
@@ -207,7 +203,7 @@ public class searchInputScreen extends Activity {
 			spinner = (Spinner) findViewById(R.id.fieldtypeInput);
 			fieldsData.fieldType = spinner.getSelectedItemPosition();
 		}
-		else if (smt == Numbers)
+		else if (smt == SearchData.Numbers)
 		{
 			spinner = (Spinner) findViewById(R.id.searchandsortInput);
 			fieldsData.searchAndSort = spinner.getSelectedItemPosition();
@@ -215,7 +211,7 @@ public class searchInputScreen extends Activity {
 			spinner = (Spinner) findViewById(R.id.numbertypeInput);
 			fieldsData.fieldType = spinner.getSelectedItemPosition();
 		}
-		else if (smt == Simple)
+		else if (smt == SearchData.Simple)
 		{
 
 		}

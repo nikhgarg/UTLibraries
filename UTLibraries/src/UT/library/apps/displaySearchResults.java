@@ -48,76 +48,93 @@ public class displaySearchResults extends Activity {
 
 			//TODO: also fix sorting for numbers
 
+			Uri.Builder build = new Uri.Builder();
+			build.scheme("http");
+			String buildpath = "//catalog.lib.utexas.edu/search/";
+			// Search String and Field Type
+			String toSearch = data.searchString;
+			String searchKey="";
+
 			//simple -> 			   http://catalog.lib.utexas.edu/search/?searchtype=X&SORT=D&searcharg=test&searchscope=29
 			//advanced search -> 	   http://catalog.lib.utexas.edu/search/X?SEARCH=(test)&searchscope=29&SORT=D
 			//numbers ->
-				//library of congress: http://catalog.lib.utexas.edu/search/c?SEARCH=1&searchscope=29&sortdropdown=-
-				//other call number:   http://catalog.lib.utexas.edu/search/h?SEARCH=2&searchscope=23&sortdropdown=-
-				//dewey call number:   http://catalog.lib.utexas.edu/search/e?SEARCH=3&searchscope=29&sortdropdown=-
-				//us doc #:			   http://catalog.lib.utexas.edu/search/g?SEARCH=4&searchscope=29&sortdropdown=-
-				//isbn:				   http://catalog.lib.utexas.edu/search/i?SEARCH=1&searchscope=29&sortdropdown=-
-				//oclc:				   http://catalog.lib.utexas.edu/search/o?SEARCH=6&searchscope=29&sortdropdown=-
+			//library of congress: http://catalog.lib.utexas.edu/search/c?SEARCH=1&searchscope=29&sortdropdown=-
+			//other call number:   http://catalog.lib.utexas.edu/search/h?SEARCH=2&searchscope=23&sortdropdown=-
+			//dewey call number:   http://catalog.lib.utexas.edu/search/e?SEARCH=3&searchscope=29&sortdropdown=-
+			//us doc #:			   http://catalog.lib.utexas.edu/search/g?SEARCH=4&searchscope=29&sortdropdown=-
+			//isbn:				   http://catalog.lib.utexas.edu/search/i?SEARCH=1&searchscope=29&sortdropdown=-
+			//oclc:				   http://catalog.lib.utexas.edu/search/o?SEARCH=6&searchscope=29&sortdropdown=-
+			if (data.metaFieldType == SearchData.Advanced)
+			{
+				buildpath +="X";
+				if (data.fieldType != 0)
+					toSearch = getResources().getStringArray(
+							R.array.fieldtypeValues)[data.fieldType]
+							                         + "(" + toSearch + ")";
+				searchKey = "SEARCH";
 
-			Uri.Builder build = new Uri.Builder();
-			build.scheme("http");
-			build.path("//catalog.lib.utexas.edu/search/X");
+				if (!data.materialType[0]){
+					for (int i=1;i<data.materialType.length;i++)
+					{
+						if (data.materialType[i])
+							build.appendQueryParameter("m", getResources().getStringArray(R.array.materialtypeValues)[i]);
+					}
+				}
+				if (!data.language[0]){
+					for (int i=1;i<data.language.length;i++)
+					{
+						if (data.language[i])
+							build.appendQueryParameter("l", getResources().getStringArray(R.array.langValues)[i]);
+					}
+				}
+			}
+			else if (data.metaFieldType == SearchData.Numbers)
+			{
+				switch(data.fieldType)
+				{
+				case 0: buildpath+='c';break;
+				case 1: buildpath+='h';break;
+				case 2: buildpath+='e';break;
+				case 3: buildpath+='g';break;
+				case 4: buildpath+='i';break;
+				case 5: buildpath+='o';break;
+				}
+				searchKey = "SEARCH";
+				// Year Start, Year Start, 2 associated checkboxes
+				if (data.useYearStart)
+					build.appendQueryParameter("Da", "" + data.yearStart);
+				if (data.useYearEnd)
+					build.appendQueryParameter("Db", "" + data.yearEnd);
+				// limit to available items
+				if (data.limitAvailable)
+					build.appendQueryParameter("availlim", "1");
+				// publisher
+				if (data.usePublisher)
+					build.appendQueryParameter("p", data.publisher);
 
-			// Search String and Field Type
-			String toSearch = data.searchString;
-			if (data.fieldType != 0)
-				toSearch = getResources().getStringArray(
-						R.array.fieldtypeValues)[data.fieldType]
-						                         + "(" + toSearch + ")";
-			build.appendQueryParameter("SEARCH", toSearch);
 
+			}
+			else if (data.metaFieldType == SearchData.Simple)
+			{
+				searchKey = "searcharg";
+			}
+
+			build.path(buildpath);
+			build.appendQueryParameter(searchKey, toSearch);
 			// Location
 			if (data.location != 0)
 				build.appendQueryParameter(
 						"searchscope",
 						getResources()
 						.getStringArray(R.array.searchscopeValues)[data.location]);
-			if (!data.materialType[0]){
-
-				for (int i=1;i<data.materialType.length;i++)
-				{
-					if (data.materialType[i])
-						build.appendQueryParameter("m", getResources().getStringArray(R.array.materialtypeValues)[i]);
-				}
-
-			}
-			if (!data.language[0]){
-
-				for (int i=1;i<data.language.length;i++)
-				{
-					if (data.language[i])
-						build.appendQueryParameter("l", getResources().getStringArray(R.array.langValues)[i]);
-				}
-
-			}
-
-
-			// Year Start, Year Start, 2 associated checkboxes
-			if (data.useYearStart)
-				build.appendQueryParameter("Da", "" + data.yearStart);
-			if (data.useYearEnd)
-				build.appendQueryParameter("Db", "" + data.yearEnd);
-			// limit to available items
-			if (data.limitAvailable)
-				build.appendQueryParameter("availlim", "1");
-			// publisher
-			if (data.usePublisher)
-				build.appendQueryParameter("p", data.publisher);
 
 			Uri uri = build.build();
 			Log.i("displaySearchResults", "uri built from data: " + uri.toString());
 			return uri;
 
 		} catch (Exception e) {
-			Log.i("displaySearchResults",
-					"Exception in buildURIfromData:" + e.toString());
-			TextView tv = new TextView(this);
-			tv.setText(e.toString());
-			setContentView(tv);
+			Log.e("displaySearchResults",
+					"Exception in buildURIfromData: " + e.toString(),e);
 			return null;
 		}
 
@@ -260,7 +277,7 @@ public class displaySearchResults extends Activity {
 	public void handleZeroResults()
 	{
 
-//		Looper.prepare();
+		//		Looper.prepare();
 		handler.post(new Runnable() {
 			@Override
 			public void run() {
@@ -324,7 +341,7 @@ public class displaySearchResults extends Activity {
 				listViewData.clear();
 				for (int i = start; i < end; i++)
 					listViewData.add(allBooks.get(i));
-//				Looper.prepare();
+				//				Looper.prepare();
 				handler.post(new Runnable() {
 					@Override
 					public void run() {
@@ -519,7 +536,7 @@ public class displaySearchResults extends Activity {
 		dialog = new ProgressDialog(this,R.style.CustomDialog);
 		dialog.setMessage("Loading. Please wait...");
 		dialog.show();
-//		dialog = ProgressDialog.show(this, "", "Loading. Please wait...", true);		activityRunning = true;
+		//		dialog = ProgressDialog.show(this, "", "Loading. Please wait...", true);		activityRunning = true;
 		// header = (TextView) findViewById(R.id.searchResultsHeader);
 		context = this;
 		ListView listview = (ListView) findViewById(R.id.searchResultsListView5);
@@ -529,18 +546,18 @@ public class displaySearchResults extends Activity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				//TODO: disabled onclick for beta test until can figure out how to fix this
-//				Log.i("displaySearchResult", "listview item clicked: "
-//						+ position);
-//				dialog = new ProgressDialog(context,R.style.CustomDialog);
-//				dialog.setMessage("Loading. Please wait...");
-//				dialog.show();
-////				dialog = ProgressDialog.show(this, "", "Loading. Please wait...", true);
-//				(new fetchBookDetail(position, position)).run(); // in UI
-//				// thread.
-//				// new Thread(new fetchBookDetail(currentViewNumEnd, //not
-//				// fetching details right now - slows down code too much
-//				// currentViewNumEnd + resultsPerPage)).start();
-//				displayBookDetail(position);
+				//				Log.i("displaySearchResult", "listview item clicked: "
+				//						+ position);
+				//				dialog = new ProgressDialog(context,R.style.CustomDialog);
+				//				dialog.setMessage("Loading. Please wait...");
+				//				dialog.show();
+				////				dialog = ProgressDialog.show(this, "", "Loading. Please wait...", true);
+				//				(new fetchBookDetail(position, position)).run(); // in UI
+				//				// thread.
+				//				// new Thread(new fetchBookDetail(currentViewNumEnd, //not
+				//				// fetching details right now - slows down code too much
+				//				// currentViewNumEnd + resultsPerPage)).start();
+				//				displayBookDetail(position);
 			}
 		});
 
@@ -570,8 +587,6 @@ public class displaySearchResults extends Activity {
 			URL libraryURL = new URL(httpget.getURI().toString());
 			// if (!pageLoading)
 			new Thread(new getURIdata(libraryURL)).start();
-
-
 
 			if (allResultsQed && !shownFirst) {
 				displayResults(0);
