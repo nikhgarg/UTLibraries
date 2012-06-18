@@ -55,15 +55,6 @@ public class displaySearchResults extends Activity {
 			String toSearch = data.searchString;
 			String searchKey="";
 
-			//simple -> 			   http://catalog.lib.utexas.edu/search/?searchtype=X&SORT=D&searcharg=test&searchscope=29
-			//advanced search -> 	   http://catalog.lib.utexas.edu/search/X?SEARCH=(test)&searchscope=29&SORT=D
-			//numbers ->
-			//library of congress: http://catalog.lib.utexas.edu/search/c?SEARCH=1&searchscope=29&sortdropdown=-
-			//other call number:   http://catalog.lib.utexas.edu/search/h?SEARCH=2&searchscope=23&sortdropdown=-
-			//dewey call number:   http://catalog.lib.utexas.edu/search/e?SEARCH=3&searchscope=29&sortdropdown=-
-			//us doc #:			   http://catalog.lib.utexas.edu/search/g?SEARCH=4&searchscope=29&sortdropdown=-
-			//isbn:				   http://catalog.lib.utexas.edu/search/i?SEARCH=1&searchscope=29&sortdropdown=-
-			//oclc:				   http://catalog.lib.utexas.edu/search/o?SEARCH=6&searchscope=29&sortdropdown=-
 			if (data.metaFieldType == SearchData.Advanced)
 			{
 				buildpath +="X";
@@ -72,6 +63,7 @@ public class displaySearchResults extends Activity {
 							R.array.fieldtypeValues)[data.fieldType]
 							                         + "(" + toSearch + ")";
 				searchKey = "SEARCH";
+				build.appendQueryParameter(searchKey, toSearch);
 
 				if (!data.materialType[0]){
 					for (int i=1;i<data.materialType.length;i++)
@@ -87,9 +79,14 @@ public class displaySearchResults extends Activity {
 							build.appendQueryParameter("l", getResources().getStringArray(R.array.langValues)[i]);
 					}
 				}
+				build.appendQueryParameter("SORT", getResources().getStringArray(R.array.searchandsortvalues)[data.searchAndSort]);
 			}
 			else if (data.metaFieldType == SearchData.Numbers)
 			{
+
+				//TODO for numbers: display search results differently (results either shows list of books in a
+				//table or immediately shows book details)
+
 				switch(data.fieldType)
 				{
 				case 0: buildpath+='c';break;
@@ -100,6 +97,8 @@ public class displaySearchResults extends Activity {
 				case 5: buildpath+='o';break;
 				}
 				searchKey = "SEARCH";
+				build.appendQueryParameter(searchKey, toSearch);
+
 				// Year Start, Year Start, 2 associated checkboxes
 				if (data.useYearStart)
 					build.appendQueryParameter("Da", "" + data.yearStart);
@@ -116,11 +115,15 @@ public class displaySearchResults extends Activity {
 			}
 			else if (data.metaFieldType == SearchData.Simple)
 			{
+				//simple -> http://catalog.lib.utexas.edu/search/?searchtype=X&SORT=D&searcharg=test&searchscope=29
 				searchKey = "searcharg";
+				build.appendQueryParameter("searchtype", "X");
+				build.appendQueryParameter("SORT", "D");
+				build.appendQueryParameter(searchKey, toSearch);
+
 			}
 
 			build.path(buildpath);
-			build.appendQueryParameter(searchKey, toSearch);
 			// Location
 			if (data.location != 0)
 				build.appendQueryParameter(
@@ -137,7 +140,6 @@ public class displaySearchResults extends Activity {
 					"Exception in buildURIfromData: " + e.toString(),e);
 			return null;
 		}
-
 	}
 
 	boolean startedParseThread = false;

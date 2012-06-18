@@ -5,9 +5,9 @@ import android.os.Parcelable;
 
 public class SearchData implements Parcelable {
 
-	public static final int Advanced = 0;
-	public static final int Numbers = 1;
-	public static final int Simple = 2;
+	public static final int Advanced = 1;
+	public static final int Numbers = 2;
+	public static final int Simple = 0;
 
 	public int metaFieldType = 0; //eg: advanced search, by number, simple, etc
 	public int fieldType=0;

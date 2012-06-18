@@ -14,16 +14,17 @@ public final class R {
         public static final int LocationTable=0x7f09000a;
         public static final int MaterialTypeTable=0x7f090009;
         public static final int PM=0x7f090004;
-        public static final int fieldtypeValues=0x7f090010;
-        public static final int langValues=0x7f09000d;
-        public static final int materialtypeValues=0x7f09000e;
-        public static final int numberTypeTable=0x7f09000c;
+        public static final int fieldtypeValues=0x7f090011;
+        public static final int langValues=0x7f09000e;
+        public static final int materialtypeValues=0x7f09000f;
+        public static final int numberTypeTable=0x7f09000d;
         public static final int reserveRoomBuildingNames=0x7f090000;
         public static final int reserveRoomNumberOfPeople=0x7f090005;
         public static final int reserveRoomRoomRequirements=0x7f090006;
         public static final int searchHeader=0x7f090001;
         public static final int searchandsorttable=0x7f09000b;
-        public static final int searchscopeValues=0x7f09000f;
+        public static final int searchandsortvalues=0x7f09000c;
+        public static final int searchscopeValues=0x7f090010;
         public static final int timeHour=0x7f090002;
         public static final int timeMinute=0x7f090003;
     }
@@ -242,10 +243,11 @@ containing a value of this type.
         public static final int saved_books=0x7f030011;
         public static final int search_input_header=0x7f030012;
         public static final int search_input_numbers=0x7f030013;
-        public static final int search_input_simple=0x7f030014;
-        public static final int search_results5=0x7f030015;
-        public static final int settingslayout=0x7f030016;
-        public static final int single_copy_info_row=0x7f030017;
+        public static final int search_input_numbers_temp=0x7f030014;
+        public static final int search_input_simple=0x7f030015;
+        public static final int search_results5=0x7f030016;
+        public static final int settingslayout=0x7f030017;
+        public static final int single_copy_info_row=0x7f030018;
     }
     public static final class string {
         public static final int FieldPrompt=0x7f070006;
@@ -277,6 +279,7 @@ containing a value of this type.
         public static final int empty=0x7f07001c;
         public static final int endtime=0x7f070023;
         public static final int enter=0x7f070027;
+        public static final int featurecomingsoon=0x7f070056;
         public static final int finalizeroomreservation=0x7f07003a;
         public static final int finearts=0x7f070029;
         public static final int floor=0x7f070036;

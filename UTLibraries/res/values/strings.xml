@@ -23,9 +23,9 @@
         <item>Perry-Castañeda Library (Presentation Practice Rooms)</item>
     </string-array>
     <string-array name="searchHeader">
+        <item>Simple</item>
         <item>Advanced Search</item>
         <item>By Number</item>
-        <item>Simple</item>
     </string-array>
     <string-array name="timeHour">
         <item>1</item>
@@ -221,6 +221,11 @@
         <item> Sort by relevance </item>
         <item> Sort by date </item>
         <item> Sort by title </item>
+    </string-array>
+    <string-array name="searchandsortvalues">
+        <item>D</item>
+        <item>DX</item>
+        <item>AX</item>
     </string-array>
     <string-array name="numberTypeTable">
         <item>Library of Congress Call Number</item>
@@ -451,5 +456,6 @@
     <string name="large_text">Large Text</string>
     <string name="medium_text">Medium Text</string>
     <string name="small_text">Small Text</string>
+    <string name="featurecomingsoon">Feature coming soon. Thank you for your patience.</string>
 
 </resources>
