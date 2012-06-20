@@ -188,6 +188,38 @@
         <item>Artifacts, Models, Realia</item>
         <item>Kits</item>
     </string-array>
+    <string-array name="hoursLocations">
+        <item> PCL (Perry Castaneda Library)</item>
+        <item> Architecture and Planning Library</item>
+        <item> Benson Latin American Collection</item>
+        <item> Briscoe Center for American History</item>
+        <item> Chemistry Library</item>
+        <item> Classics Library</item>
+        <item> Collections Deposit Library</item>
+        <item> Engineering (McKinney) Library</item>
+        <item> Fine Arts Library</item>
+        <item> Geology (Walter) Library</item>
+        <item> Harry Ransom Center</item>
+        <item> Life Science Library</item>
+        <item> Marine Science Library</item>
+        <item> Physics-Math-Astronomy Library</item>
+    </string-array>
+    <string-array name="hoursLocationsURLs">
+        <item>http://lib.utexas.edu/m/hours/byunit.php?loc=pcl</item>
+        <item>http://lib.utexas.edu/m/hours/byunit.php?loc=apl</item>
+        <item>http://lib.utexas.edu/m/hours/byunit.php?loc=blac</item>
+        <item>http://lib.utexas.edu/m/hours/byunit.php?loc=cah</item>
+        <item>http://lib.utexas.edu/m/hours/byunit.php?loc=chem</item>
+        <item>http://lib.utexas.edu/m/hours/byunit.php?loc=class</item>
+        <item>http://lib.utexas.edu/m/hours/byunit.php?loc=cdl</item>
+        <item>http://lib.utexas.edu/m/hours/byunit.php?loc=engin</item>
+        <item>http://lib.utexas.edu/m/hours/byunit.php?loc=fal</item>
+        <item>http://lib.utexas.edu/m/hours/byunit.php?loc=geo</item>
+        <item>http://www.hrc.utexas.edu/visit/</item>
+        <item>http://lib.utexas.edu/m/hours/byunit.php?loc=life</item>
+        <item>http://www.lib.utexas.edu/msl/about/hours_staff</item>
+        <item>http://lib.utexas.edu/m/hours/byunit.php?loc=pma</item>
+    </string-array>
     <string-array name="LocationTable">
         <item> ALL Locations</item>
         <item>-- Dissertations/Theses</item>

@@ -31,7 +31,7 @@
         <activity
             android:name=".displaySearchResults"
             android:screenOrientation="portrait" />
-        <activity android:name=".showLibraryTimings" />
+        <activity android:name=".showLibraryTimings2" />
         <activity android:name=".settings" />
         <activity
             android:name=".reserveStudyRoom"

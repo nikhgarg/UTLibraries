@@ -1,21 +1,35 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/relativeLayout1"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
-
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/searchInputHeader"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
 
     <com.markupartist.android.widget.ActionBar
         android:id="@+id/actionbar"
         style="@style/customactionbar"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-		/>
+        android:layout_height="wrap_content" />
 
-    <WebView
-        android:id="@+id/libraryHours"
+    <com.markupartist.android.widget.ActionBar
+        android:id="@+id/actionbar2"
+        style="@style/customactionbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <Spinner
+            android:id="@+id/locationSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:entries="@array/hoursLocations" />
+    </com.markupartist.android.widget.ActionBar>
+
+    <FrameLayout
+        android:id="@+id/frame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/actionbar" />
+        android:layout_height="match_parent" >
+    </FrameLayout>
 
-</RelativeLayout>
+</LinearLayout>

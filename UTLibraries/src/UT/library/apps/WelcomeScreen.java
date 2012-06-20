@@ -74,7 +74,7 @@ public class WelcomeScreen extends Activity {
 		Intent intent=null;
 		switch (position) {
 		case 0:	intent = new Intent(this, searchInputScreen.class);	break;
-		case 1: intent = new Intent(this, showLibraryTimings.class);break;
+		case 1: intent = new Intent(this, showLibraryTimings2.class);break;
 		//		case 2:	intent = new Intent(this, settings.class); break;
 		case 2: intent = new Intent(this,reserveStudyRoom.class); break;
 		case 3: intent = new Intent(this, renewBooks.class);break;
