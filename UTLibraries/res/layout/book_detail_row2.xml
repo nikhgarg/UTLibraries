@@ -16,7 +16,6 @@
         android:id="@+id/detailValue2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/detailLabel2"
         android:layout_toRightOf="@+id/detailLabel2"
         android:text="@string/small_text"
         android:textAppearance="?android:attr/textAppearanceSmall" />
