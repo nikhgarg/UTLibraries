@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -42,7 +41,6 @@ public class showLibraryTimings2 extends Activity {
 			toast.show();
 		}
 
-		//      TextView ttest = new TextView(this);
 		setContentView(R.layout.library_hours);
 
 		final FrameLayout frame = (FrameLayout) findViewById(R.id.frame);
@@ -70,9 +68,6 @@ public class showLibraryTimings2 extends Activity {
 		try {
 			webview = new WebView(context);
 
-			// --------------------------------copied code
-			// copied WebView code from http://developer.android.com/reference/android/webkit/WebView.html
-
 			final Activity activity = this;
 			webview.setWebViewClient(new WebViewClient() {
 
@@ -91,7 +86,6 @@ public class showLibraryTimings2 extends Activity {
 							+ description, Toast.LENGTH_SHORT).show();
 				}
 			});
-			// --------------------------------------end Copied
 
 			frame.addView(webview);
 			searchTypeSpinnerSelected(0,frame);
