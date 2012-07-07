@@ -119,7 +119,7 @@ public class BookBaseAdapter extends BaseAdapter {
 			holder.saveBook.setFocusable(false); // needed to make listview
 			// clickable
 			holder.saveBook.setOnClickListener(new OnClickListener() {
-				@SuppressWarnings({ "unchecked", "unused" })
+				@SuppressWarnings({ "unchecked" })
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub

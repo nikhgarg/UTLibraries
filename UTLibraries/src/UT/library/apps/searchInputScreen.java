@@ -5,13 +5,12 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.CheckBox;
@@ -40,7 +39,8 @@ public class searchInputScreen extends Activity {
 		setTitleColor(getResources().getColor(R.color.snow2));
 
 		mInflater = LayoutInflater.from(context);
-		View current;
+//		View current;
+		
 		if (!shared.connectedToInternet)
 		{
 			int duration = Toast.LENGTH_LONG;
