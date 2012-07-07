@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <com.markupartist.android.widget.ActionBar
+        android:id="@+id/actionbar"
+        style="@style/customactionbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+		/>
+
+    <TextView
+        android:id="@+id/autologinText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/actionbar"
+        android:text="@string/autologin"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <CheckBox
+        android:id="@+id/autologinButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/autologinText"
+        android:layout_alignBottom="@+id/autologinText"
+        android:layout_alignParentRight="true"
+        android:text="@string/empty" />
+
+    <TextView
+        android:id="@+id/saveloginText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/autologinText"
+        android:text="@string/savelogininfo"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <CheckBox
+        android:id="@+id/saveloginBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/autologinButton"
+        android:text="@string/empty" />
+
+    <Button
+        android:id="@+id/uteidButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/saveloginBox"
+        android:onClick="launchUteidDialog"
+        android:text="@string/store" />
+
+    <TextView
+        android:id="@+id/uteidText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/saveloginBox"
+        android:text="@string/uteid"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/passwordText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/uteidButton"
+        android:text="@string/password"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/passwordButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/uteidButton"
+        android:onClick="launchPasswordDialog"
+        android:text="@string/store" />
+    <Button
+        android:id="@+id/aboutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/passwordButton"
+        android:text="@string/about"
+        android:onClick="launchAboutDialog" />
+
+</RelativeLayout>

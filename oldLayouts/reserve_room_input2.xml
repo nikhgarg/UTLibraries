@@ -1,0 +1,161 @@
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tableLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/reserve_room_header"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TableRow
+        android:id="@+id/tableRow4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/date"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:onClick="launchDateDialog"
+            android:text="@string/enter" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/starttime"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="launchStartTimeDialog"
+            android:text="@string/enter" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/endtime"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="launchEndTimeDialog"
+            android:text="@string/enter" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/building"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="launchBuildingDialog"
+            android:text="@string/enter" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/numberofpeople"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <Spinner
+            android:id="@+id/numberPeopleSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/reserveRoomNumberOfPeople"
+            android:prompt="@string/autologin" />
+
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/roomrequirements"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="launchRoomDialog"
+            android:text="@string/enter" />
+    </TableRow>
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="enterRoomSearch"
+        android:text="@android:string/search_go" />
+
+    <TableRow
+        android:id="@+id/tableRow6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+    </TableRow>
+
+</TableLayout>
