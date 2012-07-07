@@ -20,6 +20,8 @@ public class libraryMaps extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setTitleColor(getResources().getColor(R.color.snow2));
+
 		String[] locations = { "PCL Map", "PCL Locations Guide",
 				"Architecture Library Maps",
 				"Benson Latin American Collection Map",

@@ -32,6 +32,7 @@ public class parseRoomResults {
 		return ret;
 	}
 
+	@SuppressWarnings("unused")
 	static ArrayList<ArrayList<Room>> extractRooms(String html) {
 		ArrayList<ArrayList<Room>> allRooms = new ArrayList<ArrayList<Room>>();
 
@@ -102,7 +103,7 @@ public class parseRoomResults {
 									temp.indexOf('\''));
 						} catch (Exception e) {
 //							e.printStackTrace();
-							Log.e("parseRoomResults",
+							if (shared.LOGGINGLEVEL>0) Log.e("parseRoomResults",
 							"could not parse reserve Link",e);
 						}
 						break;

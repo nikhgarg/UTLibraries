@@ -37,6 +37,8 @@ public class searchInputScreen extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		context = this;
+		setTitleColor(getResources().getColor(R.color.snow2));
+
 		mInflater = LayoutInflater.from(context);
 		View current;
 		if (!shared.connectedToInternet)

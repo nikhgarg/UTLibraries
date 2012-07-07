@@ -119,6 +119,8 @@ public class searchInputScreen_advanced extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		context = this;
+		setTitleColor(getResources().getColor(R.color.snow2));
+
 		if (!shared.connectedToInternet)
 		{
 			int duration = Toast.LENGTH_LONG;

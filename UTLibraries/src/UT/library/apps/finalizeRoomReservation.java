@@ -37,6 +37,7 @@ public class finalizeRoomReservation extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setTitleColor(getResources().getColor(R.color.snow2));
 
 		setContentView(R.layout.finalize_room_reservation);
 		context = this;
@@ -88,6 +89,7 @@ public class finalizeRoomReservation extends Activity {
 	String room;
 	String location;
 
+	@SuppressWarnings("unused")
 	public void finalizeReservation(View view) {
 
 		String groupName;
@@ -160,23 +162,24 @@ public class finalizeRoomReservation extends Activity {
 					startMinute, startPM, endHour, endMinute, endPM);
 		} catch (Exception e) {
 			// e.printStackTrace();
-			Log.e("finalizeRoomReservation", "error in finalizeReservation", e);
+			if (shared.LOGGINGLEVEL>0) Log.e("finalizeRoomReservation", "error in finalizeReservation", e);
 		}
-		Log.i("finalizeRoomReservation", html);
+		if (shared.LOGGINGLEVEL>0) Log.i("finalizeRoomReservation", html);
 	}
 
+	@SuppressWarnings("unused")
 	private void createConfirmationDialog(String html, String roomId,
 			String date, String groupName, String startHour,
 			String startMinute, String startPM, String endHour,
 			String endMinute, String endPM) {
 		boolean successtemp = false;
 		String result = parseRoomResults.parseConfirmation(html);
-		Log.i("finalizeRoomReservation",
+		if (shared.LOGGINGLEVEL>0) Log.i("finalizeRoomReservation",
 				"in createConfirmationDialog. result = " + result);
 		String reserveResult = result;
 		// showDialog(0);
 
-		Log.i("finalizeRoomReservation", "inside create dialog");
+		if (shared.LOGGINGLEVEL>0) Log.i("finalizeRoomReservation", "inside create dialog");
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		if (reserveResult.contains("Error"))
 			builder.setTitle("Error");

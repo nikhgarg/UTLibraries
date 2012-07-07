@@ -3,6 +3,7 @@ package UT.library.apps;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Gravity;
@@ -26,9 +27,11 @@ public class WelcomeScreen extends Activity {
 		super.onCreate(savedInstanceState);
 		context = this;
 		handler = new Handler();
+		setTitleColor(getResources().getColor(R.color.snow2));
+
 		// setContentView(R.layout.main);
 
-		String[] features = { "Search Catalog", "Library Hours", "Reserve Study Room", "Checked Out Books", "Saved Books", "Library Maps" };
+		String[] features = { "Search Catalog", "Checked Out Books", "Saved Books", "Reserve Study Room", "Library Hours", "Library Maps" };
 
 		setContentView(R.layout.main2);
 
@@ -74,11 +77,11 @@ public class WelcomeScreen extends Activity {
 		Intent intent=null;
 		switch (position) {
 		case 0:	intent = new Intent(this, searchInputScreen.class);	break;
-		case 1: intent = new Intent(this, showLibraryTimings2.class);break;
+		case 4: intent = new Intent(this, showLibraryTimings2.class);break;
 		//		case 2:	intent = new Intent(this, settings.class); break;
-		case 2: intent = new Intent(this,reserveStudyRoom.class); break;
-		case 3: intent = new Intent(this, renewBooks.class);break;
-		case 4: intent = new Intent(this, saveBooks.class);break;
+		case 3: intent = new Intent(this,reserveStudyRoom.class); break;
+		case 1: intent = new Intent(this, renewBooks.class);break;
+		case 2: intent = new Intent(this, saveBooks.class);break;
 		case 5: intent = new Intent(this, libraryMaps.class); break;
 
 		}

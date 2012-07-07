@@ -35,6 +35,7 @@ public class renewBooks extends Activity {
 	Handler handler;
 
 	private class displayCheckedOutBooksThread implements Runnable{
+		@SuppressWarnings("unused")
 		@Override
 		public void run() {
 			// log into UT library account
@@ -43,12 +44,12 @@ public class renewBooks extends Activity {
 			// get HTML for page
 			String html = shared.retrieveProtectedWebPage(context,client,
 			"https://catalog.lib.utexas.edu/patroninfo~S29/1160546/items");
-			Log.i("renewBooks", "html: " + html);
+			if (shared.LOGGINGLEVEL>0) Log.i("renewBooks", "html: " + html);
 
 			// store HTML into some sort of structure (with links and all)
 			cbooks = new ArrayList<cBook>();
 			cbooks = parseCheckedOut.parseCheckedOutBooks(html);
-			Log.i("renewBooks", "checked out books: " + cbooks.toString());
+			if (shared.LOGGINGLEVEL>0) Log.i("renewBooks", "checked out books: " + cbooks.toString());
 
 //			Looper.prepare();
 			handler.post(new Runnable(){
@@ -77,11 +78,12 @@ public class renewBooks extends Activity {
 			});
 		}
 	}
+	@SuppressWarnings("unused")
 	public void renewMarkedBooks(View view) {
 		try {
 
 			for (int i = 0; i < cbooks.size(); i++)
-				Log.i("renewBooks", "book: " + cbooks.get(i).title
+				if (shared.LOGGINGLEVEL>0) Log.i("renewBooks", "book: " + cbooks.get(i).title
 						+ " renew?: " + cbooks.get(i).renew);
 
 			HttpPost httppost = new HttpPost(
@@ -102,7 +104,7 @@ public class renewBooks extends Activity {
 			// update listview after renewing books
 			(new Thread(new displayCheckedOutBooksThread())).start();
 		} catch (Exception e) {
-			Log.e("renewBooks",
+			if (shared.LOGGINGLEVEL>0) Log.e("renewBooks",
 					"exception in renewMarkedBooks: ",e);
 		}
 	}
@@ -123,6 +125,7 @@ public class renewBooks extends Activity {
 		setContentView(R.layout.renew_books);
 		context = this;
 		handler = new Handler();
+		setTitleColor(getResources().getColor(R.color.snow2));
 
 		// code downloaded from
 		// https://github.com/johannilsson/android-actionbar/blob/master/README.md

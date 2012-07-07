@@ -110,9 +110,10 @@ public class sBookBaseAdapter extends BaseAdapter {
 //		holder.saveBook.setText("Delete");
 		holder.saveBook.setImageDrawable(context.getResources().getDrawable(R.drawable.cross));
 		holder.saveBook.setOnClickListener(new OnClickListener() {
+			@SuppressWarnings("unused")
 			@Override
 			public void onClick(View v) {
-				Log.i("sBookBaseAdapter", "removing on click. the arrayList: " + bookArrayList.toString());
+				if (shared.LOGGINGLEVEL>0) Log.i("sBookBaseAdapter", "removing on click. the arrayList: " + bookArrayList.toString());
 				bookArrayList.remove(position);
 				notifyDataSetChanged();
 			}

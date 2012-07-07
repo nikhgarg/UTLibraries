@@ -32,7 +32,7 @@ public class saveBooks extends Activity {
 
 	// retrieve books from file
 	//returns true if there are books saved, false otherwise
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "unused" })
 	public boolean retrieveSavedBooks(){
 		try{
 			FileInputStream fileIn = context.openFileInput("Saved_Books");
@@ -41,9 +41,9 @@ public class saveBooks extends Activity {
 			//			{
 			Object nextObject = in.readObject();
 			if (nextObject!=null && nextObject instanceof ArrayList<?>){
-				Log.i("saveBooks", nextObject.toString() + "\n" + nextObject.getClass());
+				if (shared.LOGGINGLEVEL>0) Log.i("saveBooks", nextObject.toString() + "\n" + nextObject.getClass());
 				saved = (ArrayList<Book>)nextObject;
-				Log.i("saveBooks", saved.toString());
+				if (shared.LOGGINGLEVEL>0) Log.i("saveBooks", saved.toString());
 
 				oldSize = saved.size();
 			}
@@ -68,7 +68,7 @@ public class saveBooks extends Activity {
 		}
 		catch(Exception e)
 		{
-			Log.e("saveBooks", "exception in retrieveSavedBooks", e);
+			if (shared.LOGGINGLEVEL>0) Log.e("saveBooks", "exception in retrieveSavedBooks", e);
 			return false;
 		}
 		return saved.size()>0;
@@ -76,6 +76,7 @@ public class saveBooks extends Activity {
 
 	private class displaySavedBooks implements Runnable{
 
+		@SuppressWarnings("unused")
 		@Override
 		// display retrieved books
 		public void run() {
@@ -121,7 +122,7 @@ public class saveBooks extends Activity {
 					});
 
 				} catch (Exception e) {
-					Log.e("saveBooks", "Exception in displaySavedBooks", e);
+					if (shared.LOGGINGLEVEL>0) Log.e("saveBooks", "Exception in displaySavedBooks", e);
 				}
 			}
 		}
@@ -129,6 +130,7 @@ public class saveBooks extends Activity {
 
 
 	// rewrite the file (so to remove books that were deleted)
+	@SuppressWarnings("unused")
 	public void updateSaveFile() {
 		try {
 			String FILENAME = "Saved_Books";
@@ -140,14 +142,14 @@ public class saveBooks extends Activity {
 				oos = new ObjectOutputStream(fos);
 				for (Book b : saved) {
 					oos.writeObject(b);
-					Log.i("saveBooks", "saved Book title: " + b.title);
+					if (shared.LOGGINGLEVEL>0) Log.i("saveBooks", "saved Book title: " + b.title);
 				}
 				oos.close();
 				fos.close();
 			}
 			else return;
 		} catch (Exception e) {
-			Log.e("saveBooks", "exception updateSaveFile: ", e);
+			if (shared.LOGGINGLEVEL>0) Log.e("saveBooks", "exception updateSaveFile: ", e);
 		}
 
 	}
@@ -156,13 +158,14 @@ public class saveBooks extends Activity {
 	//with new version of book array
 	private class checkArrayChanged implements Runnable{
 
+		@SuppressWarnings("unused")
 		@Override
 		public void run() {
 			while(activityRunning)
 			{
 				if (oldSize!=saved.size())
 				{
-					Log.i("saveBooks", "array changed. oldSize: " + oldSize + ". new Array: " + saved.toString());
+					if (shared.LOGGINGLEVEL>0) Log.i("saveBooks", "array changed. oldSize: " + oldSize + ". new Array: " + saved.toString());
 					//overwrite saved book file
 					try{
 						String FILENAME = "Saved_Books";
@@ -178,7 +181,7 @@ public class saveBooks extends Activity {
 					}
 					catch(Exception e)
 					{
-						Log.e("saveBooks", "exception in checkArrayChanged: ",e);
+						if (shared.LOGGINGLEVEL>0) Log.e("saveBooks", "exception in checkArrayChanged: ",e);
 					}
 				}
 			}
@@ -201,6 +204,8 @@ public class saveBooks extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		context = this;
+		setTitleColor(getResources().getColor(R.color.snow2));
+
 		dialog = new ProgressDialog(this,R.style.CustomDialog);
 		dialog.setMessage("Loading. Please wait...");
 		dialog.show();

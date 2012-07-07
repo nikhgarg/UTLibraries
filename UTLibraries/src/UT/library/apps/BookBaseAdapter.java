@@ -52,6 +52,7 @@ public class BookBaseAdapter extends BaseAdapter {
 		return position;
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		try{
@@ -118,7 +119,7 @@ public class BookBaseAdapter extends BaseAdapter {
 			holder.saveBook.setFocusable(false); // needed to make listview
 			// clickable
 			holder.saveBook.setOnClickListener(new OnClickListener() {
-				@SuppressWarnings("unchecked")
+				@SuppressWarnings({ "unchecked", "unused" })
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
@@ -138,10 +139,10 @@ public class BookBaseAdapter extends BaseAdapter {
 							// everytime
 							if (nextObject != null
 									&& nextObject instanceof ArrayList<?>) {
-								Log.i("BookBaseAdapter", "class of nextObject: "
+								if (shared.LOGGINGLEVEL>0) Log.i("BookBaseAdapter", "class of nextObject: "
 										+ nextObject.getClass().toString());
 								savedBooks = (ArrayList<Book>) nextObject;
-								Log.i("BookBaseAdapter", savedBooks.toString());
+								if (shared.LOGGINGLEVEL>0) Log.i("BookBaseAdapter", savedBooks.toString());
 							}
 							in.close();
 							fileIn.close();
@@ -164,7 +165,7 @@ public class BookBaseAdapter extends BaseAdapter {
 						fos.close();
 
 					} catch (Exception e) {
-						Log.e("BookBaseAdapter", "exception in onClick", e);
+						if (shared.LOGGINGLEVEL>0) Log.e("BookBaseAdapter", "exception in onClick", e);
 					}
 				}
 			});
@@ -173,7 +174,7 @@ public class BookBaseAdapter extends BaseAdapter {
 		}
 		catch(Exception e)
 		{
-			Log.e("BookBaseAdapter", "inside getView", e);
+			if (shared.LOGGINGLEVEL>0) Log.e("BookBaseAdapter", "inside getView", e);
 			return null;
 		}
 	}

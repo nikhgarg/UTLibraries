@@ -40,11 +40,14 @@ public class displayRoomResults extends Activity {
 	LayoutInflater mInflater;
 	View view;
 	Handler handler;
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		bundle = getIntent().getExtras();
+		setTitleColor(getResources().getColor(R.color.snow2));
+
 		dialog = new ProgressDialog(this,R.style.CustomDialog);
 		dialog.setMessage("Loading. Please wait...");
 		dialog.show();
@@ -70,6 +73,7 @@ public class displayRoomResults extends Activity {
 
 	private class getDataThread implements Runnable{
 
+		@SuppressWarnings("unused")
 		@Override
 		public void run() {
 //			Looper.prepare?();
@@ -80,7 +84,7 @@ public class displayRoomResults extends Activity {
 
 			String uri = createURIfromData(bundle);
 			String html = shared.retrieveProtectedWebPage(context,client, uri);
-			Log.i("displayRoomResults", "getDataThread html:" + html);
+			if (shared.LOGGINGLEVEL>0) Log.i("displayRoomResults", "getDataThread html:" + html);
 			//parse rooms page
 			allRooms = parseRoomResults.extractRooms(html);
 			handler.post(new Runnable(){
@@ -109,6 +113,7 @@ public class displayRoomResults extends Activity {
 		}
 	}
 
+	@SuppressWarnings("unused")
 	public void displayAllRooms (ArrayList<ArrayList<Room>> rooms, LinearLayout linLayout, LayoutInflater mInflater, View view)
 	{
 		Context context = this;
@@ -119,7 +124,7 @@ public class displayRoomResults extends Activity {
 
 			for (ArrayList<Room> byLocation : rooms)
 			{
-				Log.i("displayRoomResults","in by Location");
+				if (shared.LOGGINGLEVEL>0) Log.i("displayRoomResults","in by Location");
 				TextView tv = new TextView(context);
 				tv.setText(byLocation.get(0).location);
 				tv.setTypeface(Typeface.DEFAULT_BOLD, Typeface.BOLD);
@@ -157,7 +162,7 @@ public class displayRoomResults extends Activity {
 				table.addView(header);
 				inner = 0;
 				for (Room room: byLocation){
-					Log.i("displayRoomResults","in room");
+					if (shared.LOGGINGLEVEL>0) Log.i("displayRoomResults","in room");
 
 					TableRow roomRow = (TableRow) mInflater.inflate(R.layout.room_row, null);
 					roomRow.setGravity(Gravity.CENTER);
@@ -186,7 +191,7 @@ public class displayRoomResults extends Activity {
 			}
 		}
 		catch (Exception e) {
-			Log.e("displayRoomResults", "Exception in displayRooms",e);
+			if (shared.LOGGINGLEVEL>0) Log.e("displayRoomResults", "Exception in displayRooms",e);
 		}
 		ScrollView sv = new ScrollView(context);
 		sv.addView(linLayout);

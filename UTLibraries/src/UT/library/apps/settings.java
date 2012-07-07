@@ -34,6 +34,7 @@ public class settings extends PreferenceActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.settingslayout);
 		addPreferencesFromResource(R.xml.settings2);
+		setTitleColor(getResources().getColor(R.color.snow2));
 
 
 

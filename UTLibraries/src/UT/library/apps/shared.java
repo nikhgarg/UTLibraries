@@ -27,6 +27,8 @@ import android.widget.Toast;
 //class for shared data and content, including Log in method, and client for connection
 public class shared {
 
+	public static final int LOGGINGLEVEL = 0;
+
 	public static String getHTMLfromURL(String urlstring) throws Exception { //should probably catch exception instead of throwing it
 		URL url = new URL(urlstring);
 		BufferedReader in = new BufferedReader(new InputStreamReader(
@@ -51,13 +53,14 @@ public class shared {
 	public static boolean displayedLogInCheck = false;
 	public static boolean displayedInternetCheck = false;
 
+	@SuppressWarnings("unused")
 	public static String retrieveProtectedWebPage (Context context,DefaultHttpClient client, String uri)
 	{
 		String html = "";
 
 		try{
 			boolean success = logIntoUTDirect(context, client);
-			Log.i("shared", "retrieveprotectedwebpage log in success: " + success);
+			if (shared.LOGGINGLEVEL>0) Log.i("shared", "retrieveprotectedwebpage log in success: " + success);
 			HttpGet httpget = new HttpGet();
 			httpget.setURI(new URI(uri));
 			HttpResponse response = client.execute(httpget);
@@ -78,12 +81,13 @@ public class shared {
 		{
 			//			Toast toast = Toast.makeText(context, "Could not retrive web page. Please check network connection and try again later.", Toast.LENGTH_SHORT);
 			//			toast.show();
-			Log.e("shared",
+			if (shared.LOGGINGLEVEL>0) Log.e("shared",
 					"exception in retrieveProtectedWebPage: ",e);
 			return null;
 		}
 	}
 
+	@SuppressWarnings("unused")
 	public static boolean logIntoUTDirect(Context context, DefaultHttpClient client)
 	{
 		try{
@@ -103,7 +107,7 @@ public class shared {
 		}
 		catch(Exception e)
 		{
-			Log.e("shared",
+			if (shared.LOGGINGLEVEL>0) Log.e("shared",
 					"exception in logIntoUTDirect: ",e);
 			loggedIntoUTDirect = false;
 			//			Toast toast = Toast.makeText(context, "Could not Log in. Please check UTEID/Password and network connection.", Toast.LENGTH_SHORT);
@@ -115,6 +119,7 @@ public class shared {
 
 	}
 
+	@SuppressWarnings("unused")
 	public static boolean logIntoCatalog (Context context,DefaultHttpClient client)
 	{
 		try{
@@ -135,7 +140,7 @@ public class shared {
 		}
 		catch(Exception e)
 		{
-			Log.i("shared",
+			if (shared.LOGGINGLEVEL>0) Log.i("shared",
 					"exception in logIntoCatalog: " + e.toString());
 			loggedIntoCatalog = false;
 			//			Toast toast = Toast.makeText(context, "Could not Log in. Please check UTEID/Password and network connection.", Toast.LENGTH_SHORT);
@@ -155,6 +160,7 @@ public class shared {
 		final String text = textvar;
 
 		(new Thread(new Runnable(){
+			@SuppressWarnings("unused")
 			@Override
 			public void run() {
 				boolean correcttemp = false;
@@ -169,7 +175,7 @@ public class shared {
 					String username = loginPreferences.getString("uteid", "");
 					String password = loginPreferences.getString("password","");
 
-					Log.i("shared", "uteid:" + username + " password: " + password);
+					if (shared.LOGGINGLEVEL>0) Log.i("shared", "uteid:" + username + " password: " + password);
 
 					HttpPost httppost = new HttpPost ("https://utdirect.utexas.edu/security-443/logon_check.logonform");
 					List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
@@ -218,7 +224,7 @@ public class shared {
 				}
 				catch(Exception e)
 				{
-					Log.e("shared", "checkLogInCredentials",e);
+					if (shared.LOGGINGLEVEL>0) Log.e("shared", "checkLogInCredentials",e);
 					logInWorks = false;
 				}
 //				return correcttemp;

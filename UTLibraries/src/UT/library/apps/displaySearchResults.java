@@ -43,6 +43,7 @@ public class displaySearchResults extends Activity {
 	int resultsPerPage = 5;
 	TextView header;
 
+	@SuppressWarnings("unused")
 	private Uri buildURIfromData(SearchData data) {
 		try {
 
@@ -132,11 +133,11 @@ public class displaySearchResults extends Activity {
 						.getStringArray(R.array.searchscopeValues)[data.location]);
 
 			Uri uri = build.build();
-			Log.i("displaySearchResults", "uri built from data: " + uri.toString());
+			if (shared.LOGGINGLEVEL>0) Log.i("displaySearchResults", "uri built from data: " + uri.toString());
 			return uri;
 
 		} catch (Exception e) {
-			Log.e("displaySearchResults",
+			if (shared.LOGGINGLEVEL>0) Log.e("displaySearchResults",
 					"Exception in buildURIfromData: " + e.toString(),e);
 			return null;
 		}
@@ -154,6 +155,7 @@ public class displaySearchResults extends Activity {
 			libraryURL = url;
 		}
 
+		@SuppressWarnings("unused")
 		public void run() {
 			pageLoading = true;
 			String catalogHTML = "";
@@ -188,7 +190,7 @@ public class displaySearchResults extends Activity {
 									tempBooks.get(i).numberinorder = i
 									+ oldSize + 1;
 								allBooks.addAll(tempBooks);
-								Log.i("displaySearchResults",
+								if (shared.LOGGINGLEVEL>0) Log.i("displaySearchResults",
 										"" + allBooks.size());
 								if (allBooks.size() >= resultsPerPage
 										&& !shownFirst) {
@@ -205,7 +207,7 @@ public class displaySearchResults extends Activity {
 								parseResults4.parsePage(catalogHTML); // parse
 								// top
 
-								Log.i("displaySearchResults",
+								if (shared.LOGGINGLEVEL>0) Log.i("displaySearchResults",
 										"parsed page again, book size currently:"
 										+ allBooks.size()
 										+ "\n next page url:"
@@ -253,7 +255,7 @@ public class displaySearchResults extends Activity {
 						parseResults4.nextPageUrl = null;
 					} else
 						libraryURL = null;
-					Log.i("displaySearchResults", "next page URL:" + libraryURL);
+					if (shared.LOGGINGLEVEL>0) Log.i("displaySearchResults", "next page URL:" + libraryURL);
 
 				} catch (Exception e) {
 					handler.post(new Runnable(){
@@ -269,7 +271,7 @@ public class displaySearchResults extends Activity {
 
 						}
 					});
-					Log.e("displaySearchResults", "Exception in getURIdata",e);
+					if (shared.LOGGINGLEVEL>0) Log.e("displaySearchResults", "Exception in getURIdata",e);
 					return;
 				}
 			}
@@ -304,6 +306,7 @@ public class displaySearchResults extends Activity {
 	int currentViewNumStart = 0; // start index of books currently displayed
 	int currentViewNumEnd = 0; // end index of books currently displayed
 
+	@SuppressWarnings("unused")
 	public void displayResults(int start) {
 		// to do: prettify
 		// add display if no results
@@ -320,11 +323,11 @@ public class displaySearchResults extends Activity {
 			// }
 			// });
 
-			Log.i("displaySearchResults", "inside display Results");
+			if (shared.LOGGINGLEVEL>0) Log.i("displaySearchResults", "inside display Results");
 			if (start < allBooks.size()) {
 				while (start + resultsPerPage > allBooks.size()
 						&& (!allResultsQed) && shownFirst) {
-					Log.i("displaySearchResult",
+					if (shared.LOGGINGLEVEL>0) Log.i("displaySearchResult",
 							"waiting for all to load. start: " + start + " resultsPerPage: " + resultsPerPage + "allBooks.size: "
 							+ allBooks.size() + " allResultsQed: "
 							+ allResultsQed + " shown First: "
@@ -337,7 +340,7 @@ public class displaySearchResults extends Activity {
 						allBooks.size());
 				currentViewNumStart = start;
 				currentViewNumEnd = end;
-				Log.i("displaySearchResults",
+				if (shared.LOGGINGLEVEL>0) Log.i("displaySearchResults",
 				"inside display Results if statement");
 
 				listViewData.clear();
@@ -355,21 +358,21 @@ public class displaySearchResults extends Activity {
 						// header.setText(String.format("%d-%d/%d",
 						// currentViewNumStart + 1, currentViewNumEnd,
 						// parseResults4.numResults));
-						Log.i("displaSearchResults", "displayResults: inside handler");
+						if (shared.LOGGINGLEVEL>0) Log.i("displaSearchResults", "displayResults: inside handler");
 						ListView listview = (ListView) findViewById(R.id.searchResultsListView5);
 						listview.setAdapter(new BookBaseAdapter(context,
 								listViewData));
 					}
 				});
 				// bookAdapter.notifyDataSetChanged();
-				Log.i("displaySearchResults",
+				if (shared.LOGGINGLEVEL>0) Log.i("displaySearchResults",
 						"set adaptor for display layout with arraylist size"
 						+ listViewData.size());
 
 			}
 
 		} catch (Exception e) {
-			Log.e("displaySearchResults", "Exception in displayResults: ", e);
+			if (shared.LOGGINGLEVEL>0) Log.e("displaySearchResults", "Exception in displayResults: ", e);
 		}
 	}
 
@@ -380,13 +383,14 @@ public class displaySearchResults extends Activity {
 			// next icon
 		}
 
+		@SuppressWarnings("unused")
 		@Override
 		public void performAction(View view) {
 			try {
 				if (currentViewNumEnd < allBooks.size()
 						&& allBooks.get(currentViewNumEnd).bookDetails.size() != 0) {
 					Book b = allBooks.get(currentViewNumEnd);
-					Log.i("displaySearchResults", "Book already has detail:"
+					if (shared.LOGGINGLEVEL>0) Log.i("displaySearchResults", "Book already has detail:"
 							+ b.title + " " + b.bookDetails.toString());
 				} else if (currentViewNumEnd < allBooks.size()
 						&& allBooks.get(currentViewNumEnd).bookDetails.size() == 0) {
@@ -394,10 +398,10 @@ public class displaySearchResults extends Activity {
 					// fetching details right now - slows down code too much
 					// currentViewNumEnd + resultsPerPage)).start();
 				} else
-					Log.i("displaySearchResults", "book out of range");
+					if (shared.LOGGINGLEVEL>0) Log.i("displaySearchResults", "book out of range");
 
 			} catch (Exception e) {
-				Log.i("displaySearchResults",
+				if (shared.LOGGINGLEVEL>0) Log.i("displaySearchResults",
 						"Exception in nextPage:" + e.toString());
 			}
 			displayResults(currentViewNumEnd);
@@ -430,13 +434,14 @@ public class displaySearchResults extends Activity {
 			this.end = end1;
 		}
 
+		@SuppressWarnings("unused")
 		public void run() {
-			// Log.i("displaySearchResults","inside run method for fetching book details");
+			// if (shared.LOGGINGLEVEL>0) Log.i("displaySearchResults","inside run method for fetching book details");
 			try {
 				for (int i = start; i < end; i++) {
 					if (!activityRunning)
 						finish();
-					// Log.i("displaySearchResults","inside for loop for fetching book details");
+					// if (shared.LOGGINGLEVEL>0) Log.i("displaySearchResults","inside for loop for fetching book details");
 
 					if (i < allBooks.size()) {
 						Book b = allBooks.get(i);
@@ -446,18 +451,19 @@ public class displaySearchResults extends Activity {
 							// URL detailURL = new URL (b.detailURL);
 							String HTML = shared.getHTMLfromURL(b.detailURL);
 							parseResults4.parseBookDetails(HTML, b);
-							Log.i("displaySearchResults",
+							if (shared.LOGGINGLEVEL>0) Log.i("displaySearchResults",
 									"fetched book details for book:" + b.title);
 						}
 					}
 				}
 			} catch (Exception e) {
-				Log.i("displaySearchResults", "Exception in fetchBookDetail"
+				if (shared.LOGGINGLEVEL>0) Log.i("displaySearchResults", "Exception in fetchBookDetail"
 						+ e.toString());
 			}
 		}
 	}
 
+	@SuppressWarnings("unused")
 	public void displayBookDetail(int position) {
 		try {
 			Book b = allBooks.get(position + currentViewNumStart);
@@ -494,12 +500,12 @@ public class displaySearchResults extends Activity {
 				setContentView(detailsTable);
 				// setContentView(R.layout.book_detail_layout2);
 			} else
-				Log.i("displaySearchResults", "book detail not fetched yet:"
+				if (shared.LOGGINGLEVEL>0) Log.i("displaySearchResults", "book detail not fetched yet:"
 						+ b.title);
 		}
 
 		catch (Exception e) {
-			Log.i("displaySearchResults", "Exception in displayBookDetail");
+			if (shared.LOGGINGLEVEL>0) Log.i("displaySearchResults", "Exception in displayBookDetail");
 			TextView tv = new TextView(this);
 			tv.setText(e.toString());
 			setContentView(tv);
@@ -530,9 +536,11 @@ public class displaySearchResults extends Activity {
 	ActionBar actionBar;
 
 	/** Called when the activity is first created. */
+	@SuppressWarnings("unused")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setTitleColor(getResources().getColor(R.color.snow2));
 
 		setContentView(R.layout.search_results5);
 		dialog = new ProgressDialog(this,R.style.CustomDialog);
@@ -548,7 +556,7 @@ public class displaySearchResults extends Activity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				//TODO: disabled onclick for beta test until can figure out how to fix this
-				//				Log.i("displaySearchResult", "listview item clicked: "
+				//				if (shared.LOGGINGLEVEL>0) Log.i("displaySearchResult", "listview item clicked: "
 				//						+ position);
 				//				dialog = new ProgressDialog(context,R.style.CustomDialog);
 				//				dialog.setMessage("Loading. Please wait...");
@@ -598,7 +606,7 @@ public class displaySearchResults extends Activity {
 			// fetch
 			// book // details // for // first // page
 		} catch (Exception e) {
-			Log.i("displaySearchResults",
+			if (shared.LOGGINGLEVEL>0) Log.i("displaySearchResults",
 					"Exception in getResultsPage:" + e.toString());
 		}
 

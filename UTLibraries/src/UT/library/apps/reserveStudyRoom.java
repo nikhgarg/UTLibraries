@@ -77,6 +77,7 @@ public class reserveStudyRoom extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.reserve_room_input3);
 		shared.checkLogInandInternetHeader(this);
+		setTitleColor(getResources().getColor(R.color.snow2));
 
 		// code downloaded from
 		// https://github.com/johannilsson/android-actionbar/blob/master/README.md

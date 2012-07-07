@@ -14,9 +14,11 @@ import android.widget.TextView;
 
 public class libraryMapsShowImages extends Activity {
 	/** Called when the activity is first created. */
+	@SuppressWarnings("unused")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setTitleColor(getResources().getColor(R.color.snow2));
 
 		Bundle bundle = getIntent().getExtras();
 		final int[] images = bundle.getIntArray("images");
@@ -73,7 +75,7 @@ public class libraryMapsShowImages extends Activity {
 	}
 		catch(Exception e)
 		{
-			Log.e("libraryMapsShowImages", "exception in onCreate",e);
+			if (shared.LOGGINGLEVEL>0) Log.e("libraryMapsShowImages", "exception in onCreate",e);
 		}
 	}
 }

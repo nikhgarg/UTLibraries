@@ -29,10 +29,13 @@ public class showLibraryTimings2 extends Activity {
 	Dialog dialog;
 
 	/** Called when the activity is first created. */
+	@SuppressWarnings("unused")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		context = this;
+		setTitleColor(getResources().getColor(R.color.snow2));
+
 		mInflater = LayoutInflater.from(context);
 		if (!shared.connectedToInternet)
 		{
@@ -92,7 +95,7 @@ public class showLibraryTimings2 extends Activity {
 
 
 		} catch (Exception e) {
-			Log.e("showLibraryTimings", "exception in onCreate: " + e.toString(),e);
+			if (shared.LOGGINGLEVEL>0) Log.e("showLibraryTimings", "exception in onCreate: " + e.toString(),e);
 		}
 	}
 

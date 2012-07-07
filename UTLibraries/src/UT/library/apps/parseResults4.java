@@ -120,6 +120,7 @@ public class parseResults4 {
 	public static String nextPageUrl = null;
 
 	//parses top of page to get total number of Results and the URL for the next Page (to prefetch before displaying results)
+	@SuppressWarnings("unused")
 	public static void parsePage(String HTML) {
 
 		try{
@@ -158,7 +159,7 @@ public class parseResults4 {
 		}
 		catch(Exception e)
 		{
-			Log.e("parseResults", "exception caught in parse page", e);
+			if (shared.LOGGINGLEVEL>0) Log.e("parseResults", "exception caught in parse page", e);
 		}
 	}
 }
