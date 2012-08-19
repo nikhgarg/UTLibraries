@@ -99,8 +99,7 @@ public class searchInputScreen extends Activity {
 		switch(position){
 		case SearchData.Advanced:
 			child = mInflater.inflate(R.layout.advanced_search_input, frame, true); break;
-		case SearchData.Numbers:
-			child = mInflater.inflate(R.layout.search_input_numbers_temp, frame,true);break;
+
 		case SearchData.Simple:
 			child = mInflater.inflate(R.layout.search_input_simple, frame,true);break;
 		}
