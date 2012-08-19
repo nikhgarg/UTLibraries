@@ -36,8 +36,6 @@ public class WelcomeScreen extends Activity {
 
 		//code downloaded from https://github.com/johannilsson/android-actionbar/blob/master/README.md
 		ActionBar actionBar = (ActionBar) findViewById(R.id.actionbar);
-		// You can also assign the title programmatically by passing a
-		// CharSequence or resource id.
 		actionBar.setTitle("\t\t\tUTLibraries");
 		actionBar.setGravity(Gravity.CENTER);
 		actionBar.setHomeLogo(R.drawable.home);
@@ -58,17 +56,6 @@ public class WelcomeScreen extends Activity {
 			}
 		});
 
-		// GridView gridview = (GridView) findViewById(R.id.gridview);
-		// gridview.setAdapter(new ImageAdapter(this));
-		//
-		// gridview.setOnItemClickListener(new OnItemClickListener() {
-		// public void onItemClick(AdapterView<?> parent, View v, int position,
-		// long id) {
-		// // Toast.makeText(WelcomeScreen.this, "" + position,
-		// Toast.LENGTH_SHORT).show();
-		// launchActivity(position);
-		// }
-		// });
 	}
 
 	public void launchActivity(int position) {

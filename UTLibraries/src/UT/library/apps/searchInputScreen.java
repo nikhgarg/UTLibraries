@@ -40,7 +40,7 @@ public class searchInputScreen extends Activity {
 
 		mInflater = LayoutInflater.from(context);
 //		View current;
-		
+
 		if (!shared.connectedToInternet)
 		{
 			int duration = Toast.LENGTH_LONG;
